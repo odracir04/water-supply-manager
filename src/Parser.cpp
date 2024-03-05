@@ -38,8 +38,7 @@ void Parser::readData() {
         getline(iss, population, '\r');
 
 
-        std::cout << name << " "<< population<<"\n";
-        //tempCounter++;
+
         //Adding here to Graph
     }
 
@@ -58,10 +57,6 @@ void Parser::readData() {
         getline(iss, direction, '\r');
 
 
-
-        std::cout << SA << " "<< direction<<"\n";
-
-        //Adding here to Graph
     }
 
     inputFile.close();
@@ -81,8 +76,6 @@ void Parser::readData() {
 
 
 
-        std::cout << reservoir << " "<< municipality<<"\n";
-
         //Adding here to Graph
     }
 
@@ -99,8 +92,6 @@ void Parser::readData() {
         getline(iss, code, '\r');
 
 
-        std::cout << id << " "<< code<<"\n";
-        tempCounter++;
         //Adding here to Graph
     }
 
