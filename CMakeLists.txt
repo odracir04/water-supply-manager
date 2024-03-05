@@ -12,4 +12,7 @@ add_executable(da_proj1 src/main.cpp
         src/City.h
         src/Parser.cpp
         src/Parser.h
+        src/Interface.h
+        src/Interface.cpp
 )
+
