@@ -3,4 +3,11 @@ project(da_proj1)
 
 set(CMAKE_CXX_STANDARD 11)
 
-add_executable(da_proj1 src/main.cpp)
+add_executable(da_proj1 src/main.cpp
+        src/Reservoir.cpp
+        src/Reservoir.h
+        src/Station.cpp
+        src/Station.h
+        src/City.cpp
+        src/City.h
+)
