@@ -138,16 +138,24 @@ void Interface::servicesMenu() {
             mainMenu();
             break;
         case 1:
+            clear();
             // manager.getWaterSupplyCity
+            // printWaterSupplyCity
             break;
         case 2:
+            clear();
             // manager.getWaterSupplyAllCities
+            // // printWaterSupplyAllCities
             break;
         case 3:
+            clear();
             // manager.getRequirementsSatisfaction
+            // printRequirementsSatisfaction
             break;
         case 4:
+            clear();
             // manager.balanceNetworkFlow
+            // printNetworkFlow
             break;
     }
 
@@ -175,12 +183,18 @@ void Interface::reliabilityMenu() {
             break;
         case 1:
             // manager.checkReservoirFailure(readReservoir())
+            clear();
+            // printNetworkFlow
             break;
         case 2:
             // manager.checkStationFailure(readStation())
+            clear();
+            // printNetworkFlow
             break;
         case 3:
             // manager.checkPipeFailure(readPipeline())
+            clear();
+            // printNetworkFlow
             break;
     }
 
