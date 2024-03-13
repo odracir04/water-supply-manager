@@ -9,19 +9,19 @@ void Interface::clear() {
 
 void Interface::header() {
     clear();
-    std::cout << BOLD << "┌─────────────────────────────────────────────────────────────────────────────────────────────────┐\n"
-              << "├" << RESET << "───────────────────────────────── " << BOLD << BLUE << "Water Supply Manager (Group 5)" << RESET <<" ────────────────────────────────" << BOLD << "┤\n\n" << RESET;
+    std::cout << BOLD << " _______________________________________________________________________________________________\n"
+              << "/-----/-----/-----/-----/-----/-----/-----/-----\\-----\\-----\\-----\\-----\\-----\\-----\\-----\\-----\\\n"
+              << "" << RESET << "|------------------------------- " << BOLD << BLUE << "Water Supply Manager (Group 5)" << RESET <<" --------------------------------|" << BOLD << "\n\n" << RESET;
 }
 
 void Interface::footer() {
 
-    std::cout << BOLD << "├" << RESET << "───────────────────────────────── " << BOLD << BLUE << "Water Supply Manager (Group 5)" << RESET << " ────────────────────────────────" << BOLD "┤\n"
-              << "└─────────────────────────────────────────────────────────────────────────────────────────────────┘\n" << RESET;
+    std::cout << BOLD << "|------------------------------  " << BOLD << BLUE << "Water Supply Manager (Group 5)" << RESET << " --------------------------------|\n";
 }
 
 void Interface::inputWait() {
     cin.clear();
-    cout << "\n\n\t\t\t\t    " << FAINT << "< Press " << RESET << BOLD << "ENTER" << RESET << FAINT << " to Continue >" << RESET;
+    cout << "\n\n\t\t\t\t  " << FAINT << "< Press " << RESET << BOLD << "ENTER" << RESET << FAINT << " to Continue >" << RESET;
     cin.ignore();
 }
 
@@ -112,7 +112,7 @@ void Interface::startMenu() {
 void Interface::exitMenu() {
     header();
 
-    cout << BOLD << "\t\t\t    Thank you for using our Water Supply Manager!\n\n" << RESET;
+    cout << BOLD << "\t\t\t  Thank you for using our Water Supply Manager!\n\n" << RESET;
 
     footer();
     exit(0);
