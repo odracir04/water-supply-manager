@@ -1,6 +1,7 @@
 
 #include <iostream>
 #include "Parser.h"
+#include "Reservoir.h"
 
 Parser::Parser(bool dataSetter) {
     this->dataSetter = dataSetter;
@@ -61,7 +62,7 @@ void Parser::readData() {
 
     inputFile.close();
 
-    inputFile.open("../data/" + csvIndicator + "/Reservoir.csv");
+    inputFile.open("../data/" + csvIndicator + "/Reservoirs.csv");
 
     getline(inputFile, line);
     while(getline(inputFile, line)){
@@ -76,7 +77,7 @@ void Parser::readData() {
 
 
 
-        //Adding here to Graph
+
     }
 
     inputFile.close();
@@ -96,6 +97,7 @@ void Parser::readData() {
     }
 
     inputFile.close();
+
 
 
 }

@@ -14,5 +14,11 @@ add_executable(da_proj1 src/main.cpp
         src/Parser.h
         src/Interface.h
         src/Interface.cpp
+        src/Vertex.cpp
+        src/Vertex.h
+        src/Pipe.cpp
+        src/Pipe.h
+        src/Graph.cpp
+        src/Graph.h
 )
 

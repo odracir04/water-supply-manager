@@ -4,12 +4,14 @@
 #include <string>
 #include <sstream>
 #include <fstream>
+#include "Graph.h"
 
 
 class Parser {
     private:
         bool dataSetter;
         std::string csvIndicator;
+        Graph *graph;
 
     public:
         Parser(bool dataSet);

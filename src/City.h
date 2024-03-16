@@ -3,7 +3,7 @@
 
 #include <string>
 
-class City {
+class City  {
     private:
         std::string name;
         unsigned int id;

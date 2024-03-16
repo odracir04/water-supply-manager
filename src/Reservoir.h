@@ -2,8 +2,9 @@
 #define DA_PROJ1_RESERVOIR_H
 
 #include <string>
+#include "Vertex.h"
 
-class Reservoir {
+class Reservoir : public Vertex{
     private:
         std::string name;
         std::string municipality;
@@ -11,7 +12,7 @@ class Reservoir {
         std::string code;
         unsigned int maxDelivery;
     public:
-        Reservoir(std::string n, std::string m, unsigned int i, std::string c, unsigned int max) : name(n), municipality(m), id(i), code(c), maxDelivery(max) {}
+        Reservoir(std::string n, std::string m, unsigned int i, std::string c, unsigned int max);
 
     std::string getName() const {return this->name;}
     std::string getMunicipality() const {return this->municipality;}

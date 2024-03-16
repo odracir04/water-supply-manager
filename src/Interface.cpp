@@ -139,6 +139,7 @@ void Interface::servicesMenu() {
             break;
         case 1:
             clear();
+
             // manager.getWaterSupplyCity
             // printWaterSupplyCity
             break;
