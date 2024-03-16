@@ -11,7 +11,7 @@ class Parser {
     private:
         bool dataSetter;
         std::string csvIndicator;
-        Graph *graph;
+        Graph *graph = new Graph;
 
     public:
         Parser(bool dataSet);

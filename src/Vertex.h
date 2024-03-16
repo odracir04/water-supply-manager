@@ -5,7 +5,7 @@
 
 class Vertex {
     private:
-        std::string info;                // contents
+        std::string code;                // contents
         std::vector<Pipe> adj;  // list of outgoing Pipes
         bool visited;          // auxiliary field
         bool processing;       // auxiliary field
@@ -13,13 +13,13 @@ class Vertex {
         int num;               // auxiliary field
         int low;               // auxiliary field
 
-        void addPipe(std::string *dest, double w);
+        void addPipe(const std::string &dest, const int &w);
         bool removePipeTo(std::string *d);
 
     public:
-        Vertex(std::string in);
-        std::string getInfo() const;
-        void setInfo(std::string in);
+        Vertex(std::string code);
+        std::string getCode() const;
+        void setCode(std::string in);
         bool isVisited() const;
         void setVisited(bool v);
         bool isProcessing() const;
