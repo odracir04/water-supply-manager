@@ -1,4 +1,5 @@
 #include "Interface.h"
+#include "Reservoir.h"
 #include <iostream>
 
 using namespace std;
@@ -102,7 +103,7 @@ void Interface::startMenu() {
     if (option == 0)
         exitMenu();
     else {
-        Parser parser = Parser(option - 1);
+        parser = Parser(option - 1);
         parser.readData();
     }
 
@@ -184,7 +185,7 @@ void Interface::reliabilityMenu() {
         case 1:
             // manager.checkReservoirFailure(readReservoir())
             clear();
-            // printNetworkFlow
+            printNetworkFlow();
             break;
         case 2:
             // manager.checkStationFailure(readStation())
@@ -228,4 +229,13 @@ void Interface::mainMenu() {
             break;
     }
 
+}
+
+void Interface::printNetworkFlow() {
+
+    for (const Vertex<Node*>* vertex : parser.waterNetwork.getVertexSet()) {
+        Node* node = vertex->getInfo();
+
+        std::cout << node->getId() << " -- " << node->getCode() << std::endl;
+    }
 }

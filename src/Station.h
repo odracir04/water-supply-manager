@@ -2,21 +2,11 @@
 #define DA_PROJ1_STATION_H
 
 #include <string>
+#include "Node.h"
 
-class Station {
-    private:
-        unsigned int id;
-        std::string code;
+class Station : public Node {
     public:
-        Station(unsigned int i, std::string c) : id(i), code(c) {}
-
-        unsigned int getId() const {return this->id;}
-        std::string getCode() const {return this->code;}
-
-        /*
-        void setId(unsigned int const i) {this->id = i;}
-        void setCode(std::string const c) {this->code = c;}
-         */
+        Station(unsigned int i, std::string c) : Node(i, c) {};
 };
 
 

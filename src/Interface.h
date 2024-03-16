@@ -51,6 +51,8 @@ private:
 
     static void inputWait();
 
+    Parser parser = NULL;
+
 public:
 
     void init();
@@ -65,6 +67,8 @@ public:
     static std::string readReservoir();
     static std::string readStation();
     static std::pair<std::string, std::string> readPipeline();
+
+    void printNetworkFlow();
 };
 
 

@@ -4,6 +4,8 @@
 #include <string>
 #include <sstream>
 #include <fstream>
+#include "Graph.h"
+#include "Node.h"
 
 
 class Parser {
@@ -14,6 +16,7 @@ class Parser {
     public:
         Parser(bool dataSet);
         void readData(); //Graph
+        Graph<Node*> waterNetwork;
 };
 
 
