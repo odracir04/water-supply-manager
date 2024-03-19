@@ -18,7 +18,7 @@ class Vertex {
 
     public:
         Vertex(std::string code);
-        std::string getCode() const;
+        virtual std::string getCode() const;
         void setCode(std::string in);
         bool isVisited() const;
         void setVisited(bool v);
