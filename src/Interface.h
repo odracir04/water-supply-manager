@@ -4,6 +4,7 @@
 // Text Formatting
 #include <string>
 #include "Parser.h"
+#include "Manager.h"
 
 #define RESET       "\033[0m"
 #define BOLD        "\033[1m"
@@ -45,6 +46,7 @@
 
 class Interface {
 private:
+    Manager manager = Manager();
     static void header();
     static void footer();
     static void clear();

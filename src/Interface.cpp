@@ -82,7 +82,6 @@ pair<string, string> Interface::readPipeline() {
 }
 
 void Interface::init() {
-    // this.manager = Manager();
     startMenu();
 }
 
@@ -102,8 +101,7 @@ void Interface::startMenu() {
     if (option == 0)
         exitMenu();
     else {
-        Parser parser = Parser(option - 1);
-        parser.readData();
+        manager.extractFiles(option - 1);
     }
 
     mainMenu();
@@ -139,14 +137,13 @@ void Interface::servicesMenu() {
             break;
         case 1:
             clear();
-
             // manager.getWaterSupplyCity
             // printWaterSupplyCity
             break;
         case 2:
             clear();
-            // manager.getWaterSupplyAllCities
-            // // printWaterSupplyAllCities
+            std::vector<City*> cities = manager.getCities();
+            printWaterSupplyAllCities(cities);
             break;
         case 3:
             clear();

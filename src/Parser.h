@@ -11,11 +11,11 @@ class Parser {
     private:
         bool dataSetter;
         std::string csvIndicator;
-        Graph *graph = new Graph;
 
     public:
         Parser(bool dataSet);
-        void readData(); //Graph
+        void readData(Graph* graph); //Graph
+        void setCSV(bool option) { dataSetter = option; }
 };
 
 

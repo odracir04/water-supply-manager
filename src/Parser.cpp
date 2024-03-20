@@ -7,7 +7,7 @@ Parser::Parser(bool dataSetter) {
     this->dataSetter = dataSetter;
 }
 
-void Parser::readData() {
+void Parser::readData(Graph* graph) {
 
     std::ifstream inputFile;
     std::istringstream iss;
@@ -95,11 +95,5 @@ void Parser::readData() {
     inputFile.close();
 
     graph->printVertexSet();
-
-    for (auto* v : graph->getVertexSet()){
-        if (City* city = dynamic_cast<City*>(v)) {
-            std::cout << city->getDemand() << " "; // Call city specific method
-        }
-    }
 }
 
