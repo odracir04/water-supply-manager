@@ -50,6 +50,7 @@ private:
     static void header();
     static void footer();
     static void clear();
+    static void printSupplyHeader();
 
     static void inputWait();
 
@@ -63,10 +64,14 @@ public:
     void servicesMenu();
     void reliabilityMenu();
 
+    void printWaterSupplyCity(std::string option);
+    void printWaterSupplyAllCities();
+
     static int readOption(unsigned int options);
-    static std::string readReservoir();
-    static std::string readStation();
-    static std::pair<std::string, std::string> readPipeline();
+    std::string readReservoir();
+    std::string readStation();
+    std::pair<std::string, std::string> readPipeline();
+    std::string readCity();
 };
 
 

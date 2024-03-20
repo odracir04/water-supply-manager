@@ -19,3 +19,53 @@ std::vector<City*> Manager::getCities() {
     }
     return cities;
 }
+
+City *Manager::getCity(std::string code) {
+    for (auto* v : graph->getVertexSet()){
+        if (v->getCode() == code) {
+            return dynamic_cast<City*>(v); // Call city specific method
+        }
+    }
+
+    return nullptr;
+}
+
+bool Manager::validateStation(std::string code) {
+    return true;
+}
+
+bool Manager::validateCity(std::string code) {
+    return true;
+}
+
+bool Manager::validateReservoir(std::string code) {
+    return true;
+}
+
+bool Manager::validatePipe(std::string src, std::string dest) {
+    return true;
+}
+
+void Manager::balanceWaterFlow() {
+
+}
+
+void Manager::maxFlowCities() {
+
+}
+
+void Manager::checkReservoirFailure(std::string code) {
+
+}
+
+void Manager::checkStationFailure(std::string code) {
+
+}
+
+void Manager::checkPipeFailure(std::pair<std::string, std::string> vertices) {
+
+}
+
+bool Manager::checkNetworkRequirements() {
+    return true;
+}

@@ -19,11 +19,19 @@ private:
 public:
     void extractFiles(bool option);
     void maxFlowCities();
+    bool checkNetworkRequirements();
     void balanceWaterFlow();
-    void checkReservoirFailure();
-    void checkStationFailure();
-    void checkPipeFailure();
+    void checkReservoirFailure(std::string code);
+    void checkStationFailure(std::string code);
+    void checkPipeFailure(std::pair<std::string, std::string> vertices);
     std::vector<City*> getCities();
+
+    City* getCity(std::string code);
+
+    bool validateStation(std::string code);
+    bool validateCity(std::string code);
+    bool validateReservoir(std::string code);
+    bool validatePipe(std::string src, std::string dest);
 };
 
 
