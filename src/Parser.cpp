@@ -1,7 +1,7 @@
-
 #include <iostream>
 #include "Parser.h"
 #include "Reservoir.h"
+#include "City.h"
 
 Parser::Parser(bool dataSetter) {
     this->dataSetter = dataSetter;
@@ -38,26 +38,7 @@ void Parser::readData() {
         getline(iss, demand, ',');
         getline(iss, population, '\r');
 
-
-
-        //Adding here to Graph
-    }
-
-    inputFile.close();
-
-    inputFile.open("../data/" + csvIndicator + "/Pipes.csv");
-
-    getline(inputFile, line);
-    while(getline(inputFile, line)){
-        iss.clear();
-        iss.str(line);
-
-        getline(iss, SA, ',');
-        getline(iss, SB, ',');
-        getline(iss, capacity, ',');
-        getline(iss, direction, '\r');
-
-
+        graph->addCity(name, stoi(id), code, stoi(demand), stoi(population));
     }
 
     inputFile.close();
@@ -75,9 +56,7 @@ void Parser::readData() {
         getline(iss, code, ',');
         getline(iss, maxDelivery, '\r');
 
-
-
-
+        graph->addReservoir(reservoir, municipality, stoi(id), code, stoi(maxDelivery));
     }
 
     inputFile.close();
@@ -92,13 +71,35 @@ void Parser::readData() {
         getline(iss, id, ',');
         getline(iss, code, '\r');
 
-
-        //Adding here to Graph
+        if (!id.empty() && !code.empty())
+            graph->addStation(code, stoi(id));
     }
 
     inputFile.close();
 
+    inputFile.open("../data/" + csvIndicator + "/Pipes.csv");
 
+    getline(inputFile, line);
+    while(getline(inputFile, line)){
+        iss.clear();
+        iss.str(line);
 
+        getline(iss, SA, ',');
+        getline(iss, SB, ',');
+        getline(iss, capacity, ',');
+        getline(iss, direction, '\r');
+
+        graph->addEdge(SA, SB, stoi(capacity));
+    }
+
+    inputFile.close();
+
+    graph->printVertexSet();
+
+    for (auto* v : graph->getVertexSet()){
+        if (City* city = dynamic_cast<City*>(v)) {
+            std::cout << city->getDemand() << " "; // Call city specific method
+        }
+    }
 }
 

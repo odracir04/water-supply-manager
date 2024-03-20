@@ -2,20 +2,20 @@
 #define DA_PROJ1_CITY_H
 
 #include <string>
+#include "Vertex.h"
 
-class City  {
+class City : public Vertex {
     private:
         std::string name;
         unsigned int id;
-        std::string code;
         unsigned int demand;
         unsigned int population;
     public:
-        City(std::string n, unsigned int i, std::string c, unsigned int d, unsigned int p) : name(n), id(i), code(c), demand(d), population(p) {}
+        City(std::string n, unsigned int i, std::string c, unsigned int d, unsigned int p)
+        : Vertex(c), name(n), id(i), demand(d), population(p) {}
 
     std::string getName() const {return this->name;}
     unsigned int getId() const {return this->id;}
-    std::string getCode() const {return this->code;}
     unsigned int getDemand() const {return this->demand;}
     unsigned int getPopulation() const {return this->population;}
 

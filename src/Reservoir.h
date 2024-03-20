@@ -4,12 +4,11 @@
 #include <string>
 #include "Vertex.h"
 
-class Reservoir : public Vertex{
+class Reservoir : public Vertex {
     private:
         std::string name;
         std::string municipality;
         unsigned int id;
-        std::string code;
         unsigned int maxDelivery;
     public:
         Reservoir(std::string n, std::string m, unsigned int i, std::string c, unsigned int max);
@@ -17,7 +16,6 @@ class Reservoir : public Vertex{
     std::string getName() const {return this->name;}
     std::string getMunicipality() const {return this->municipality;}
     unsigned int getId() const {return this->id;}
-    std::string getCode() const {return this->code;}
     unsigned int getMaxDelivery() const {return this->maxDelivery;}
 
     /*
