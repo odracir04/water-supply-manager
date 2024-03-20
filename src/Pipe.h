@@ -7,9 +7,8 @@
 
 class Pipe {
     private:
-        std::string servicePointA, servicePointB;
+        std::string servicePointB;
         int capacity;
-        bool direction;
     public:
         Pipe(std::string d, int w);
         std::string *getDest() const;
