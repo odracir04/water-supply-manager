@@ -97,6 +97,5 @@ void Parser::readData(Graph* graph) {
 
     inputFile.close();
 
-    graph->printVertexSet();
 }
 

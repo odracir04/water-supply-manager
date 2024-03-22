@@ -27,6 +27,7 @@ public:
     std::vector<Vertex> bfs(const std::string &source) const;
     void printVertexSet();
 
+    bool addVertex(const std::string &code);
 };
 
 

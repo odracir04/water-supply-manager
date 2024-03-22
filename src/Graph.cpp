@@ -36,6 +36,13 @@ bool Graph::addStation(const std::string &code, const unsigned int &id) {
     return true;
 }
 
+bool Graph::addVertex(const std::string &code) {
+    if (findVertex(code) != nullptr)
+        return false;
+    vertexSet.push_back(new Vertex(code));
+    return true;
+}
+
 void Graph::printVertexSet() {
     for(auto v : vertexSet ){
         std::cout << v->getCode() << "\n";
@@ -53,6 +60,8 @@ bool Graph::addEdge(const std::string &sourc, const std::string &dest, double w)
     if (source == nullptr || destination == nullptr)
         return false;
 
-    source->addPipe(dest, w);
+    auto newPipe = new Pipe(sourc, dest, w);
+    source->adj.push_back(newPipe);
+    destination->incoming.push_back(newPipe);
     return true;
 }
