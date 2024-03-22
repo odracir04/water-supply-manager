@@ -65,3 +65,7 @@ bool Graph::addEdge(const std::string &sourc, const std::string &dest, double w)
     destination->incoming.push_back(newPipe);
     return true;
 }
+
+void Graph::setVertexSet(std::vector<Vertex *> &v) {
+    this->vertexSet = v;
+}

@@ -4,6 +4,7 @@
 
 #include <iostream>
 #include <queue>
+#include <cfloat>
 #include "Manager.h"
 #include "City.h"
 
@@ -86,10 +87,42 @@ bool findAugmentingPath(Graph &g, Vertex* s ,Vertex* t) {
             }
         }
 // Return true if a path to the target is found, false otherwise
-        return t->isVisited();
     }
+    return t->isVisited();
 }
 
+double findMinResidualAlongPath(Graph* g, Vertex*s, Vertex *t) {
+    double f = INF;
+// Traverse the augmenting path to find the minimum residual capacity
+    for (auto v = t; v != s; ) {
+        auto e = v->getPath();
+        if (g->findVertex(e->getDest()) == v) {
+            f = std::min(f, e->getWeight() - e->getFlow());
+            v = g->findVertex(e->getOrig());
+        }
+        else {
+            f = std::min(f, e->getFlow());
+            v = g->findVertex(e->getDest());
+        }
+    }
+// Return the minimum residual capacity
+    return f;
+}
+
+void augmentFlowAlongPath(Graph* g, Vertex *s, Vertex *t, double f) {
+// Traverse the augmenting path and update the flow values accordingly
+    for (auto v = t; v != s;) {
+        auto e = v->getPath();
+        double flow = e->getFlow();
+        if (g->findVertex(e->getDest()) == v) {
+            e->setFlow(flow + f);
+            v = g->findVertex(e->getOrig());
+        } else {
+            e->setFlow(flow - f);
+            v = g->findVertex(e->getDest());
+        }
+    }
+}
 
     void Manager::maxFlowCities(std::string dest) {
 
@@ -105,10 +138,14 @@ bool findAugmentingPath(Graph &g, Vertex* s ,Vertex* t) {
 
         //Create super Source
         Vertex *superSource = new Vertex("SS");
-        newGraph.getVertexSet().push_back(superSource);
+        //newGraph.getVertexSet().push_back(superSource);
+        std::vector<Vertex*> vec = newGraph.getVertexSet();
+        vec.push_back(superSource);
+        newGraph.setVertexSet(vec);
+
         for (auto *v: newGraph.getVertexSet()) {
             if (v->getCode()[0] == 'R') {
-                newGraph.addEdge("SS", v->getCode(), 0);
+                newGraph.addEdge("SS", v->getCode(), 999999999);
             }
         }
 
@@ -119,12 +156,19 @@ bool findAugmentingPath(Graph &g, Vertex* s ,Vertex* t) {
             }
         }
 
+        double maxFlow = 0;
         while (findAugmentingPath(newGraph, superSource, t)) {
-            //double f = findMinResidualAlongPath(s, t);
-            //augmentFlowAlongPath(s, t, f);
+            double f = findMinResidualAlongPath(&newGraph,superSource, t);
+            augmentFlowAlongPath(&newGraph,superSource, t, f);
+            maxFlow += f;
         }
 
 
+        delete superSource;
+
+        *graph = newGraph;
+
+        std::cout << maxFlow;
     }
 
     void Manager::checkReservoirFailure(std::string code) {

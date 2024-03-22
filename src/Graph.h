@@ -3,7 +3,10 @@
 #include "Vertex.h"
 #include "Pipe.h"
 #include <vector>
+#include <limits>
+#include <algorithm>
 
+#define INF std::numeric_limits<double>::max();
 
 class Graph {
 
@@ -22,6 +25,7 @@ public:
     bool addEdge(const std::string &sourc, const std::string &dest, double w);
     bool removeEdge(const std::string &sourc, const std::string &dest);
     std::vector<Vertex*> getVertexSet() const;
+    void setVertexSet(std::vector<Vertex*> &v);
     std::vector<Vertex> dfs() const;
     std::vector<Vertex> dfs(const std::string & source) const;
     std::vector<Vertex> bfs(const std::string &source) const;
