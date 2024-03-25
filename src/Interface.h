@@ -65,6 +65,7 @@ public:
     void reliabilityMenu();
 
     void printWaterSupplyCity(std::string option);
+    void printCitiesInDeficit();
     void printWaterSupplyAllCities();
 
     static int readOption(unsigned int options);
