@@ -19,6 +19,8 @@ private:
 public:
     void extractFiles(bool option);
     void maxFlowCities(std::string dest);
+    void maxFlowAll();
+
     bool checkNetworkRequirements();
     void balanceWaterFlow();
     void checkReservoirFailure(std::string code);

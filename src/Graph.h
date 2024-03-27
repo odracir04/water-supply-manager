@@ -32,6 +32,10 @@ public:
     void printVertexSet();
 
     bool addVertex(const std::string &code);
+
+    void deleteEdge(const std::string &s, Pipe *pipe) const;
+
+    void removeAllAdjEdges(Vertex *vertex);
 };
 
 

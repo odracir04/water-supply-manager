@@ -126,7 +126,7 @@ void augmentFlowAlongPath(Graph* g, Vertex *s, Vertex *t, double f) {
 
     void Manager::maxFlowCities(std::string dest) {
 
-        //Fazer cópia do graph?
+
         Graph newGraph = *graph;
 
         Vertex *t = newGraph.findVertex(dest);
@@ -138,7 +138,7 @@ void augmentFlowAlongPath(Graph* g, Vertex *s, Vertex *t, double f) {
 
         //Create super Source
         Vertex *superSource = new Vertex("SS");
-        //newGraph.getVertexSet().push_back(superSource);
+
         std::vector<Vertex*> vec = newGraph.getVertexSet();
         vec.push_back(superSource);
         newGraph.setVertexSet(vec);
@@ -163,15 +163,35 @@ void augmentFlowAlongPath(Graph* g, Vertex *s, Vertex *t, double f) {
             maxFlow += f;
         }
 
+        //newGraph.removeAllAdjEdges(superSource);
 
-        delete superSource;
+        for(auto* v : newGraph.getVertexSet()){
+            if(v->getCode() == "SS"){
+                delete v;
+            }
+        }
+        newGraph.getVertexSet().clear();
+        std::vector<Vertex*> temp = graph->getVertexSet();
+        newGraph.setVertexSet(temp);
 
         *graph = newGraph;
 
-        std::cout << maxFlow;
+
+        City*  c = dynamic_cast<City *>(graph->findVertex(dest));
+        c->setIncome(maxFlow);
     }
 
-    void Manager::checkReservoirFailure(std::string code) {
+void Manager::maxFlowAll() {
+    for(auto* v : graph->getVertexSet()){
+        if(v->getCode()[0] == 'C'){
+            maxFlowCities(v->getCode());
+        }
+    }
+}
+
+
+
+void Manager::checkReservoirFailure(std::string code) {
 
     }
 

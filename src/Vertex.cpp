@@ -40,4 +40,3 @@ bool Vertex::isVisited() const {
 }
 
 
-

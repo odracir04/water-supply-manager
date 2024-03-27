@@ -15,8 +15,8 @@ class Vertex {
         Pipe *path = nullptr;
 
         void addPipe(const std::string &dest,double &w);
-        bool removePipeTo(std::string *d);
         std::vector<Pipe *> incoming;
+        friend class Graph;
 
     public:
         Vertex(std::string code);

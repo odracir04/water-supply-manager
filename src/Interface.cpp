@@ -139,6 +139,7 @@ void Interface::servicesMenu() {
     footer();
 
     int option = readOption(4);
+    string city;
 
     switch(option) {
         case 0:
@@ -146,11 +147,13 @@ void Interface::servicesMenu() {
             break;
         case 1:
             clear();
-            manager.maxFlowCities(readCity());
-           // printWaterSupplyCity(readCity());
+            city = readCity();
+            manager.maxFlowCities(city);
+            printWaterSupplyCity(city);
             break;
         case 2:
             clear();
+            manager.maxFlowAll();
             printWaterSupplyAllCities();
             break;
         case 3:
@@ -243,9 +246,9 @@ void Interface::printWaterSupplyCity(string option) {
         printSupplyHeader();
         cout << left << "| " << setw(15) << city->getPopulation()
              << "| " << setw(15) << city->getDemand()
-             << "| " << setw(15) << 100
-             << "| " << ((city->getDemand() - 100 < 0) ? GREEN : RED) << setw(15)
-             << ((city->getDemand() - 100 <= 0) ? "SUPPLIED" : "NOT SUPPLIED") << RESET
+             << "| " << setw(15) << city->getIncome()
+             << "| " << ((city->getDemand() - city->getIncome() < 0) ? GREEN : RED) << setw(15)
+             << ((city->getDemand() - city->getIncome() <= 0) ? "SUPPLIED" : "NOT SUPPLIED") << RESET
              << "| " << setw(30) << city->getName() << endl;
 
         inputWait();
@@ -259,9 +262,9 @@ void Interface::printWaterSupplyAllCities() {
     for (const City* city : cities) {
         cout << left << "| " << setw(15) << city->getPopulation()
              << "| " << setw(15) << city->getDemand()
-             << "| " << setw(15) << 100
-             << "| " << ((city->getDemand() - 100 < 0) ? GREEN : RED) << setw(15)
-             << ((city->getDemand() - 100 < 0) ? "SUPPLIED" : "NOT SUPPLIED") << RESET
+             << "| " << setw(15) << city->getIncome()
+             << "| " << ((city->getDemand() - city->getIncome() < 0) ? GREEN : RED) << setw(15)
+             << ((city->getDemand() - city->getIncome() < 0) ? "SUPPLIED" : "NOT SUPPLIED") << RESET
              << "| " << setw(30) << city->getName() << endl;
     }
     inputWait();
