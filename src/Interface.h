@@ -67,6 +67,7 @@ public:
     void reliabilityMenu();
 
     void printWaterSupplyCity(std::string option);
+    void printCitiesInDeficit(std::vector<City*> cities);
     void printWaterSupplyAllCities();
 
     static int readOption(unsigned int options);

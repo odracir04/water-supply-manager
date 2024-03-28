@@ -30,3 +30,7 @@ std::string Pipe::getOrig() const {
 double Pipe::getWeight() const {
     return capacity;
 }
+
+void Pipe::setWeight(double weight) {
+    this->capacity = weight;
+}

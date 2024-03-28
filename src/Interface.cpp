@@ -160,11 +160,13 @@ void Interface::servicesMenu() {
         case 3:
             clear();
             manager.checkNetworkRequirements();
+            //printCitiesInDeficit();
             break;
         case 4:
             clear();
+            // printNetworkMetrics();
             manager.balanceWaterFlow();
-            printWaterSupplyAllCities();
+            // printNetworkMetrics();
             break;
     }
 
@@ -191,19 +193,15 @@ void Interface::reliabilityMenu() {
             mainMenu();
             break;
         case 1:
-            manager.checkReservoirFailure(readReservoir());
-            clear();
-            printWaterSupplyAllCities();
+            printCitiesInDeficit(manager.checkReservoirFailure(readReservoir()));
             break;
         case 2:
-            manager.checkStationFailure(readStation());
-            clear();
-            printWaterSupplyAllCities();
+            printCitiesInDeficit(manager.checkStationFailure(readStation()));
             break;
         case 3:
             manager.checkPipeFailure(readPipeline());
             clear();
-            printWaterSupplyAllCities();
+            //printCitiesInDeficit();
             break;
     }
 
@@ -240,18 +238,16 @@ void Interface::mainMenu() {
 }
 
 void Interface::printWaterSupplyCity(string option) {
-
     City* city = manager.getCity(option);
 
     if (city != nullptr) {
         printSupplyHeader();
-        cout << left << "| " << setw(15) << city->getPopulation()
+        cout << left << "| " << setw(15) << city->getCode()
              << "| " << setw(15) << city->getDemand()
              << "| " << setw(15) << city->getIncome()
-             << "| " << ((city->getDemand() - city->getIncome() < 0) ? GREEN : RED) << setw(15)
+             << "| " << ((city->getDemand() - city->getIncome() <= 0) ? GREEN : RED) << setw(15)
              << ((city->getDemand() - city->getIncome() <= 0) ? "SUPPLIED" : "NOT SUPPLIED") << RESET
              << "| " << setw(30) << city->getName() << endl;
-
         inputWait();
     }
     servicesMenu();
@@ -261,24 +257,38 @@ void Interface::printWaterSupplyAllCities() {
     printSupplyHeader();
     std::vector<City*> cities = manager.getCities();
     for (const City* city : cities) {
-        cout << left << "| " << setw(15) << city->getPopulation()
+        cout << left << "| " << setw(15) << city->getCode()
              << "| " << setw(15) << city->getDemand()
              << "| " << setw(15) << city->getIncome()
-             << "| " << ((city->getDemand() - city->getIncome() < 0) ? GREEN : RED) << setw(15)
-             << ((city->getDemand() - city->getIncome() < 0) ? "SUPPLIED" : "NOT SUPPLIED") << RESET
+             << "| " << ((city->getDemand() - city->getIncome() <= 0) ? GREEN : RED) << setw(15)
+             << ((city->getDemand() - city->getIncome() <= 0) ? "SUPPLIED" : "NOT SUPPLIED") << RESET
              << "| " << setw(30) << city->getName() << endl;
     }
     inputWait();
     servicesMenu();
 }
 
-void Interface::printSupplyHeader() {
+void Interface::printCitiesInDeficit(std::vector<City*> cities) {
 
-    cout << left << BOLD << "\n\n| " << BLUE << setw(15) << "Population" << RESET
+    clear();
+    cout << left << BOLD << "| " << BLUE << setw(15) << "Code" << RESET
+    << BOLD << "| " << BLUE << setw(15) << "Deficit" << RESET << endl;
+
+    for (const City* city : cities) {
+        if (city->getDemand() > city->getIncome()) {
+            cout << left << "| " << setw(15) << city->getCode()
+                 << "| " << setw(15) << city->getDemand() - city->getIncome() << RESET << endl;
+        }
+    }
+    inputWait();
+    servicesMenu();
+}
+
+void Interface::printSupplyHeader() {
+    cout << left << BOLD << "| " << BLUE << setw(15) << "Code" << RESET
          << BOLD << "| " << BLUE << setw(15) << "Demand" << RESET
          << BOLD << "| " << BLUE << setw(15) << "Supply" << RESET
          << BOLD << "| " << BLUE << setw(15) << "Status" << RESET
          << BOLD << "| " << BLUE << setw(30) << "Name" << RESET << endl;
-
 }
 
