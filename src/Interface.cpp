@@ -241,8 +241,8 @@ void Interface::printWaterSupplyCity(string option) {
         cout << left << "| " << setw(15) << city->getCode()
              << "| " << setw(15) << city->getDemand()
              << "| " << setw(15) << 100
-             << "| " << ((city->getDemand() - 100 < 0) ? GREEN : RED) << setw(15)
-             << ((city->getDemand() - 100 <= 0) ? "SUPPLIED" : "NOT SUPPLIED") << RESET
+             << "| " << ((city->getDemand() <= city->getSupplied()) ? GREEN : RED) << setw(15)
+             << ((city->getDemand() <= city->getSupplied()) ? "SUPPLIED" : "NOT SUPPLIED") << RESET
              << "| " << setw(30) << city->getName() << endl;
 
         inputWait();
@@ -256,9 +256,9 @@ void Interface::printWaterSupplyAllCities() {
     for (const City* city : cities) {
         cout << left << "| " << setw(15) << city->getCode()
              << "| " << setw(15) << city->getDemand()
-             << "| " << setw(15) << 100
-             << "| " << ((city->getDemand() > 100) ? GREEN : RED) << setw(15)
-             << ((city->getDemand() > 100) ? "SUPPLIED" : "NOT SUPPLIED") << RESET
+             << "| " << setw(15) << city->getSupplied()
+             << "| " << ((city->getDemand() <= city->getSupplied()) ? GREEN : RED) << setw(15)
+             << ((city->getDemand() <= city->getSupplied()) ? "SUPPLIED" : "NOT SUPPLIED") << RESET
              << "| " << setw(30) << city->getName() << endl;
     }
     inputWait();

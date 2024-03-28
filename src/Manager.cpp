@@ -200,6 +200,16 @@ void Manager::dubiousMaxFlow(Graph* g) {
         double f = findMinResidualAlongPath(g, superSource, superTarget);
         augmentFlowAlongPath(g, superSource, superTarget, f);
     }
+
+    for (Vertex* vertex : g->getVertexSet()) {
+        if (auto city = dynamic_cast<City*>(vertex)) {
+            unsigned int flow = 0;
+            for (const Pipe* pipe : vertex->getAdj()) {
+                flow += pipe->getFlow();
+            }
+            city->setSupplied(flow);
+        }
+    }
 }
 
 std::vector<City*> Manager::checkReservoirFailure(std::string code) {
@@ -215,13 +225,8 @@ std::vector<City*> Manager::checkReservoirFailure(std::string code) {
     std::vector<City*> res;
     for (Vertex* vertex : newGraph->getVertexSet()) {
         if (auto city = dynamic_cast<City*>(vertex)) {
-            double flow = 0;
-            for (const Pipe* pipe : vertex->getAdj()) {
-                flow += pipe->getFlow();
-            }
-            if (flow < city->getDemand())
+            if (city->getDemand() > city->getSupplied())
                 res.push_back(city);
-            city->setSupplied(flow);
         }
     }
 
@@ -244,14 +249,9 @@ std::vector<City*> Manager::checkStationFailure(std::string code) {
 
     std::vector<City*> res;
     for (Vertex* vertex : newGraph->getVertexSet()) {
-        if (auto city = dynamic_cast<City*>(vertex)) {
-            double flow = 0;
-            for (const Pipe* pipe : vertex->getAdj()) {
-                flow += pipe->getFlow();
-            }
-            if (flow < city->getDemand())
+        if (auto city = dynamic_cast<City *>(vertex)) {
+            if (city->getDemand() > city->getSupplied())
                 res.push_back(city);
-            city->setSupplied(flow);
         }
     }
 
