@@ -114,8 +114,8 @@ bool Graph::removeEdge(const std::string &sourc, const std::string &dest) {
 }
 
 void Graph::removeAllAdjEdges(Vertex* vertex) {
-    for (auto it = vertex->adj.begin(); it != vertex->adj.end(); ++it) {
-        delete *it;
+    for (auto & it : vertex->adj) {
+        delete it;
     }
     vertex->adj.clear();
 }

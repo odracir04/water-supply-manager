@@ -54,8 +54,6 @@ private:
 
     static void inputWait();
 
-    Parser parser = NULL;
-
 public:
 
     void init();

@@ -42,6 +42,8 @@ int Interface::readOption(unsigned int options) {
 string Interface::readReservoir() {
     string option;
     do {
+        clear();
+        header();
         cout <<"\n\tInsert a " << BLUE << "reservoir code" << RESET <<  " (e.g. R_1): " << RESET;
         cin.clear();
         cin >> option;
@@ -54,6 +56,8 @@ string Interface::readReservoir() {
 string Interface::readStation() {
     string option;
     do {
+        clear();
+        header();
         cout <<"\n\tInsert a " << BLUE << "station code" << RESET <<  " (e.g. PS_1): " << RESET;
         cin.clear();
         cin >> option;
@@ -66,6 +70,8 @@ string Interface::readStation() {
 string Interface::readCity() {
     string option;
     do {
+        clear();
+        header();
         cout <<"\n\tInsert a " << BLUE << "city code" << RESET <<  " (e.g. C_1): " << RESET;
         cin.clear();
         cin >> option;
@@ -78,6 +84,8 @@ string Interface::readCity() {
 pair<string, string> Interface::readPipeline() {
     string option1, option2;
     do {
+        clear();
+        header();
         cout <<"\n\tInsert a " << BLUE << " pipe source" << RESET <<  " (e.g. R_1 / PS_1): " << RESET;
         cin.clear();
         cin >> option1;
@@ -225,6 +233,7 @@ void Interface::mainMenu() {
 
     switch(option) {
         case 0:
+            manager.resetGraph();
             startMenu();
             break;
         case 1:
@@ -256,7 +265,9 @@ void Interface::printWaterSupplyCity(string option) {
 void Interface::printWaterSupplyAllCities() {
     printSupplyHeader();
     std::vector<City*> cities = manager.getCities();
+    double total_flow = 0;
     for (const City* city : cities) {
+        total_flow += city->getIncome();
         cout << left << "| " << setw(15) << city->getCode()
              << "| " << setw(15) << city->getDemand()
              << "| " << setw(15) << city->getIncome()
@@ -264,24 +275,27 @@ void Interface::printWaterSupplyAllCities() {
              << ((city->getDemand() - city->getIncome() <= 0) ? "SUPPLIED" : "NOT SUPPLIED") << RESET
              << "| " << setw(30) << city->getName() << endl;
     }
+
+    cout << YELLOW << BOLD << "\n\nTotal Flow: " << RESET << total_flow << endl;
     inputWait();
     servicesMenu();
 }
 
 void Interface::printCitiesInDeficit(std::vector<City*> cities) {
-
     clear();
     cout << left << BOLD << "| " << BLUE << setw(15) << "Code" << RESET
-    << BOLD << "| " << BLUE << setw(15) << "Deficit" << RESET << endl;
+    << BOLD << "| " << BLUE << setw(15) << "Deficit" << RESET
+    << BOLD << "| " << BLUE << setw(30) << "Name" << RESET << endl;
 
     for (const City* city : cities) {
         if (city->getDemand() > city->getIncome()) {
             cout << left << "| " << setw(15) << city->getCode()
-                 << "| " << setw(15) << city->getDemand() - city->getIncome() << RESET << endl;
+                 << "| " << setw(15) << city->getDemand() - city->getIncome()
+                 << "| " << setw(30) << city->getName() << RESET << endl;
         }
     }
     inputWait();
-    servicesMenu();
+    reliabilityMenu();
 }
 
 void Interface::printSupplyHeader() {

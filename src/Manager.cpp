@@ -5,6 +5,7 @@
 #include <iostream>
 #include <queue>
 #include <cfloat>
+#include <unordered_map>
 #include "Manager.h"
 #include "City.h"
 #include "Reservoir.h"
@@ -36,24 +37,37 @@ City *Manager::getCity(std::string code) {
 }
 
 bool Manager::validateStation(std::string code) {
-    return true;
+    if (code.size() < 4 || code.substr(0, 3) != "PS_")
+        return false;
+
+    return graph->findVertex(code);
 }
 
 bool Manager::validateCity(std::string code) {
-    return true;
+    if (code.size() < 3 || code.substr(0, 2) != "C_")
+        return false;
+
+    return graph->findVertex(code);
 }
 
 bool Manager::validateReservoir(std::string code) {
-    return true;
+    if (code.size() < 3 || code.substr(0, 2) != "R_")
+        return false;
+
+    return graph->findVertex(code);
 }
 
 bool Manager::validatePipe(std::string src, std::string dest) {
+    if (!validateReservoir(src) && !validateStation(src)) return false;
+    if (!validateStation(dest) && !validateCity(dest)) return false;
+
     return true;
 }
 
 void Manager::balanceWaterFlow() {
 
 }
+
 void testAndVisit(std::queue< Vertex*> &q, Pipe *e, Vertex *w, double residual) {
 // Check if the vertex 'w' is not visited and there is residual capacity
     if (!w->isVisited() && residual > 0) {
@@ -194,16 +208,19 @@ void Manager::maxFlowAll() {
 }
 
 void Manager::dubiousMaxFlow(Graph* g) {
-
+    std::vector<std::pair<std::string, std::string>> extraEdges;
     g->addVertex("SS");
     g->addVertex("ST");
 
     for (Vertex* v : g->getVertexSet()) {
         if (auto reservoir = dynamic_cast<Reservoir*>(v)) {
             g->addEdge("SS", v->getCode(), reservoir->getMaxDelivery());
+            extraEdges.push_back({"SS", v->getCode()});
         }
         if (auto city = dynamic_cast<City*>(v)) {
             g->addEdge(v->getCode(), "ST", city->getDemand());
+            city->setIncome(0);
+            extraEdges.push_back({v->getCode(), "ST"});
         }
     }
 
@@ -224,55 +241,70 @@ void Manager::dubiousMaxFlow(Graph* g) {
     for (Vertex* vertex : g->getVertexSet()) {
         if (auto city = dynamic_cast<City*>(vertex)) {
             unsigned int flow = 0;
-            for (const Pipe* pipe : vertex->getAdj()) {
+            for (const Pipe* pipe : vertex->getIncoming()) {
                 flow += pipe->getFlow();
             }
             city->setIncome(flow);
         }
     }
+
+    for (auto edge : extraEdges) {
+        g->removeEdge(edge.first, edge.second);
+    }
 }
 
 std::vector<City*> Manager::checkReservoirFailure(std::string code) {
-    Graph* newGraph(graph);
-    auto reservoir = dynamic_cast<Reservoir*>(newGraph->findVertex(code));
+    std::unordered_map<Pipe*, double> weights;
+    auto reservoir = dynamic_cast<Reservoir*>(graph->findVertex(code));
 
     for (Pipe* pipe : reservoir->getAdj()) {
+        weights.insert({pipe, pipe->getWeight()});
         pipe->setWeight(0);
     }
 
-    dubiousMaxFlow(newGraph);
+    dubiousMaxFlow(graph);
 
     std::vector<City*> res;
-    for (Vertex* vertex : newGraph->getVertexSet()) {
+    for (Vertex* vertex : graph->getVertexSet()) {
         if (auto city = dynamic_cast<City*>(vertex)) {
             if (city->getDemand() > city->getIncome())
                 res.push_back(city);
         }
     }
 
+    for (auto pair : weights) {
+        pair.first->setWeight(pair.second);
+    }
+
     return res;
 }
 
 std::vector<City*> Manager::checkStationFailure(std::string code) {
-    Graph* newGraph(graph);
-    auto station = dynamic_cast<Station*>(newGraph->findVertex(code));
+    std::unordered_map<Pipe*, double> weights;
+    auto station = dynamic_cast<Station*>(graph->findVertex(code));
 
     for (Pipe* pipe : station->getAdj()) {
+        weights.insert({pipe, pipe->getWeight()});
         pipe->setWeight(0);
     }
 
     for (Pipe* pipe : station->getIncoming()) {
+        weights.insert({pipe, pipe->getWeight()});
         pipe->setWeight(0);
     }
 
-    dubiousMaxFlow(newGraph);
+    dubiousMaxFlow(graph);
 
     std::vector<City*> res;
-    for (Vertex* vertex : newGraph->getVertexSet()) {
+    for (Vertex* vertex : graph->getVertexSet()) {
         if (auto city = dynamic_cast<City *>(vertex)) {
             if (city->getDemand() > city->getIncome())
                 res.push_back(city);
         }
+    }
+
+    for (auto pair : weights) {
+        pair.first->setWeight(pair.second);
     }
 
     return res;
@@ -286,3 +318,7 @@ std::vector<City*> Manager::checkStationFailure(std::string code) {
         return true;
     }
 
+void Manager::resetGraph() {
+    delete graph;
+    this->graph = new Graph();
+}

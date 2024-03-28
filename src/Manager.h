@@ -1,7 +1,3 @@
-//
-// Created by ricardo on 3/20/24.
-//
-
 #ifndef DA_PROJ1_MANAGER_H
 #define DA_PROJ1_MANAGER_H
 
@@ -36,6 +32,8 @@ public:
     bool validateCity(std::string code);
     bool validateReservoir(std::string code);
     bool validatePipe(std::string src, std::string dest);
+
+    void resetGraph();
 };
 
 
