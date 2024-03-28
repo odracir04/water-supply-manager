@@ -36,6 +36,13 @@ bool Graph::addStation(const std::string &code, const unsigned int &id) {
     return true;
 }
 
+bool Graph::addVertex(const std::string &code) {
+    if (findVertex(code) != nullptr)
+        return false;
+    vertexSet.push_back(new Vertex(code));
+    return true;
+}
+
 void Graph::printVertexSet() {
     for(auto v : vertexSet ){
         std::cout << v->getCode() << "\n";
@@ -53,6 +60,63 @@ bool Graph::addEdge(const std::string &sourc, const std::string &dest, double w)
     if (source == nullptr || destination == nullptr)
         return false;
 
-    source->addPipe(dest, w);
+    auto newPipe = new Pipe(sourc, dest, w);
+    source->adj.push_back(newPipe);
+    destination->incoming.push_back(newPipe);
     return true;
 }
+
+void Graph::setVertexSet(std::vector<Vertex *> &v) {
+    this->vertexSet = v;
+}
+
+void Graph::deleteEdge(const std::string &s, Pipe *pipe) const{
+    Vertex *dest = findVertex(pipe->getDest());
+    // Remove the corresponding edge from the incoming list
+    auto it = dest->incoming.begin();
+    while (it != dest->incoming.end()) {
+        auto* temp = findVertex((*it)->getOrig());
+        if (temp->getCode() == s) {
+            it = dest->incoming.erase(it);
+        }
+        else {
+            it++;
+        }
+    }
+    delete pipe;
+}
+
+bool Graph::removeEdge(const std::string &sourc, const std::string &dest) {
+    bool removedEdge = false;
+
+    Vertex* s = findVertex(sourc);
+    Vertex* t = findVertex(dest);
+
+    if(s == nullptr || t == nullptr){
+        std::cout << "Invalid!";
+        return removedEdge;
+    }
+
+    auto it = s->adj.begin();
+    while (it != s->adj.end()) {
+        Pipe *p = *it;
+        Vertex *tempDest = findVertex(p->getDest());
+        if (tempDest->getCode() == dest) {
+            it = s->adj.erase(it);
+            deleteEdge(sourc, p);
+            removedEdge = true;
+        }
+        else {
+            it++;
+        }
+    }
+    return removedEdge;
+}
+
+void Graph::removeAllAdjEdges(Vertex* vertex) {
+    for (auto it = vertex->adj.begin(); it != vertex->adj.end(); ++it) {
+        delete *it;
+    }
+    vertex->adj.clear();
+}
+

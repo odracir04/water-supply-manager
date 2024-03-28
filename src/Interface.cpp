@@ -1,6 +1,7 @@
 #include "Interface.h"
 #include "Reservoir.h"
 #include <iostream>
+#include <iomanip>
 
 using namespace std;
 
@@ -45,7 +46,7 @@ string Interface::readReservoir() {
         cin.clear();
         cin >> option;
         cin.ignore();
-    } while (false); // manager.validateReservoir
+    } while (!manager.validateReservoir(option));
 
     return option;
 }
@@ -57,33 +58,40 @@ string Interface::readStation() {
         cin.clear();
         cin >> option;
         cin.ignore();
-    } while (false); // manager.validateStation
+    } while (!manager.validateStation(option));
+
+    return option;
+}
+
+string Interface::readCity() {
+    string option;
+    do {
+        cout <<"\n\tInsert a " << BLUE << "city code" << RESET <<  " (e.g. C_1): " << RESET;
+        cin.clear();
+        cin >> option;
+        cin.ignore();
+    } while (!manager.validateCity(option));
 
     return option;
 }
 
 pair<string, string> Interface::readPipeline() {
-    string option1;
+    string option1, option2;
     do {
         cout <<"\n\tInsert a " << BLUE << " pipe source" << RESET <<  " (e.g. R_1 / PS_1): " << RESET;
         cin.clear();
         cin >> option1;
         cin.ignore();
-    } while (false); // manager.validateReservoir || manager.validateStation
-
-    string option2;
-    do {
         cout <<"\n\tInsert a " << BLUE << " pipe destination" << RESET <<  " (e.g. C_1 / PS_1): " << RESET;
         cin.clear();
         cin >> option1;
         cin.ignore();
-    } while (false); // manager.validateCity || manager.validateStation
+    } while (!manager.validatePipe(option1, option2));
 
     return {option1, option2};
 }
 
 void Interface::init() {
-    // this.manager = Manager();
     startMenu();
 }
 
@@ -103,8 +111,7 @@ void Interface::startMenu() {
     if (option == 0)
         exitMenu();
     else {
-        parser = Parser(option - 1);
-        parser.readData();
+        manager.extractFiles(option - 1);
     }
 
     mainMenu();
@@ -133,6 +140,7 @@ void Interface::servicesMenu() {
     footer();
 
     int option = readOption(4);
+    string city;
 
     switch(option) {
         case 0:
@@ -140,24 +148,23 @@ void Interface::servicesMenu() {
             break;
         case 1:
             clear();
-
-            // manager.getWaterSupplyCity
-            // printWaterSupplyCity
+            city = readCity();
+            manager.maxFlowCities(city);
+            printWaterSupplyCity(city);
             break;
         case 2:
             clear();
-            // manager.getWaterSupplyAllCities
-            // // printWaterSupplyAllCities
+            manager.maxFlowAll();
+            printWaterSupplyAllCities();
             break;
         case 3:
             clear();
-            // manager.getRequirementsSatisfaction
-            // printRequirementsSatisfaction
+            manager.checkNetworkRequirements();
             break;
         case 4:
             clear();
-            // manager.balanceNetworkFlow
-            // printNetworkFlow
+            manager.balanceWaterFlow();
+            printWaterSupplyAllCities();
             break;
     }
 
@@ -184,19 +191,19 @@ void Interface::reliabilityMenu() {
             mainMenu();
             break;
         case 1:
-            // manager.checkReservoirFailure(readReservoir())
+            manager.checkReservoirFailure(readReservoir());
             clear();
-            // printNetworkFlow();
+            printWaterSupplyAllCities();
             break;
         case 2:
-            // manager.checkStationFailure(readStation())
+            manager.checkStationFailure(readStation());
             clear();
-            // printNetworkFlow
+            printWaterSupplyAllCities();
             break;
         case 3:
-            // manager.checkPipeFailure(readPipeline())
+            manager.checkPipeFailure(readPipeline());
             clear();
-            // printNetworkFlow
+            printWaterSupplyAllCities();
             break;
     }
 
@@ -231,3 +238,47 @@ void Interface::mainMenu() {
     }
 
 }
+
+void Interface::printWaterSupplyCity(string option) {
+
+    City* city = manager.getCity(option);
+
+    if (city != nullptr) {
+        printSupplyHeader();
+        cout << left << "| " << setw(15) << city->getPopulation()
+             << "| " << setw(15) << city->getDemand()
+             << "| " << setw(15) << city->getIncome()
+             << "| " << ((city->getDemand() - city->getIncome() < 0) ? GREEN : RED) << setw(15)
+             << ((city->getDemand() - city->getIncome() <= 0) ? "SUPPLIED" : "NOT SUPPLIED") << RESET
+             << "| " << setw(30) << city->getName() << endl;
+
+        inputWait();
+    }
+    servicesMenu();
+}
+
+void Interface::printWaterSupplyAllCities() {
+    printSupplyHeader();
+    std::vector<City*> cities = manager.getCities();
+    for (const City* city : cities) {
+        cout << left << "| " << setw(15) << city->getPopulation()
+             << "| " << setw(15) << city->getDemand()
+             << "| " << setw(15) << city->getIncome()
+             << "| " << ((city->getDemand() - city->getIncome() < 0) ? GREEN : RED) << setw(15)
+             << ((city->getDemand() - city->getIncome() < 0) ? "SUPPLIED" : "NOT SUPPLIED") << RESET
+             << "| " << setw(30) << city->getName() << endl;
+    }
+    inputWait();
+    servicesMenu();
+}
+
+void Interface::printSupplyHeader() {
+
+    cout << left << BOLD << "\n\n| " << BLUE << setw(15) << "Population" << RESET
+         << BOLD << "| " << BLUE << setw(15) << "Demand" << RESET
+         << BOLD << "| " << BLUE << setw(15) << "Supply" << RESET
+         << BOLD << "| " << BLUE << setw(15) << "Status" << RESET
+         << BOLD << "| " << BLUE << setw(30) << "Name" << RESET << endl;
+
+}
+

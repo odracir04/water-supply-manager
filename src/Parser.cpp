@@ -7,7 +7,7 @@ Parser::Parser(bool dataSetter) {
     this->dataSetter = dataSetter;
 }
 
-void Parser::readData() {
+void Parser::readData(Graph* graph) {
 
     std::ifstream inputFile;
     std::istringstream iss;
@@ -37,7 +37,7 @@ void Parser::readData() {
         getline(iss, demand, ',');
         getline(iss, population, '\r');
 
-        graph->addCity(name, stoi(id), code, stoi(demand), 1000);
+        graph->addCity(name, stoi(id), code, stoi(demand), stoi(population));
     }
 
     inputFile.close();
@@ -53,7 +53,7 @@ void Parser::readData() {
         getline(iss, municipality, ',');
         getline(iss, id, ',');
         getline(iss, code, ',');
-        getline(iss, maxDelivery, ',');
+        getline(iss, maxDelivery, '\r');
 
         graph->addReservoir(reservoir, municipality, stoi(id), code, stoi(maxDelivery));
     }
@@ -68,7 +68,7 @@ void Parser::readData() {
         iss.str(line);
 
         getline(iss, id, ',');
-        getline(iss, code, ',');
+        getline(iss, code, '\r');
 
         if (!id.empty() && !code.empty())
             graph->addStation(code, stoi(id));
@@ -89,9 +89,11 @@ void Parser::readData() {
         getline(iss, direction, '\r');
 
         graph->addEdge(SA, SB, stoi(capacity));
+
+        if (stoi(direction) == 0)
+            graph->addEdge(SB, SA, stoi(capacity));
     }
 
     inputFile.close();
 
-    graph->printVertexSet();
 }

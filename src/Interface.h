@@ -4,6 +4,7 @@
 // Text Formatting
 #include <string>
 #include "Parser.h"
+#include "Manager.h"
 
 #define RESET       "\033[0m"
 #define BOLD        "\033[1m"
@@ -45,9 +46,11 @@
 
 class Interface {
 private:
+    Manager manager = Manager();
     static void header();
     static void footer();
     static void clear();
+    static void printSupplyHeader();
 
     static void inputWait();
 
@@ -63,12 +66,15 @@ public:
     void servicesMenu();
     void reliabilityMenu();
 
-    static int readOption(unsigned int options);
-    static std::string readReservoir();
-    static std::string readStation();
-    static std::pair<std::string, std::string> readPipeline();
+    void printWaterSupplyCity(std::string option);
+    void printWaterSupplyAllCities();
 
-    void printNetworkFlow();
+    static int readOption(unsigned int options);
+
+    std::string readReservoir();
+    std::string readStation();
+    std::pair<std::string, std::string> readPipeline();
+    std::string readCity();
 };
 
 
