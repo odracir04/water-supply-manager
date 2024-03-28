@@ -1,9 +1,7 @@
-
 #include <iostream>
 #include "Parser.h"
-#include "City.h"
 #include "Reservoir.h"
-#include "Station.h"
+#include "City.h"
 
 Parser::Parser(bool dataSetter) {
     this->dataSetter = dataSetter;
@@ -38,7 +36,8 @@ void Parser::readData() {
         getline(iss, code, ',');
         getline(iss, demand, ',');
         getline(iss, population, '\r');
-        waterNetwork.addVertex(new City(stoi(id), code, name, stoi(demand), 10000));
+
+        graph->addCity(name, stoi(id), code, stoi(demand), 1000);
     }
 
     inputFile.close();
@@ -54,9 +53,9 @@ void Parser::readData() {
         getline(iss, municipality, ',');
         getline(iss, id, ',');
         getline(iss, code, ',');
-        getline(iss, maxDelivery, '\r');
+        getline(iss, maxDelivery, ',');
 
-        waterNetwork.addVertex(new Reservoir(reservoir, municipality, stoi(id), code, stoi(maxDelivery)));
+        graph->addReservoir(reservoir, municipality, stoi(id), code, stoi(maxDelivery));
     }
 
     inputFile.close();
@@ -71,9 +70,8 @@ void Parser::readData() {
         getline(iss, id, ',');
         getline(iss, code, ',');
 
-        if (id.empty() || code.empty()) continue;
-
-        waterNetwork.addVertex(new Station(stoi(id), code));
+        if (!id.empty() && !code.empty())
+            graph->addStation(code, stoi(id));
     }
 
     inputFile.close();
@@ -90,15 +88,10 @@ void Parser::readData() {
         getline(iss, capacity, ',');
         getline(iss, direction, '\r');
 
-        Node src(0, SA);
-        Node dest(0, SB);
-
-        if (stoi(direction) == 1)
-            waterNetwork.addEdge(&src, &dest, stoi(capacity));
-        else if (stoi(direction) == 0)
-            waterNetwork.addBidirectionalEdge(&src, &dest, stoi(capacity));
+        graph->addEdge(SA, SB, stoi(capacity));
     }
 
     inputFile.close();
-}
 
+    graph->printVertexSet();
+}

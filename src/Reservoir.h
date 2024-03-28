@@ -2,19 +2,20 @@
 #define DA_PROJ1_RESERVOIR_H
 
 #include <string>
-#include "Node.h"
+#include "Vertex.h"
 
-class Reservoir : public Node {
+class Reservoir : public Vertex {
     private:
         std::string name;
         std::string municipality;
+        unsigned int id;
         unsigned int maxDelivery;
     public:
-        Reservoir(std::string n, std::string m, unsigned int i, std::string c, unsigned int max) :
-        name(n), municipality(m), maxDelivery(max), Node(i, c) {}
+        Reservoir(std::string n, std::string m, unsigned int i, std::string c, unsigned int max);
 
     std::string getName() const {return this->name;}
     std::string getMunicipality() const {return this->municipality;}
+    unsigned int getId() const {return this->id;}
     unsigned int getMaxDelivery() const {return this->maxDelivery;}
 
 
