@@ -9,14 +9,17 @@
 #include "Graph.h"
 #include "Parser.h"
 #include "City.h"
+#include "Logger.h"
 
 class Manager {
 
 private:
+    Logger logger;
     Graph *graph = new Graph;
     Parser parser = Parser(false);
 
 public:
+    Manager();
     void extractFiles(bool option);
     void maxFlowCities(std::string dest);
     void maxFlowAll();
@@ -34,6 +37,8 @@ public:
     bool validateCity(std::string code);
     bool validateReservoir(std::string code);
     bool validatePipe(std::string src, std::string dest);
+
+    Logger* getLogger();
 };
 
 

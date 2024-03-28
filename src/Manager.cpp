@@ -207,3 +207,9 @@ void Manager::checkReservoirFailure(std::string code) {
         return true;
     }
 
+Manager::Manager() : logger("../out/log.txt") {}
+
+Logger* Manager::getLogger() {
+    return &logger;
+}
+
