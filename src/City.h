@@ -10,6 +10,7 @@ class City : public Vertex {
         unsigned int id;
         unsigned int demand;
         unsigned int population;
+        unsigned int supplied = 0;
     public:
         City(std::string n, unsigned int i, std::string c, unsigned int d, unsigned int p)
         : Vertex(c), name(n), id(i), demand(d), population(p) {}
@@ -18,6 +19,7 @@ class City : public Vertex {
     unsigned int getId() const {return this->id;}
     unsigned int getDemand() const {return this->demand;}
     unsigned int getPopulation() const {return this->population;}
+    unsigned int getSupplied() const { return this->supplied; }
 
     /*
     void setName(std::string const n) {this->name = n;}
@@ -26,6 +28,7 @@ class City : public Vertex {
     void setDemand(unsigned int const d) {this->demand = d;}
     void setPopulation(unsigned int const p) {this->population = p;}
     */
+    void setSupplied(unsigned int s) { this->supplied = s; }
 };
 
 

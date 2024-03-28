@@ -21,10 +21,12 @@ public:
     void maxFlowCities(std::string dest);
     bool checkNetworkRequirements();
     void balanceWaterFlow();
-    void checkReservoirFailure(std::string code);
-    void checkStationFailure(std::string code);
+    std::vector<City*> checkReservoirFailure(std::string code);
+    std::vector<City*> checkStationFailure(std::string code);
     void checkPipeFailure(std::pair<std::string, std::string> vertices);
     std::vector<City*> getCities();
+
+    void dubiousMaxFlow(Graph* g);
 
     City* getCity(std::string code);
 

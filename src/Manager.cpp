@@ -7,6 +7,8 @@
 #include <cfloat>
 #include "Manager.h"
 #include "City.h"
+#include "Reservoir.h"
+#include "Station.h"
 
 void Manager::extractFiles(bool option) {
     parser.setCSV(option);
@@ -132,7 +134,7 @@ void augmentFlowAlongPath(Graph* g, Vertex *s, Vertex *t, double f) {
         Vertex *t = newGraph.findVertex(dest);
 
         if (t == nullptr) {
-            std::cout << "Invalid  target!";
+            std::cout << "Invalid target!";
             return;
         }
 
@@ -171,13 +173,90 @@ void augmentFlowAlongPath(Graph* g, Vertex *s, Vertex *t, double f) {
         std::cout << maxFlow;
     }
 
-    void Manager::checkReservoirFailure(std::string code) {
+void Manager::dubiousMaxFlow(Graph* g) {
 
+    g->addVertex("SS");
+    g->addVertex("ST");
+
+    for (Vertex* v : g->getVertexSet()) {
+        if (auto reservoir = dynamic_cast<Reservoir*>(v)) {
+            g->addEdge("SS", v->getCode(), reservoir->getMaxDelivery());
+        }
+        if (auto city = dynamic_cast<City*>(v)) {
+            g->addEdge(v->getCode(), "ST", city->getDemand());
+        }
     }
 
-    void Manager::checkStationFailure(std::string code) {
-
+    for (Vertex* v : g->getVertexSet()) {
+        for (Pipe* p : v->getAdj()) {
+            p->setFlow(0);
+        }
     }
+
+    Vertex* superSource = g->findVertex("SS");
+    Vertex* superTarget = g->findVertex("ST");
+
+    while(findAugmentingPath(*g, superSource, superTarget)) {
+        double f = findMinResidualAlongPath(g, superSource, superTarget);
+        augmentFlowAlongPath(g, superSource, superTarget, f);
+    }
+}
+
+std::vector<City*> Manager::checkReservoirFailure(std::string code) {
+    Graph* newGraph(graph);
+    auto reservoir = dynamic_cast<Reservoir*>(newGraph->findVertex(code));
+
+    for (Pipe* pipe : reservoir->getAdj()) {
+        pipe->setWeight(0);
+    }
+
+    dubiousMaxFlow(newGraph);
+
+    std::vector<City*> res;
+    for (Vertex* vertex : newGraph->getVertexSet()) {
+        if (auto city = dynamic_cast<City*>(vertex)) {
+            double flow = 0;
+            for (const Pipe* pipe : vertex->getAdj()) {
+                flow += pipe->getFlow();
+            }
+            if (flow < city->getDemand())
+                res.push_back(city);
+            city->setSupplied(flow);
+        }
+    }
+
+    return res;
+}
+
+std::vector<City*> Manager::checkStationFailure(std::string code) {
+    Graph* newGraph(graph);
+    auto station = dynamic_cast<Station*>(newGraph->findVertex(code));
+
+    for (Pipe* pipe : station->getAdj()) {
+        pipe->setWeight(0);
+    }
+
+    for (Pipe* pipe : station->getIncoming()) {
+        pipe->setWeight(0);
+    }
+
+    dubiousMaxFlow(newGraph);
+
+    std::vector<City*> res;
+    for (Vertex* vertex : newGraph->getVertexSet()) {
+        if (auto city = dynamic_cast<City*>(vertex)) {
+            double flow = 0;
+            for (const Pipe* pipe : vertex->getAdj()) {
+                flow += pipe->getFlow();
+            }
+            if (flow < city->getDemand())
+                res.push_back(city);
+            city->setSupplied(flow);
+        }
+    }
+
+    return res;
+}
 
     void Manager::checkPipeFailure(std::pair<std::string, std::string> vertices) {
 
