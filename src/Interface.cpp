@@ -256,7 +256,7 @@ void Interface::printWaterSupplyCity(string option) {
 
         ss << std::left << "| " << std::setw(15) << city->getPopulation()
            << "| " << std::setw(15) << city->getDemand()
-           << "| " << std::setw(15) << city->getIncome() << setw(15)
+           << "| " << std::setw(15) << city->getIncome()
            << "| " << setw(15)<<((deficit <= 0) ? "SUPPLIED" : "NOT SUPPLIED")
            << "| " << std::setw(30) << city->getName() << std::endl;
 
