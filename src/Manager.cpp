@@ -6,6 +6,8 @@
 #include <queue>
 #include <cfloat>
 #include <unordered_map>
+#include <unordered_set>
+#include <climits>
 #include "Manager.h"
 #include "City.h"
 #include "Reservoir.h"
@@ -207,8 +209,36 @@ void Manager::maxFlowAll() {
     dubiousMaxFlow(graph);
 }
 
+void Manager::clearVertexes() {
+    for (Vertex* vertex : graph->getVertexSet()) {
+        vertex->setVisited(false);
+        vertex->setPath(nullptr);
+    }
+}
+
+void Manager::computePath(Vertex* src, Vertex* dest) {
+    std::queue<Vertex*> processing;
+    processing.push(src);
+
+    while (!processing.empty()) {
+        Vertex* current = processing.front();
+        if (current->getCode() == dest->getCode()) return;
+        for (Pipe* pipe : current->getAdj()) {
+            Vertex* next = graph->findVertex(pipe->getDest());
+            if (pipe->getFlow() < pipe->getWeight() && !next->isVisited()) {
+                next->setPath(pipe);
+                processing.push(next);
+            }
+        }
+        current->setVisited(true);
+        processing.pop();
+    }
+}
+
 void Manager::dubiousMaxFlow(Graph* g) {
     std::vector<std::pair<std::string, std::string>> extraEdges;
+    std::unordered_set<Pipe*> back_edges;
+
     g->addVertex("SS");
     g->addVertex("ST");
 
@@ -224,18 +254,62 @@ void Manager::dubiousMaxFlow(Graph* g) {
         }
     }
 
-    for (Vertex* v : g->getVertexSet()) {
-        for (Pipe* p : v->getAdj()) {
-            p->setFlow(0);
+    clearVertexes();
+
+    for (Vertex* vertex : g->getVertexSet()) {
+        for (Pipe *pipe: vertex->getAdj()) {
+            pipe->setReverse(nullptr);
+        }
+    }
+
+    for (Vertex* vertex : g->getVertexSet()) {
+        for (Pipe* pipe: vertex->getAdj()) {
+            if (pipe->getReverse() == nullptr) {
+                pipe->setFlow(0);
+
+                Pipe *reverse = graph->addEdge(pipe->getDest(), pipe->getOrig(), pipe->getWeight());
+
+                reverse->setFlow(reverse->getWeight());
+                pipe->setReverse(reverse);
+                reverse->setReverse(pipe);
+                back_edges.insert(reverse);
+            }
         }
     }
 
     Vertex* superSource = g->findVertex("SS");
     Vertex* superTarget = g->findVertex("ST");
 
-    while(findAugmentingPath(*g, superSource, superTarget)) {
-        double f = findMinResidualAlongPath(g, superSource, superTarget);
-        augmentFlowAlongPath(g, superSource, superTarget, f);
+    computePath( superSource, superTarget);
+
+    Pipe* backtrack = superTarget->getPath();
+
+    while (backtrack != nullptr) {
+
+        double max_flow = INT_MAX;
+        while (backtrack != nullptr) {
+            max_flow = std::min(max_flow, backtrack->getWeight() - backtrack->getFlow());
+            backtrack = graph->findVertex(backtrack->getOrig())->getPath();
+        }
+
+        backtrack = superTarget->getPath();
+        while (backtrack != nullptr) {
+            backtrack->setFlow(backtrack->getFlow() + max_flow);
+            backtrack->getReverse()->setFlow(backtrack->getReverse()->getFlow() - max_flow);
+            backtrack = graph->findVertex(backtrack->getOrig())->getPath();
+        }
+
+        clearVertexes();
+        computePath( superSource, superTarget);
+        backtrack = superTarget->getPath();
+    }
+
+    for (auto edge : extraEdges) {
+        g->removeEdge(edge.first, edge.second);
+    }
+
+    for (Pipe* edge : back_edges) {
+        g->removeEdge(edge);
     }
 
     for (Vertex* vertex : g->getVertexSet()) {
@@ -246,10 +320,6 @@ void Manager::dubiousMaxFlow(Graph* g) {
             }
             city->setIncome(flow);
         }
-    }
-
-    for (auto edge : extraEdges) {
-        g->removeEdge(edge.first, edge.second);
     }
 }
 

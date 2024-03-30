@@ -161,7 +161,7 @@ void Interface::servicesMenu() {
             printWaterSupplyCity(city);
             break;
         case 2:
-            clear();
+            //clear();
             manager.maxFlowAll();
             printWaterSupplyAllCities();
             break;

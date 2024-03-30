@@ -53,17 +53,17 @@ std::vector<Vertex *> Graph::getVertexSet() const {
     return vertexSet;
 }
 
-bool Graph::addEdge(const std::string &sourc, const std::string &dest, double w) {
+Pipe* Graph::addEdge(const std::string &sourc, const std::string &dest, double w) {
     Vertex* source = findVertex(sourc);
     Vertex* destination = findVertex(dest);
 
     if (source == nullptr || destination == nullptr)
-        return false;
+        return nullptr;
 
     auto newPipe = new Pipe(sourc, dest, w);
     source->adj.push_back(newPipe);
     destination->incoming.push_back(newPipe);
-    return true;
+    return newPipe;
 }
 
 void Graph::setVertexSet(std::vector<Vertex *> &v) {
@@ -110,6 +110,25 @@ bool Graph::removeEdge(const std::string &sourc, const std::string &dest) {
             it++;
         }
     }
+    return removedEdge;
+}
+
+bool Graph::removeEdge(Pipe* pipe) {
+    bool removedEdge = false;
+
+    Vertex* s = this->findVertex(pipe->getOrig());
+    Vertex* t = this->findVertex(pipe->getDest());
+
+    if(s == nullptr || t == nullptr){
+        std::cout << "Invalid!";
+        return removedEdge;
+    }
+
+    auto it = std::find(s->adj.begin(), s->adj.end(), pipe);
+    s->adj.erase(it);
+    deleteEdge(pipe->getOrig(), pipe);
+    removedEdge = true;
+
     return removedEdge;
 }
 

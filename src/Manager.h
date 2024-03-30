@@ -24,6 +24,8 @@ public:
     void checkPipeFailure(std::pair<std::string, std::string> vertices);
     std::vector<City*> getCities();
 
+    void clearVertexes();
+    void computePath(Vertex* src, Vertex* dest);
     void dubiousMaxFlow(Graph* g);
 
     City* getCity(std::string code);

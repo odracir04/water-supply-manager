@@ -23,8 +23,9 @@ public:
                              const unsigned int &id, const std::string &code, const unsigned int &max);
     bool addStation(const std::string &code, const unsigned int &id);
     bool removeVertex(const std::string &in);
-    bool addEdge(const std::string &sourc, const std::string &dest, double w);
+    Pipe* addEdge(const std::string &sourc, const std::string &dest, double w);
     bool removeEdge(const std::string &sourc, const std::string &dest);
+    bool removeEdge(Pipe* pipe);
     std::vector<Vertex*> getVertexSet() const;
     void setVertexSet(std::vector<Vertex*> &v);
     std::vector<Vertex> dfs() const;

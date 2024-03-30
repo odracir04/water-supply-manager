@@ -34,3 +34,11 @@ double Pipe::getWeight() const {
 void Pipe::setWeight(double weight) {
     this->capacity = weight;
 }
+
+Pipe *Pipe::getReverse() const {
+    return reverse;
+}
+
+void Pipe::setReverse(Pipe *pipe) {
+    this->reverse = pipe;
+}
