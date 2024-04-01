@@ -120,3 +120,28 @@ void Graph::removeAllAdjEdges(Vertex* vertex) {
     vertex->adj.clear();
 }
 
+bool Graph::removeVertex(const std::string &in) {
+    auto it = vertexSet.begin();
+
+    while (it != vertexSet.end() && (*it) != findVertex(in)) it++;
+
+    if (it == vertexSet.end()) return false;
+
+    Vertex* vertex = *it;
+
+    while (!vertex->adj.empty()) {
+        Pipe* pipe = vertex->adj[0];
+        removeEdge(pipe->getOrig(), pipe->getDest());
+    }
+
+    while (!vertex->incoming.empty()) {
+        Pipe* pipe = vertex->incoming[0];
+        removeEdge(pipe->getOrig(), pipe->getDest());
+    }
+
+    vertexSet.erase(it);
+    delete vertex;
+
+    return true;
+}
+

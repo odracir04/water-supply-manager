@@ -201,14 +201,61 @@ void augmentFlowAlongPath(Graph* g, Vertex *s, Vertex *t, double f) {
 
 
 void Manager::maxFlowAll() {
-    /*for(auto* v : graph->getVertexSet()){
+    for(auto* v : graph->getVertexSet()){
         if(v->getCode()[0] == 'C'){
             maxFlowCities(v->getCode());
         }
-    }*/
-    dubiousMaxFlow(graph);
+    }
 }
 
+void Manager::addSuperVertexes() {
+    graph->addVertex("SS");
+    graph->addVertex("ST");
+
+    for (Vertex* v : graph->getVertexSet()) {
+        if (auto reservoir = dynamic_cast<Reservoir*>(v)) {
+            graph->addEdge("SS", v->getCode(), reservoir->getMaxDelivery());
+        }
+        if (auto city = dynamic_cast<City*>(v)) {
+            graph->addEdge(v->getCode(), "ST", city->getDemand());
+            city->setIncome(0);
+        }
+    }
+}
+
+void Manager::computeCityFlow() {
+    for (Vertex* vertex : graph->getVertexSet()) {
+        if (auto city = dynamic_cast<City*>(vertex)) {
+            unsigned int flow = 0;
+            for (const Pipe* pipe : vertex->getIncoming()) {
+                flow += pipe->getFlow();
+            }
+            city->setIncome(flow);
+        }
+    }
+}
+
+void Manager::maxFlowAllCities() {
+    addSuperVertexes();
+
+    for (Vertex* v : graph->getVertexSet()) {
+        for (Pipe* p : v->getAdj()) {
+            p->setFlow(0);
+        }
+    }
+
+    Vertex* superSource = graph->findVertex("SS");
+    Vertex* superTarget = graph->findVertex("ST");
+
+    while(findAugmentingPath(*graph, superSource, superTarget)) {
+        double f = findMinResidualAlongPath(graph, superSource, superTarget);
+        augmentFlowAlongPath(graph, superSource, superTarget, f);
+    }
+
+    computeCityFlow();
+    graph->removeVertex("SS");
+    graph->removeVertex("ST");
+}
 
 std::vector<City*> Manager::checkReservoirFailure(std::string code) {
     std::unordered_map<Pipe*, double> weights;
@@ -219,7 +266,7 @@ std::vector<City*> Manager::checkReservoirFailure(std::string code) {
         pipe->setWeight(0);
     }
 
-    dubiousMaxFlow(graph);
+    maxFlowAllCities();
 
     std::vector<City*> res;
     for (Vertex* vertex : graph->getVertexSet()) {
@@ -250,7 +297,7 @@ std::vector<City*> Manager::checkStationFailure(std::string code) {
         pipe->setWeight(0);
     }
 
-    dubiousMaxFlow(graph);
+    maxFlowAllCities();
 
     std::vector<City*> res;
     for (Vertex* vertex : graph->getVertexSet()) {

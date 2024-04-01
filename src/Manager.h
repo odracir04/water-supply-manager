@@ -12,6 +12,9 @@ private:
     Graph *graph = new Graph;
     Parser parser = Parser(false);
 
+    void computeCityFlow();
+    void addSuperVertexes();
+
 public:
     void extractFiles(bool option);
     void maxFlowCities(std::string dest);
@@ -24,7 +27,7 @@ public:
     void checkPipeFailure(std::pair<std::string, std::string> vertices);
     std::vector<City*> getCities();
 
-    void dubiousMaxFlow(Graph* g);
+    void maxFlowAllCities();
 
     City* getCity(std::string code);
 
