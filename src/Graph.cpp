@@ -113,25 +113,6 @@ bool Graph::removeEdge(const std::string &sourc, const std::string &dest) {
     return removedEdge;
 }
 
-bool Graph::removeEdge(Pipe* pipe) {
-    bool removedEdge = false;
-
-    Vertex* s = this->findVertex(pipe->getOrig());
-    Vertex* t = this->findVertex(pipe->getDest());
-
-    if(s == nullptr || t == nullptr){
-        std::cout << "Invalid!";
-        return removedEdge;
-    }
-
-    auto it = std::find(s->adj.begin(), s->adj.end(), pipe);
-    s->adj.erase(it);
-    deleteEdge(pipe->getOrig(), pipe);
-    removedEdge = true;
-
-    return removedEdge;
-}
-
 void Graph::removeAllAdjEdges(Vertex* vertex) {
     for (auto & it : vertex->adj) {
         delete it;
