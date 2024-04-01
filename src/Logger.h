@@ -15,25 +15,25 @@ private:
 public:
 
     /**
-     * Construtor de um Logger.
-     * Recebe apenas o nome do ficheiro onde vai escrever.
-     * \n Complexidade: O(1)
-     * @param filename string relativa ao nome do ficheiro de log.
+     * Logger constructor.
+     * Receives the name of file where it is going to write.
+     * \n Complexity: O(1)
+     * @param filename string related to the name of the file..
      */
     Logger(std::string filename);
 
     /**
-     * Destruidor de um Logger.
-     * Verifica se ifstream está aberto e fecha.
-     * \n Complexidade: O(1)
+     * Logger destructor.
+     * Verifies if the ifstream is open and closes it.
+     * \n Complexity: O(1)
      */
     ~Logger();
 
     /**
-     * Escritor do log.
-     * Verifica se iftream aberta, captura o tempo local do sistema e escreve no ficheiro uma determinada mensagem,
-     * \n Complexidade: O(1)
-     * @param str String que é escrita no ficheiro.
+     * Logger writer.
+     * Verifies if ifstream is open, and writes the content to the file.
+     * \n Complexity: O(1)
+     * @param str String that is written to the file.
      */
     void log(std::string str);
 

@@ -19,6 +19,10 @@ class Vertex {
         friend class Graph;
 
     public:
+        /**
+         * @brief Vertex constructor.
+         * @param code Code of the vertex.
+         */
         Vertex(std::string code);
         virtual std::string getCode() const;
         void setCode(std::string in);
