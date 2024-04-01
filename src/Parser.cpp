@@ -26,7 +26,6 @@ void Parser::readData(Graph* graph) {
     }
 
     inputFile.open("../data/" + csvIndicator + "/Cities.csv");
-
     getline(inputFile, line);
     while(getline(inputFile, line)){
         iss.clear();
@@ -98,4 +97,3 @@ void Parser::readData(Graph* graph) {
     inputFile.close();
 
 }
-

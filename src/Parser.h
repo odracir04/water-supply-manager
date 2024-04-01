@@ -16,6 +16,7 @@ class Parser {
         Parser(bool dataSet);
         void readData(Graph* graph); //Graph
         void setCSV(bool option) { dataSetter = option; }
+        bool getCSV() { return dataSetter; }
 };
 
 

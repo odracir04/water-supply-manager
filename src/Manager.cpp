@@ -1,12 +1,13 @@
-//
-// Created by ricardo on 3/20/24.
-//
-
 #include <iostream>
 #include <queue>
 #include <cfloat>
+#include <unordered_map>
+#include <unordered_set>
+#include <climits>
 #include "Manager.h"
 #include "City.h"
+#include "Reservoir.h"
+#include "Station.h"
 
 void Manager::extractFiles(bool option) {
     parser.setCSV(option);
@@ -34,24 +35,37 @@ City *Manager::getCity(std::string code) {
 }
 
 bool Manager::validateStation(std::string code) {
-    return true;
+    if (code.size() < 4 || code.substr(0, 3) != "PS_")
+        return false;
+
+    return graph->findVertex(code);
 }
 
 bool Manager::validateCity(std::string code) {
-    return true;
+    if (code.size() < 3 || code.substr(0, 2) != "C_")
+        return false;
+
+    return graph->findVertex(code);
 }
 
 bool Manager::validateReservoir(std::string code) {
-    return true;
+    if (code.size() < 3 || code.substr(0, 2) != "R_")
+        return false;
+
+    return graph->findVertex(code);
 }
 
 bool Manager::validatePipe(std::string src, std::string dest) {
+    if (!validateReservoir(src) && !validateStation(src)) return false;
+    if (!validateStation(dest) && !validateCity(dest)) return false;
+
     return true;
 }
 
 void Manager::balanceWaterFlow() {
 
 }
+
 void testAndVisit(std::queue< Vertex*> &q, Pipe *e, Vertex *w, double residual) {
 // Check if the vertex 'w' is not visited and there is residual capacity
     if (!w->isVisited() && residual > 0) {
@@ -124,33 +138,31 @@ void augmentFlowAlongPath(Graph* g, Vertex *s, Vertex *t, double f) {
     }
 }
 
-    void Manager::maxFlowCities(std::string dest) {
+void Manager::maxFlowCities(std::string dest) {
 
+    Graph newGraph = *graph;
 
-        Graph newGraph = *graph;
+    Vertex *t = newGraph.findVertex(dest);
 
-        Vertex *t = newGraph.findVertex(dest);
+    if (t == nullptr) {
+        std::cout << "Invalid target!";
+        return;
+    }
 
-        if (t == nullptr) {
-            std::cout << "Invalid  target!";
-            return;
+    //Create super Source
+    Vertex *superSource = new Vertex("SS");
+
+    std::vector<Vertex*> vec = newGraph.getVertexSet();
+    vec.push_back(superSource);
+    newGraph.setVertexSet(vec);
+
+    for (auto *v: newGraph.getVertexSet()) {
+        if (v->getCode()[0] == 'R') {
+            newGraph.addEdge("SS", v->getCode(), 999999999);
         }
+    }
 
-        //Create super Source
-        Vertex *superSource = new Vertex("SS");
-
-        std::vector<Vertex*> vec = newGraph.getVertexSet();
-        vec.push_back(superSource);
-        newGraph.setVertexSet(vec);
-
-        for (auto *v: newGraph.getVertexSet()) {
-            if (v->getCode()[0] == 'R') {
-                newGraph.addEdge("SS", v->getCode(), 999999999);
-            }
-        }
-
-
-        for (auto v: newGraph.getVertexSet()) {
+    for (auto v: newGraph.getVertexSet()) {
             for (auto *e: v->getAdj()) {
                 e->setFlow(0);
             }
@@ -176,10 +188,10 @@ void augmentFlowAlongPath(Graph* g, Vertex *s, Vertex *t, double f) {
 
         *graph = newGraph;
 
-
         City*  c = dynamic_cast<City *>(graph->findVertex(dest));
         c->setIncome(maxFlow);
-    }
+}
+
 
 void Manager::maxFlowAll() {
     for(auto* v : graph->getVertexSet()){
@@ -189,21 +201,125 @@ void Manager::maxFlowAll() {
     }
 }
 
+void Manager::addSuperVertexes() {
+    graph->addVertex("SS");
+    graph->addVertex("ST");
 
+    for (Vertex* v : graph->getVertexSet()) {
+        if (auto reservoir = dynamic_cast<Reservoir*>(v)) {
+            graph->addEdge("SS", v->getCode(), reservoir->getMaxDelivery());
+        }
+        if (auto city = dynamic_cast<City*>(v)) {
+            graph->addEdge(v->getCode(), "ST", city->getDemand());
+            city->setIncome(0);
+        }
+    }
+}
 
-void Manager::checkReservoirFailure(std::string code) {
+void Manager::computeCityFlow() {
+    for (Vertex* vertex : graph->getVertexSet()) {
+        if (auto city = dynamic_cast<City*>(vertex)) {
+            unsigned int flow = 0;
+            for (const Pipe* pipe : vertex->getIncoming()) {
+                flow += pipe->getFlow();
+            }
+            city->setIncome(flow);
+        }
+    }
+}
 
+void Manager::maxFlowAllCities() {
+    addSuperVertexes();
+
+    for (Vertex* v : graph->getVertexSet()) {
+        for (Pipe* p : v->getAdj()) {
+            p->setFlow(0);
+        }
     }
 
-    void Manager::checkStationFailure(std::string code) {
+    Vertex* superSource = graph->findVertex("SS");
+    Vertex* superTarget = graph->findVertex("ST");
 
+    while(findAugmentingPath(*graph, superSource, superTarget)) {
+        double f = findMinResidualAlongPath(graph, superSource, superTarget);
+        augmentFlowAlongPath(graph, superSource, superTarget, f);
     }
 
-    void Manager::checkPipeFailure(std::pair<std::string, std::string> vertices) {
+    computeCityFlow();
+    graph->removeVertex("SS");
+    graph->removeVertex("ST");
+}
 
+std::vector<City*> Manager::checkReservoirFailure(std::string code) {
+    std::unordered_map<Pipe*, double> weights;
+    auto reservoir = dynamic_cast<Reservoir*>(graph->findVertex(code));
+
+    for (Pipe* pipe : reservoir->getAdj()) {
+        weights.insert({pipe, pipe->getWeight()});
+        pipe->setWeight(0);
     }
 
-    bool Manager::checkNetworkRequirements() {
+    maxFlowAllCities();
+
+    std::vector<City*> res;
+    for (Vertex* vertex : graph->getVertexSet()) {
+        if (auto city = dynamic_cast<City*>(vertex)) {
+            if (city->getDemand() > city->getIncome())
+                res.push_back(city);
+        }
+    }
+
+    for (auto pair : weights) {
+        pair.first->setWeight(pair.second);
+    }
+
+    return res;
+}
+
+std::vector<City*> Manager::checkStationFailure(std::string code) {
+    std::unordered_map<Pipe*, double> weights;
+    auto station = dynamic_cast<Station*>(graph->findVertex(code));
+
+    for (Pipe* pipe : station->getAdj()) {
+        weights.insert({pipe, pipe->getWeight()});
+        pipe->setWeight(0);
+    }
+
+    for (Pipe* pipe : station->getIncoming()) {
+        weights.insert({pipe, pipe->getWeight()});
+        pipe->setWeight(0);
+    }
+
+    maxFlowAllCities();
+
+    std::vector<City*> res;
+    for (Vertex* vertex : graph->getVertexSet()) {
+        if (auto city = dynamic_cast<City *>(vertex)) {
+            if (city->getDemand() > city->getIncome())
+                res.push_back(city);
+        }
+    }
+
+    for (auto pair : weights) {
+        pair.first->setWeight(pair.second);
+    }
+
+    return res;
+}
+
+void Manager::checkPipeFailure(std::pair<std::string, std::string> vertices) {
+
+}
+
+void Manager::checkVitalPipes(std::string code) {
+
+}
+
+bool Manager::checkNetworkRequirements() {
         return true;
-    }
+}
 
+void Manager::resetGraph() {
+    delete graph;
+    this->graph = new Graph();
+}

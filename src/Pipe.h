@@ -11,6 +11,8 @@ class Pipe {
         std::string servicePointB;
         int capacity;
         double flow;
+        Pipe* reverse;
+
     public:
         Pipe(const std::string &s, const std::string &d, double &w);
         double getFlow() const;
@@ -18,10 +20,12 @@ class Pipe {
 
         std::string getDest() const;
         std::string getOrig() const;
+        Pipe* getReverse() const;
 
         void setDest(std::string *dest);
         double getWeight() const;
         void setWeight(double weight);
+        void setReverse(Pipe* pipe);
 
 
 };

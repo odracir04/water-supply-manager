@@ -1,7 +1,3 @@
-//
-// Created by ricardo on 3/20/24.
-//
-
 #ifndef DA_PROJ1_MANAGER_H
 #define DA_PROJ1_MANAGER_H
 
@@ -16,6 +12,9 @@ private:
     Graph *graph = new Graph;
     Parser parser = Parser(false);
 
+    void computeCityFlow();
+    void addSuperVertexes();
+
 public:
     void extractFiles(bool option);
     void maxFlowCities(std::string dest);
@@ -23,10 +22,13 @@ public:
 
     bool checkNetworkRequirements();
     void balanceWaterFlow();
-    void checkReservoirFailure(std::string code);
-    void checkStationFailure(std::string code);
+    std::vector<City*> checkReservoirFailure(std::string code);
+    std::vector<City*> checkStationFailure(std::string code);
     void checkPipeFailure(std::pair<std::string, std::string> vertices);
+    void checkVitalPipes(std::string code);
     std::vector<City*> getCities();
+
+    void maxFlowAllCities();
 
     City* getCity(std::string code);
 
@@ -34,6 +36,8 @@ public:
     bool validateCity(std::string code);
     bool validateReservoir(std::string code);
     bool validatePipe(std::string src, std::string dest);
+
+    void resetGraph();
 };
 
 

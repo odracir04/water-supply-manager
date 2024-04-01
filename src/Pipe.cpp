@@ -30,3 +30,15 @@ std::string Pipe::getOrig() const {
 double Pipe::getWeight() const {
     return capacity;
 }
+
+void Pipe::setWeight(double weight) {
+    this->capacity = weight;
+}
+
+Pipe *Pipe::getReverse() const {
+    return reverse;
+}
+
+void Pipe::setReverse(Pipe *pipe) {
+    this->reverse = pipe;
+}
