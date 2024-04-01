@@ -25,6 +25,7 @@ public:
     std::vector<City*> checkReservoirFailure(std::string code);
     std::vector<City*> checkStationFailure(std::string code);
     void checkPipeFailure(std::pair<std::string, std::string> vertices);
+    void checkVitalPipes(std::string code);
     std::vector<City*> getCities();
 
     void maxFlowAllCities();

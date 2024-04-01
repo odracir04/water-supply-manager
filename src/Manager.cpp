@@ -1,7 +1,3 @@
-//
-// Created by ricardo on 3/20/24.
-//
-
 #include <iostream>
 #include <queue>
 #include <cfloat>
@@ -142,33 +138,31 @@ void augmentFlowAlongPath(Graph* g, Vertex *s, Vertex *t, double f) {
     }
 }
 
-    void Manager::maxFlowCities(std::string dest) {
+void Manager::maxFlowCities(std::string dest) {
 
+    Graph newGraph = *graph;
 
-        Graph newGraph = *graph;
+    Vertex *t = newGraph.findVertex(dest);
 
-        Vertex *t = newGraph.findVertex(dest);
+    if (t == nullptr) {
+        std::cout << "Invalid target!";
+        return;
+    }
 
-        if (t == nullptr) {
-            std::cout << "Invalid target!";
-            return;
+    //Create super Source
+    Vertex *superSource = new Vertex("SS");
+
+    std::vector<Vertex*> vec = newGraph.getVertexSet();
+    vec.push_back(superSource);
+    newGraph.setVertexSet(vec);
+
+    for (auto *v: newGraph.getVertexSet()) {
+        if (v->getCode()[0] == 'R') {
+            newGraph.addEdge("SS", v->getCode(), 999999999);
         }
+    }
 
-        //Create super Source
-        Vertex *superSource = new Vertex("SS");
-
-        std::vector<Vertex*> vec = newGraph.getVertexSet();
-        vec.push_back(superSource);
-        newGraph.setVertexSet(vec);
-
-        for (auto *v: newGraph.getVertexSet()) {
-            if (v->getCode()[0] == 'R') {
-                newGraph.addEdge("SS", v->getCode(), 999999999);
-            }
-        }
-
-
-        for (auto v: newGraph.getVertexSet()) {
+    for (auto v: newGraph.getVertexSet()) {
             for (auto *e: v->getAdj()) {
                 e->setFlow(0);
             }
@@ -194,10 +188,9 @@ void augmentFlowAlongPath(Graph* g, Vertex *s, Vertex *t, double f) {
 
         *graph = newGraph;
 
-
         City*  c = dynamic_cast<City *>(graph->findVertex(dest));
         c->setIncome(maxFlow);
-    }
+}
 
 
 void Manager::maxFlowAll() {
@@ -314,13 +307,17 @@ std::vector<City*> Manager::checkStationFailure(std::string code) {
     return res;
 }
 
-    void Manager::checkPipeFailure(std::pair<std::string, std::string> vertices) {
+void Manager::checkPipeFailure(std::pair<std::string, std::string> vertices) {
 
-    }
+}
 
-    bool Manager::checkNetworkRequirements() {
+void Manager::checkVitalPipes(std::string code) {
+
+}
+
+bool Manager::checkNetworkRequirements() {
         return true;
-    }
+}
 
 void Manager::resetGraph() {
     delete graph;

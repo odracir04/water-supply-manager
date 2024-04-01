@@ -86,13 +86,13 @@ pair<string, string> Interface::readPipeline() {
     do {
         clear();
         header();
-        cout <<"\n\tInsert a " << BLUE << " pipe source" << RESET <<  " (e.g. R_1 / PS_1): " << RESET;
+        cout <<"\n\tInsert a " << BLUE << "pipe source" << RESET <<  " (e.g. R_1 / PS_1): " << RESET;
         cin.clear();
         cin >> option1;
         cin.ignore();
-        cout <<"\n\tInsert a " << BLUE << " pipe destination" << RESET <<  " (e.g. C_1 / PS_1): " << RESET;
+        cout <<"\n\tInsert a " << BLUE << "pipe destination" << RESET <<  " (e.g. C_1 / PS_1): " << RESET;
         cin.clear();
-        cin >> option1;
+        cin >> option2;
         cin.ignore();
     } while (!manager.validatePipe(option1, option2));
 
@@ -182,6 +182,33 @@ void Interface::servicesMenu() {
     servicesMenu();
 }
 
+void Interface::pipeFailureMenu() {
+    clear();
+    header();
+
+    cout << FAINT << YELLOW << "\tWhat are you looking for today?\n\n" << RESET;
+
+    cout << BLUE << BOLD << "\t[1]" << RESET << " - Display Cities affected by Pipe\n"
+         << BLUE << BOLD << "\t[2]" << RESET << " - Display Pipes vital to City\n"
+         << RED << BOLD << "\t[0]" << RESET << " - Back\n\n";
+
+    footer();
+
+    int option = readOption(2);
+
+    switch(option) {
+        case 0:
+            reliabilityMenu();
+            break;
+        case 1:
+            manager.checkPipeFailure(readPipeline());
+            break;
+        case 2:
+            manager.checkVitalPipes(readCity());
+
+    }
+}
+
 void Interface::reliabilityMenu() {
     header();
 
@@ -207,9 +234,7 @@ void Interface::reliabilityMenu() {
             printCitiesInDeficit(manager.checkStationFailure(readStation()));
             break;
         case 3:
-            manager.checkPipeFailure(readPipeline());
-            clear();
-            //printCitiesInDeficit();
+            pipeFailureMenu();
             break;
     }
 

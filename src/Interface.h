@@ -63,6 +63,7 @@ public:
     static void exitMenu();
     void servicesMenu();
     void reliabilityMenu();
+    void pipeFailureMenu();
 
     void printWaterSupplyCity(std::string option);
     void printCitiesInDeficit(std::vector<City*> cities);
