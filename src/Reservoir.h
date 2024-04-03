@@ -46,13 +46,11 @@ class Reservoir : public Vertex {
      */
     unsigned int getMaxDelivery() const {return this->maxDelivery;}
 
-    /*
+
     void setName(std::string const n) {this->name = n;}
     void setMunicipality(std::string const m) {this->municipality = m;}
-    void setId(unsigned int i) {this->id = i;}
-    void setCode(std::string const c) {this->code = c;}
     void setMaxDelivery(unsigned int const max) {this->maxDelivery = max;}
-    */
+
 };
 
 

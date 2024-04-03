@@ -1,4 +1,5 @@
 #include "Interface.h"
+#include "Reservoir.h"
 #include <iostream>
 #include <iomanip>
 
@@ -41,6 +42,8 @@ int Interface::readOption(unsigned int options) {
 string Interface::readReservoir() {
     string option;
     do {
+        clear();
+        header();
         cout <<"\n\tInsert a " << BLUE << "reservoir code" << RESET <<  " (e.g. R_1): " << RESET;
         cin.clear();
         cin >> option;
@@ -53,6 +56,8 @@ string Interface::readReservoir() {
 string Interface::readStation() {
     string option;
     do {
+        clear();
+        header();
         cout <<"\n\tInsert a " << BLUE << "station code" << RESET <<  " (e.g. PS_1): " << RESET;
         cin.clear();
         cin >> option;
@@ -65,6 +70,8 @@ string Interface::readStation() {
 string Interface::readCity() {
     string option;
     do {
+        clear();
+        header();
         cout <<"\n\tInsert a " << BLUE << "city code" << RESET <<  " (e.g. C_1): " << RESET;
         cin.clear();
         cin >> option;
@@ -77,13 +84,15 @@ string Interface::readCity() {
 pair<string, string> Interface::readPipeline() {
     string option1, option2;
     do {
-        cout <<"\n\tInsert a " << BLUE << " pipe source" << RESET <<  " (e.g. R_1 / PS_1): " << RESET;
+        clear();
+        header();
+        cout <<"\n\tInsert a " << BLUE << "pipe source" << RESET <<  " (e.g. R_1 / PS_1): " << RESET;
         cin.clear();
         cin >> option1;
         cin.ignore();
-        cout <<"\n\tInsert a " << BLUE << " pipe destination" << RESET <<  " (e.g. C_1 / PS_1): " << RESET;
+        cout <<"\n\tInsert a " << BLUE << "pipe destination" << RESET <<  " (e.g. C_1 / PS_1): " << RESET;
         cin.clear();
-        cin >> option1;
+        cin >> option2;
         cin.ignore();
     } while (!manager.validatePipe(option1, option2));
 
@@ -152,23 +161,52 @@ void Interface::servicesMenu() {
             printWaterSupplyCity(city);
             break;
         case 2:
-            clear();
-            manager.maxFlowAll();
+            //clear();
+            manager.maxFlowAllCities();
             printWaterSupplyAllCities();
             break;
         case 3:
             clear();
             manager.checkNetworkRequirements();
+            //printCitiesInDeficit();
             break;
         case 4:
             clear();
+            // printNetworkMetrics();
             manager.balanceWaterFlow();
-            printWaterSupplyAllCities();
+            // printNetworkMetrics();
             break;
     }
 
     inputWait();
     servicesMenu();
+}
+
+void Interface::pipeFailureMenu() {
+    clear();
+    header();
+
+    cout << FAINT << YELLOW << "\tWhat are you looking for today?\n\n" << RESET;
+
+    cout << BLUE << BOLD << "\t[1]" << RESET << " - Display Cities affected by Pipe\n"
+         << BLUE << BOLD << "\t[2]" << RESET << " - Display Pipes vital to City\n"
+         << RED << BOLD << "\t[0]" << RESET << " - Back\n\n";
+
+    footer();
+
+    int option = readOption(2);
+
+    switch(option) {
+        case 0:
+            reliabilityMenu();
+            break;
+        case 1:
+            manager.checkPipeFailure(readPipeline());
+            break;
+        case 2:
+            manager.checkVitalPipes(readCity());
+
+    }
 }
 
 void Interface::reliabilityMenu() {
@@ -190,19 +228,13 @@ void Interface::reliabilityMenu() {
             mainMenu();
             break;
         case 1:
-            manager.checkReservoirFailure(readReservoir());
-            clear();
-            printWaterSupplyAllCities();
+            printCitiesInDeficit(manager.checkReservoirFailure(readReservoir()));
             break;
         case 2:
-            manager.checkStationFailure(readStation());
-            clear();
-            printWaterSupplyAllCities();
+            printCitiesInDeficit(manager.checkStationFailure(readStation()));
             break;
         case 3:
-            manager.checkPipeFailure(readPipeline());
-            clear();
-            printWaterSupplyAllCities();
+            pipeFailureMenu();
             break;
     }
 
@@ -226,6 +258,7 @@ void Interface::mainMenu() {
 
     switch(option) {
         case 0:
+            manager.resetGraph();
             startMenu();
             break;
         case 1:
@@ -239,21 +272,19 @@ void Interface::mainMenu() {
 }
 
 void Interface::printWaterSupplyCity(string option) {
-
     City* city = manager.getCity(option);
     std::stringstream ss;
 
     if (city != nullptr) {
-        printSupplyHeader(manager);
-        double deficit = (city->getDemand() - city->getIncome());
-        cout << left << "| " << setw(15) << city->getPopulation()
+        printSupplyHeader();
+      
+        cout << left << "| " << setw(15) << city->getCode()
              << "| " << setw(15) << city->getDemand()
              << "| " << setw(15) << city->getIncome()
-             << "| " << ((deficit < 0) ? GREEN : RED) << setw(15)
-             << ((deficit <= 0) ? "SUPPLIED" : "NOT SUPPLIED") << RESET
+             << "| " << ((city->getDemand() - city->getIncome() <= 0) ? GREEN : RED) << setw(15)
+             << ((city->getDemand() - city->getIncome() <= 0) ? "SUPPLIED" : "NOT SUPPLIED") << RESET
              << "| " << setw(30) << city->getName() << endl;
-
-
+      
         ss << std::left << "| " << std::setw(15) << city->getPopulation()
            << "| " << std::setw(15) << city->getDemand()
            << "| " << std::setw(15) << city->getIncome()
@@ -269,33 +300,55 @@ void Interface::printWaterSupplyCity(string option) {
 void Interface::printWaterSupplyAllCities() {
     printSupplyHeader(manager);
     std::vector<City*> cities = manager.getCities();
+
     std::stringstream ss;
 
+    double total_flow = 0;
     for (const City* city : cities) {
-        double deficit = (city->getDemand() - city->getIncome());
-        cout << left << "| " << setw(15) << city->getPopulation()
+        total_flow += city->getIncome();
+        cout << left << "| " << setw(15) << city->getCode()
              << "| " << setw(15) << city->getDemand()
              << "| " << setw(15) << city->getIncome()
-             << "| " << ((deficit < 0) ? GREEN : RED) << setw(15)
-             << ((deficit < 0) ? "SUPPLIED" : "NOT SUPPLIED") << RESET
+             << "| " << ((city->getDemand() - city->getIncome() <= 0) ? GREEN : RED) << setw(15)
+             << ((city->getDemand() - city->getIncome() <= 0) ? "SUPPLIED" : "NOT SUPPLIED") << RESET
              << "| " << setw(30) << city->getName() << endl;
 
         ss << std::left << "| " << std::setw(15) << city->getPopulation()
            << "| " << std::setw(15) << city->getDemand()
            << "| " << std::setw(15) << city->getIncome()
-           << "| " <<setw(15) <<((deficit <= 0) ? "SUPPLIED" : "NOT SUPPLIED")
+           << "| " <<setw(15) <<(((city->getDemand() - city->getIncome())<= 0) ? "SUPPLIED" : "NOT SUPPLIED")
            << "| " << std::setw(30) << city->getName() << std::endl;
     }
+
+    cout << YELLOW << BOLD << "\n\nTotal Flow: " << RESET << total_flow << endl;
     inputWait();
     manager.getLogger()->log(ss.str());
     servicesMenu();
 }
 
-void Interface::printSupplyHeader(Manager &man) {
 
-    stringstream ss;
+void Interface::printCitiesInDeficit(std::vector<City*> cities) {
+    clear();
+    cout << left << BOLD << "| " << BLUE << setw(15) << "Code" << RESET
+    << BOLD << "| " << BLUE << setw(15) << "Deficit" << RESET
+    << BOLD << "| " << BLUE << setw(30) << "Name" << RESET << endl;
 
-    cout << left << BOLD << "\n\n| " << BLUE << setw(15) << "Population" << RESET
+    for (const City* city : cities) {
+        if (city->getDemand() > city->getIncome()) {
+            cout << left << "| " << setw(15) << city->getCode()
+                 << "| " << setw(15) << city->getDemand() - city->getIncome()
+                 << "| " << setw(30) << city->getName() << RESET << endl;
+        }
+    }
+    inputWait();
+    reliabilityMenu();
+}
+
+void Interface::printSupplyHeader() {
+    
+    std::stringstream ss;
+
+    cout << left << BOLD << "| " << BLUE << setw(15) << "Code" << RESET
          << BOLD << "| " << BLUE << setw(15) << "Demand" << RESET
          << BOLD << "| " << BLUE << setw(15) << "Supply" << RESET
          << BOLD << "| " << BLUE << setw(15) << "Status" << RESET

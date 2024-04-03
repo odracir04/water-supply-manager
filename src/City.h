@@ -2,6 +2,7 @@
 #define DA_PROJ1_CITY_H
 
 #include <string>
+
 #include "Vertex.h"
 
 class City : public Vertex {
@@ -11,6 +12,7 @@ class City : public Vertex {
         unsigned int demand;
         unsigned int population;
         double income;
+
     public:
 
     /**
@@ -60,13 +62,10 @@ class City : public Vertex {
      */
     unsigned int getPopulation() const {return this->population;}
 
-    /*
+
     void setName(std::string const n) {this->name = n;}
-    void setId(unsigned int const i) {this->id = i;}
-    void setCode(std::string const c) {this->code = c;}
     void setDemand(unsigned int const d) {this->demand = d;}
     void setPopulation(unsigned int const p) {this->population = p;}
-    */
 };
 
 

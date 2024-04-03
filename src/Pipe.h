@@ -11,6 +11,8 @@ class Pipe {
         std::string servicePointB;
         int capacity;
         double flow;
+        Pipe* reverse;
+
     public:
 
         /**
@@ -44,6 +46,7 @@ class Pipe {
          * @return source vertex code.
          */
         std::string getOrig() const;
+        Pipe* getReverse() const;
 
 
         /**
@@ -54,6 +57,7 @@ class Pipe {
 
         void setDest(std::string *dest);
         void setWeight(double weight);
+        void setReverse(Pipe* pipe);
 
 
 };

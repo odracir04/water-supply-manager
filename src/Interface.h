@@ -63,11 +63,14 @@ public:
     static void exitMenu();
     void servicesMenu();
     void reliabilityMenu();
+    void pipeFailureMenu();
 
     void printWaterSupplyCity(std::string option);
+    void printCitiesInDeficit(std::vector<City*> cities);
     void printWaterSupplyAllCities();
 
     static int readOption(unsigned int options);
+
     std::string readReservoir();
     std::string readStation();
     std::pair<std::string, std::string> readPipeline();

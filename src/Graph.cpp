@@ -53,17 +53,17 @@ std::vector<Vertex *> Graph::getVertexSet() const {
     return vertexSet;
 }
 
-bool Graph::addEdge(const std::string &sourc, const std::string &dest, double w) {
+Pipe* Graph::addEdge(const std::string &sourc, const std::string &dest, double w) {
     Vertex* source = findVertex(sourc);
     Vertex* destination = findVertex(dest);
 
     if (source == nullptr || destination == nullptr)
-        return false;
+        return nullptr;
 
     auto newPipe = new Pipe(sourc, dest, w);
     source->adj.push_back(newPipe);
     destination->incoming.push_back(newPipe);
-    return true;
+    return newPipe;
 }
 
 void Graph::setVertexSet(std::vector<Vertex *> &v) {
@@ -114,9 +114,34 @@ bool Graph::removeEdge(const std::string &sourc, const std::string &dest) {
 }
 
 void Graph::removeAllAdjEdges(Vertex* vertex) {
-    for (auto it = vertex->adj.begin(); it != vertex->adj.end(); ++it) {
-        delete *it;
+    for (auto & it : vertex->adj) {
+        delete it;
     }
     vertex->adj.clear();
+}
+
+bool Graph::removeVertex(const std::string &in) {
+    auto it = vertexSet.begin();
+
+    while (it != vertexSet.end() && (*it) != findVertex(in)) it++;
+
+    if (it == vertexSet.end()) return false;
+
+    Vertex* vertex = *it;
+
+    while (!vertex->adj.empty()) {
+        Pipe* pipe = vertex->adj[0];
+        removeEdge(pipe->getOrig(), pipe->getDest());
+    }
+
+    while (!vertex->incoming.empty()) {
+        Pipe* pipe = vertex->incoming[0];
+        removeEdge(pipe->getOrig(), pipe->getDest());
+    }
+
+    vertexSet.erase(it);
+    delete vertex;
+
+    return true;
 }
 
