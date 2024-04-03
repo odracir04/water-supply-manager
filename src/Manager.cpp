@@ -277,42 +277,41 @@ std::vector<City*> Manager::checkReservoirFailure(std::string code) {
 }
 
 std::vector<City*> Manager::checkStationFailure(std::string code) {
-    std::unordered_map<Pipe*, double> weights;
-    auto station = dynamic_cast<Station*>(graph->findVertex(code));
+    std::unordered_map<Pipe *, double> weights;
+    auto station = dynamic_cast<Station *>(graph->findVertex(code));
 
-    for (Pipe* pipe : station->getAdj()) {
+    for (Pipe *pipe: station->getAdj()) {
         weights.insert({pipe, pipe->getWeight()});
         pipe->setWeight(0);
     }
 
-    for (Pipe* pipe : station->getIncoming()) {
+    for (Pipe *pipe: station->getIncoming()) {
         weights.insert({pipe, pipe->getWeight()});
         pipe->setWeight(0);
     }
 
     maxFlowAllCities();
 
-    std::vector<City*> res;
-    for (Vertex* vertex : graph->getVertexSet()) {
+    std::vector<City *> res;
+    for (Vertex *vertex: graph->getVertexSet()) {
         if (auto city = dynamic_cast<City *>(vertex)) {
             if (city->getDemand() > city->getIncome())
                 res.push_back(city);
         }
     }
 
-    for (auto pair : weights) {
+    for (auto pair: weights) {
         pair.first->setWeight(pair.second);
     }
+
+    return res;
+}
 
 
 Manager::Manager() : logger("../out/log.txt") {}
 
 Logger* Manager::getLogger() {
     return &logger;
-}
-
-
-    return res;
 }
 
 void Manager::checkPipeFailure(std::pair<std::string, std::string> vertices) {

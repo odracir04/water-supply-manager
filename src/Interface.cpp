@@ -276,7 +276,7 @@ void Interface::printWaterSupplyCity(string option) {
     std::stringstream ss;
 
     if (city != nullptr) {
-        printSupplyHeader();
+        printSupplyHeader(manager);
       
         cout << left << "| " << setw(15) << city->getCode()
              << "| " << setw(15) << city->getDemand()
@@ -288,7 +288,7 @@ void Interface::printWaterSupplyCity(string option) {
         ss << std::left << "| " << std::setw(15) << city->getPopulation()
            << "| " << std::setw(15) << city->getDemand()
            << "| " << std::setw(15) << city->getIncome()
-           << "| " << setw(15)<<((deficit <= 0) ? "SUPPLIED" : "NOT SUPPLIED")
+           << "| " << setw(15)<<(((city->getDemand() - city->getIncome()) <= 0) ? "SUPPLIED" : "NOT SUPPLIED")
            << "| " << std::setw(30) << city->getName() << std::endl;
 
         inputWait();
@@ -344,7 +344,7 @@ void Interface::printCitiesInDeficit(std::vector<City*> cities) {
     reliabilityMenu();
 }
 
-void Interface::printSupplyHeader() {
+void Interface::printSupplyHeader(Manager &man) {
     
     std::stringstream ss;
 
