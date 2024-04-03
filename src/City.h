@@ -49,8 +49,8 @@ class City : public Vertex {
     double getIncome() const{ return income;}
 
     /**
-     * City income setter.
-     * @return
+     * Setter for City Income
+     * @param income of the city.
      */
     void setIncome(double inc){this->income=inc;}
 
