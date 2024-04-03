@@ -1,0 +1,5 @@
+
+
+| Population     | Demand         | Supply         | Status         | Name                          
+| 77241          | 515            | 560            | SUPPLIED       | Aveiro                        
+

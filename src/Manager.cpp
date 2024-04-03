@@ -308,7 +308,7 @@ std::vector<City*> Manager::checkStationFailure(std::string code) {
 }
 
 
-Manager::Manager() : logger("../out/log.txt") {}
+Manager::Manager() : logger("../data/out/log.txt") {}
 
 Logger* Manager::getLogger() {
     return &logger;
@@ -320,10 +320,6 @@ void Manager::checkPipeFailure(std::pair<std::string, std::string> vertices) {
 
 void Manager::checkVitalPipes(std::string code) {
 
-}
-
-bool Manager::checkNetworkRequirements() {
-        return true;
 }
 
 void Manager::resetGraph() {

@@ -23,7 +23,6 @@ public:
     void maxFlowCities(std::string dest);
     void maxFlowAll();
 
-    bool checkNetworkRequirements();
     void balanceWaterFlow();
     std::vector<City*> checkReservoirFailure(std::string code);
     std::vector<City*> checkStationFailure(std::string code);

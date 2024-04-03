@@ -141,8 +141,7 @@ void Interface::servicesMenu() {
 
     cout << BOLD << BLUE << "\t[1]" << RESET << " - Water Supply (City)\n"
          << BOLD << BLUE << "\t[2]" << RESET << " - Water Supply (All Cities)\n"
-         << BOLD << BLUE << "\t[3]" << RESET << " - Requirements Satisfaction\n"
-         << BOLD << BLUE << "\t[4]" << RESET << " - Network Flow Balance\n"
+         << BOLD << BLUE << "\t[3]" << RESET << " - Network Flow Balance\n"
          << BOLD << RED << "\t[0]" << RESET << " - Back\n\n";
 
     footer();
@@ -166,11 +165,6 @@ void Interface::servicesMenu() {
             printWaterSupplyAllCities();
             break;
         case 3:
-            clear();
-            manager.checkNetworkRequirements();
-            //printCitiesInDeficit();
-            break;
-        case 4:
             clear();
             // printNetworkMetrics();
             manager.balanceWaterFlow();
