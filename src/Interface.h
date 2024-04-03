@@ -3,6 +3,7 @@
 
 // Text Formatting
 #include <string>
+#include <unordered_map>
 #include "Parser.h"
 #include "Manager.h"
 
@@ -66,8 +67,9 @@ public:
     void pipeFailureMenu();
 
     void printWaterSupplyCity(std::string option);
-    void printCitiesInDeficit(std::vector<City*> cities);
+    void printAffectedCities(std::unordered_map<City*, unsigned int>  cities);
     void printWaterSupplyAllCities();
+    void printVitalPipes(std::pair<City*, std::vector<Pipe*>> city);
 
     static int readOption(unsigned int options);
 
