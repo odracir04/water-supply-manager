@@ -304,6 +304,14 @@ std::vector<City*> Manager::checkStationFailure(std::string code) {
         pair.first->setWeight(pair.second);
     }
 
+
+Manager::Manager() : logger("../out/log.txt") {}
+
+Logger* Manager::getLogger() {
+    return &logger;
+}
+
+
     return res;
 }
 
@@ -323,3 +331,4 @@ void Manager::resetGraph() {
     delete graph;
     this->graph = new Graph();
 }
+

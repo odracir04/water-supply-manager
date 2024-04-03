@@ -9,8 +9,17 @@ class Station : public Vertex {
         unsigned int id;
 
     public:
+        /**
+        * @brief Station constructor.
+        * @param i Id of the station.
+        * @param c Code of the station.
+        */
         Station(unsigned int i, std::string c) : id(i), Vertex(c) {}
 
+        /**
+         * Station getter.
+         * @return id of the station.
+         */
         unsigned int getId() const {return this->id;}
         /*
         void setId(unsigned int const i) {this->id = i;}

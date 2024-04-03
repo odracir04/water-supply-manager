@@ -13,8 +13,22 @@ class Parser {
         std::string csvIndicator;
 
     public:
+        /**
+         * @brief Parser constructor.
+         * @param dataSet Value that corresponds to the dataset chosen.
+         */
         Parser(bool dataSet);
-        void readData(Graph* graph); //Graph
+
+        /**
+         * Parses the data files and builds the graph.
+         * @param graph Graph to be filled.
+         */
+        void readData(Graph* graph);
+
+        /**
+         * Setter for the dataSet to be read.
+         * @param option Chooses the dataSet read.
+         */
         void setCSV(bool option) { dataSetter = option; }
         bool getCSV() { return dataSetter; }
 };

@@ -22,5 +22,7 @@ add_executable(da_proj1 src/main.cpp
         src/Graph.h
         src/Manager.h
         src/Manager.cpp
+        src/Logger.cpp
+        src/Logger.h
 )
 
