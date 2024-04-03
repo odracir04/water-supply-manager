@@ -271,19 +271,22 @@ void Interface::printWaterSupplyCity(string option) {
 
     if (city != nullptr) {
         printSupplyHeader(manager);
-      
+
         cout << left << "| " << setw(15) << city->getCode()
              << "| " << setw(15) << city->getDemand()
              << "| " << setw(15) << city->getIncome()
              << "| " << ((city->getDemand() - city->getIncome() <= 0) ? GREEN : RED) << setw(15)
              << ((city->getDemand() - city->getIncome() <= 0) ? "SUPPLIED" : "NOT SUPPLIED") << RESET
+             << "| " << ((city->getDemand() - city->getIncome() <= 0) ? GREEN : RED) << setw(15)
+             << ((city->getDemand() - city->getIncome() <= 0) ? 0 : (city->getDemand() - city->getIncome())) << RESET
              << "| " << setw(30) << city->getName() << endl;
-      
-        ss << std::left << "| " << std::setw(15) << city->getPopulation()
-           << "| " << std::setw(15) << city->getDemand()
-           << "| " << std::setw(15) << city->getIncome()
-           << "| " << setw(15)<<(((city->getDemand() - city->getIncome()) <= 0) ? "SUPPLIED" : "NOT SUPPLIED")
-           << "| " << std::setw(30) << city->getName() << std::endl;
+
+        ss << left << "| " << setw(15) << city->getCode()
+           << "| " << setw(15) << city->getDemand()
+           << "| " << setw(15) << city->getIncome()
+           << "| " << setw(15) << ((city->getDemand() - city->getIncome() <= 0) ? "SUPPLIED" : "NOT SUPPLIED")
+           << "| " << setw(15) << ((city->getDemand() - city->getIncome() <= 0) ? 0 : (city->getDemand() - city->getIncome()))
+           << "| " << setw(30) << city->getName() << endl;
 
         inputWait();
     }
@@ -305,13 +308,16 @@ void Interface::printWaterSupplyAllCities() {
              << "| " << setw(15) << city->getIncome()
              << "| " << ((city->getDemand() - city->getIncome() <= 0) ? GREEN : RED) << setw(15)
              << ((city->getDemand() - city->getIncome() <= 0) ? "SUPPLIED" : "NOT SUPPLIED") << RESET
+             << "| " << ((city->getDemand() - city->getIncome() <= 0) ? GREEN : RED) << setw(15)
+             << ((city->getDemand() - city->getIncome() <= 0) ? 0 : (city->getDemand() - city->getIncome())) << RESET
              << "| " << setw(30) << city->getName() << endl;
 
-        ss << std::left << "| " << std::setw(15) << city->getPopulation()
-           << "| " << std::setw(15) << city->getDemand()
-           << "| " << std::setw(15) << city->getIncome()
-           << "| " <<setw(15) <<(((city->getDemand() - city->getIncome())<= 0) ? "SUPPLIED" : "NOT SUPPLIED")
-           << "| " << std::setw(30) << city->getName() << std::endl;
+        ss << left << "| " << setw(15) << city->getCode()
+           << "| " << setw(15) << city->getDemand()
+           << "| " << setw(15) << city->getIncome()
+           << "| " << setw(15) << ((city->getDemand() - city->getIncome() <= 0) ? "SUPPLIED" : "NOT SUPPLIED")
+           << "| " << setw(15) << ((city->getDemand() - city->getIncome() <= 0) ? 0 : (city->getDemand() - city->getIncome()))
+           << "| " << setw(30) << city->getName() << endl;
     }
 
     cout << YELLOW << BOLD << "\n\nTotal Flow: " << RESET << total_flow << endl;
@@ -346,12 +352,14 @@ void Interface::printSupplyHeader(Manager &man) {
          << BOLD << "| " << BLUE << setw(15) << "Demand" << RESET
          << BOLD << "| " << BLUE << setw(15) << "Supply" << RESET
          << BOLD << "| " << BLUE << setw(15) << "Status" << RESET
+         << BOLD << "| " << BLUE << setw(15) << "Deficit" << RESET
          << BOLD << "| " << BLUE << setw(30) << "Name" << RESET << endl;
 
-    ss << left <<   "\n\n| "<< setw(15) << "Population"
+    ss << left   <<   "| " << setw(15) << "Code"
                  <<   "| " <<  setw(15) << "Demand"
                  <<   "| " <<  setw(15) << "Supply"
                  <<   "| " <<  setw(15) << "Status"
+                 <<   "| " <<  setw(15) << "Deficit"
                  <<   "| " <<  setw(30) << "Name";
     man.getLogger()->log(ss.str());
 }

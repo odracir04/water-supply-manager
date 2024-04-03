@@ -19,9 +19,9 @@ private:
 
 public:
     Manager();
+    Graph* getGraph() {return graph;}
     void extractFiles(bool option);
     void maxFlowCities(std::string dest);
-    void maxFlowAll();
 
     void balanceWaterFlow();
     std::vector<City*> checkReservoirFailure(std::string code);

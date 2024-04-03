@@ -192,15 +192,6 @@ void Manager::maxFlowCities(std::string dest) {
         c->setIncome(maxFlow);
 }
 
-
-void Manager::maxFlowAll() {
-    for(auto* v : graph->getVertexSet()){
-        if(v->getCode()[0] == 'C'){
-            maxFlowCities(v->getCode());
-        }
-    }
-}
-
 void Manager::addSuperVertexes() {
     graph->addVertex("SS");
     graph->addVertex("ST");
@@ -315,11 +306,76 @@ Logger* Manager::getLogger() {
 }
 
 void Manager::checkPipeFailure(std::pair<std::string, std::string> vertices) {
+    std::vector<City*> res = {};
+    std::vector<std::pair<std::string, int>> start = {};
 
+    maxFlowAllCities();
+
+    for (auto v : graph->getVertexSet()) {
+        if (v->getCode()[0] == 'C') {
+            auto c = dynamic_cast<City *>(v);
+            start.push_back(std::pair<std::string, int>(c->getCode(), c->getIncome()));
+        }
+    }
+
+    auto v = graph->findVertex(vertices.first);
+    Pipe* pipe = nullptr;
+    for (auto p : v->getAdj()) {
+        if (p->getDest() == vertices.second) {
+            pipe = p;
+            break;
+        }
+    }
+
+    if (pipe == nullptr) {
+        std::cout << "ERROR: Pipe not found.\n";
+        return;
+    }
+
+    int w = pipe->getWeight();
+    pipe->setWeight(0);
+
+    maxFlowAllCities();
+
+    for (auto pair : start) {
+        auto u = graph->findVertex(pair.first);
+        auto c = dynamic_cast<City *>(u);
+        if (pair.second > c->getIncome()) {
+            res.push_back(c);
+        }
+    }
+
+    pipe->setWeight(w);
 }
 
 void Manager::checkVitalPipes(std::string code) {
+    std::vector<std::pair<Pipe*, int>> res = {};
+    std::queue<Pipe*> pipeQ = {};
 
+    maxFlowAllCities();
+    int defaultFlow = dynamic_cast<City*>(graph->findVertex(code))->getIncome();
+
+    for (auto v : graph->getVertexSet()) {
+        for (auto e : v->getAdj()) {
+            pipeQ.push(e);
+        }
+    }
+
+    while (!pipeQ.empty()) {
+        Pipe* p = pipeQ.front();
+        pipeQ.pop();
+        int w = p->getWeight();
+        p->setWeight(0);
+        maxFlowAllCities();
+        if (dynamic_cast<City*>(graph->findVertex(code))->getIncome() != defaultFlow) {
+            res.push_back(std::pair<Pipe*, int>(p, dynamic_cast<City*>(graph->findVertex(code))->getIncome()));
+        }
+        p->setWeight(w);
+    }
+
+    for (auto p : res) {
+        std::cout << p.first->getOrig() << " -> " << p.first->getDest() << " New Flow: " << p.second << std::endl;
+    }
 }
 
 void Manager::resetGraph() {
