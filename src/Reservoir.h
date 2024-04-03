@@ -11,11 +11,39 @@ class Reservoir : public Vertex {
         unsigned int id;
         unsigned int maxDelivery;
     public:
-        Reservoir(std::string n, std::string m, unsigned int i, std::string c, unsigned int max);
 
+    /**
+     * @brief Reservoir constructor.
+     * @param n Name of the reservoir.
+     * @param m Municipality of the reservoir.
+     * @param i Id of the reservoir.
+     * @param c Code of the reservoir.
+     * @param max Max Delivery of the reservoir
+     */
+    Reservoir(std::string n, std::string m, unsigned int i, std::string c, unsigned int max);
+
+    /**
+     * Reservoir name getter.
+     * @return name of the city.
+     */
     std::string getName() const {return this->name;}
+
+    /**
+     * Reservoir municipality getter.
+     * @return municipality of the city.
+     */
     std::string getMunicipality() const {return this->municipality;}
+
+    /**
+     * Reservoir id getter.
+     * @return id of the city.
+     */
     unsigned int getId() const {return this->id;}
+
+    /**
+     * Reservoir Max Delivery getter.
+     * @return maxDelivery of the city.
+     */
     unsigned int getMaxDelivery() const {return this->maxDelivery;}
 
 

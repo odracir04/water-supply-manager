@@ -6,6 +6,7 @@
 #include <unordered_map>
 #include "Parser.h"
 #include "Manager.h"
+#include "Logger.h"
 
 #define RESET       "\033[0m"
 #define BOLD        "\033[1m"
@@ -47,16 +48,15 @@
 
 class Interface {
 private:
-    Manager manager = Manager();
+    Manager manager;
     static void header();
     static void footer();
     static void clear();
-    static void printSupplyHeader();
+    static void printSupplyHeader(Manager &man);
 
     static void inputWait();
 
 public:
-
     void init();
 
     void startMenu();

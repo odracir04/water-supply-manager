@@ -294,7 +294,7 @@ std::unordered_map<City*, unsigned int> Manager::checkStationFailure(std::string
         pipe->setWeight(0);
     }
 
-    for (Pipe* pipe : station->getIncoming()) {
+    for (Pipe *pipe: station->getIncoming()) {
         weights.insert({pipe, pipe->getWeight()});
         pipe->setWeight(0);
     }
@@ -309,7 +309,7 @@ std::unordered_map<City*, unsigned int> Manager::checkStationFailure(std::string
             it++;
     }
 
-    for (auto pair : weights) {
+    for (auto pair: weights) {
         pair.first->setWeight(pair.second);
     }
 
@@ -317,6 +317,12 @@ std::unordered_map<City*, unsigned int> Manager::checkStationFailure(std::string
 }
 
 std::unordered_map<City*, unsigned int> Manager::checkPipeFailure(std::pair<std::string, std::string> vertices) {
+}
+
+Manager::Manager() : logger("../out/log.txt") {}
+
+Logger* Manager::getLogger() {
+    return &logger;
 }
 
 std::pair<City*, std::vector<Pipe*>> Manager::checkVitalPipes(std::string code) {
@@ -330,3 +336,4 @@ void Manager::resetGraph() {
     delete graph;
     this->graph = new Graph();
 }
+

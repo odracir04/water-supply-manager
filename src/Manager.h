@@ -5,10 +5,12 @@
 #include "Graph.h"
 #include "Parser.h"
 #include "City.h"
+#include "Logger.h"
 
 class Manager {
 
 private:
+    Logger logger;
     Graph *graph = new Graph;
     Parser parser = Parser(false);
 
@@ -16,6 +18,7 @@ private:
     void addSuperVertexes();
 
 public:
+    Manager();
     void extractFiles(bool option);
     void maxFlowCities(std::string dest);
 
@@ -36,6 +39,8 @@ public:
     bool validateReservoir(std::string code);
     bool validatePipe(std::string src, std::string dest);
 
+
+    Logger* getLogger();
     void resetGraph();
 };
 
