@@ -317,9 +317,6 @@ std::unordered_map<City*, unsigned int> Manager::checkStationFailure(std::string
     return res;
 }
 
-std::unordered_map<City*, unsigned int> Manager::checkPipeFailure(std::pair<std::string, std::string> vertices) {
-}
-
 Manager::Manager() : logger("../data/out/log.txt") {}
 
 Logger* Manager::getLogger() {

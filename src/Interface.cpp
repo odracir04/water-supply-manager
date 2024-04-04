@@ -199,13 +199,13 @@ void Interface::pipeFailureMenu() {
             if (!confirmationMenu()) {
                 pipeFailureMenu();
             }
-            printAffectedCities(manager.checkPipeFailure(readPipeline()));
+            //printAffectedCities(manager.checkPipeFailure(readPipeline()));
             break;
         case 2:
             if (!confirmationMenu()) {
                 pipeFailureMenu();
             }
-            printVitalPipes(manager.checkVitalPipes(readCity()));
+            //printVitalPipes(manager.checkVitalPipes(readCity()));
     }
 }
 
