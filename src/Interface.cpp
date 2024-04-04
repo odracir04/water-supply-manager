@@ -87,7 +87,8 @@ pair<string, string> Interface::readPipeline() {
     do {
         clear();
         header();
-        cout <<"\n\tInsert a " << BLUE << "pipe source" << RESET <<  " (e.g. R_1 / PS_1): " << RESET;
+        cout <<"\n\tInsert a " << BLUE << "pipe source" << RESET <<  " (e.g. R_1 / PS_1)" << RESET
+        << " or " << RED << "EXIT" << RESET << " to return";
         cin.clear();
         cin >> option1;
         cin.ignore();
@@ -202,11 +203,16 @@ void Interface::pipeFailureMenu() {
             reliabilityMenu();
             break;
         case 1:
+            if (!confirmationMenu()) {
+                pipeFailureMenu();
+            }
             printAffectedCities(manager.checkPipeFailure(readPipeline()));
             break;
         case 2:
+            if (!confirmationMenu()) {
+                pipeFailureMenu();
+            }
             printVitalPipes(manager.checkVitalPipes(readCity()));
-
     }
 }
 
@@ -229,9 +235,15 @@ void Interface::reliabilityMenu() {
             mainMenu();
             break;
         case 1:
+            if (!confirmationMenu()) {
+                reliabilityMenu();
+            }
             printAffectedCities(manager.checkReservoirFailure(readReservoir()));
             break;
         case 2:
+            if (!confirmationMenu()) {
+                reliabilityMenu();
+            }
             printAffectedCities(manager.checkStationFailure(readStation()));
             break;
         case 3:
@@ -269,7 +281,20 @@ void Interface::mainMenu() {
             reliabilityMenu();
             break;
     }
+}
 
+bool Interface::confirmationMenu() {
+    string option;
+    do {
+        clear();
+        header();
+        cout << BLUE << "\n\tAre you " << BOLD "sure" << RESET << "? [yes/no]: ";
+        cin.clear();
+        cin >> option;
+        cin.ignore();
+    } while (option != "yes" && option != "no");
+
+    return option == "yes";
 }
 
 void Interface::printWaterSupplyCity(string option) {

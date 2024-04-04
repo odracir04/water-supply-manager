@@ -65,6 +65,7 @@ public:
     void servicesMenu();
     void reliabilityMenu();
     void pipeFailureMenu();
+    bool confirmationMenu();
 
     void printWaterSupplyCity(std::string option);
     void printAffectedCities(std::unordered_map<City*, unsigned int>  cities);
