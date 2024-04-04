@@ -165,7 +165,7 @@ void Interface::servicesMenu() {
             manager.maxFlowAllCities();
             printWaterSupplyAllCities();
             break;
-        case 4:
+        case 3:
             clear();
             printNetworkMetrics();
             manager.balanceWaterFlow();
