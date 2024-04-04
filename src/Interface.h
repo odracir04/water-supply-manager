@@ -3,6 +3,7 @@
 
 // Text Formatting
 #include <string>
+#include <unordered_map>
 #include "Parser.h"
 #include "Manager.h"
 #include "Logger.h"
@@ -116,6 +117,7 @@ public:
      * Complexity: Depends on user choice.
      */
     void pipeFailureMenu();
+    bool confirmationMenu();
 
     /**
      * Prints the parameters of single City according to user input, it also outputs to a file.
@@ -128,13 +130,16 @@ public:
      * Prints all the cities in deficit.
      * @param cities The cities to be printed.
      */
-    void printCitiesInDeficit(std::vector<City*> cities);
-
+    void printAffectedCities(std::unordered_map<City*, unsigned int>  cities);
+  
     /**
      * Prints all the cities and their parameters, and outputs to a file.
      * Complexity: O(v) where v is the number of vertexes.
      */
     void printWaterSupplyAllCities();
+  
+  
+    void printVitalPipes(std::pair<City*, std::vector<Pipe*>> city);
 
 
     /**
