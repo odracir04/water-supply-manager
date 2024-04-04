@@ -87,8 +87,7 @@ pair<string, string> Interface::readPipeline() {
     do {
         clear();
         header();
-        cout <<"\n\tInsert a " << BLUE << "pipe source" << RESET <<  " (e.g. R_1 / PS_1)" << RESET
-        << " or " << RED << "EXIT" << RESET << " to return";
+        cout <<"\n\tInsert a " << BLUE << "pipe source" << RESET <<  " (e.g. R_1 / PS_1)" << RESET;
         cin.clear();
         cin >> option1;
         cin.ignore();
