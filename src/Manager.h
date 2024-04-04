@@ -19,10 +19,10 @@ private:
 
 public:
     Manager();
+    Graph* getGraph() {return graph;}
     void extractFiles(bool option);
     void maxFlowCities(std::string dest);
 
-    bool checkNetworkRequirements();
     void balanceWaterFlow();
     std::unordered_map<City*, unsigned int>  checkReservoirFailure(std::string code);
     std::unordered_map<City*, unsigned int> checkStationFailure(std::string code);
