@@ -56,6 +56,11 @@ class Pipe {
         double getWeight() const;
 
         void setDest(std::string *dest);
+
+        /**
+         * Setter for the weight of the pipe.
+         * @param weight weight to be set.
+         */
         void setWeight(double weight);
         void setReverse(Pipe* pipe);
 
