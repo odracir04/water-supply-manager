@@ -189,7 +189,8 @@ void Manager::maxFlowCities(std::string dest) {
         *graph = newGraph;
 
         City*  c = dynamic_cast<City *>(graph->findVertex(dest));
-        c->setIncome(maxFlow);
+
+        c->setIncome(std::min((unsigned int) maxFlow, c->getDemand()));
 }
 
 void Manager::addSuperVertexes() {
@@ -241,9 +242,18 @@ void Manager::maxFlowAllCities() {
     graph->removeVertex("ST");
 }
 
-std::vector<City*> Manager::checkReservoirFailure(std::string code) {
+std::unordered_map<City*, unsigned int> Manager::checkReservoirFailure(std::string code) {
     std::unordered_map<Pipe*, double> weights;
     auto reservoir = dynamic_cast<Reservoir*>(graph->findVertex(code));
+
+    std::unordered_map<City*, unsigned int> res;
+    maxFlowAllCities();
+
+    for (Vertex* vertex : graph->getVertexSet()) {
+        if (auto city = dynamic_cast<City*>(vertex)) {
+            res.insert({city, city->getIncome()});
+        }
+    }
 
     for (Pipe* pipe : reservoir->getAdj()) {
         weights.insert({pipe, pipe->getWeight()});
@@ -252,12 +262,12 @@ std::vector<City*> Manager::checkReservoirFailure(std::string code) {
 
     maxFlowAllCities();
 
-    std::vector<City*> res;
-    for (Vertex* vertex : graph->getVertexSet()) {
-        if (auto city = dynamic_cast<City*>(vertex)) {
-            if (city->getDemand() > city->getIncome())
-                res.push_back(city);
-        }
+    auto it = res.begin();
+    while (it != res.end()) {
+        if (it->second == it->first->getIncome())
+            it = res.erase(it);
+        else
+            it++;
     }
 
     for (auto pair : weights) {
@@ -267,11 +277,20 @@ std::vector<City*> Manager::checkReservoirFailure(std::string code) {
     return res;
 }
 
-std::vector<City*> Manager::checkStationFailure(std::string code) {
-    std::unordered_map<Pipe *, double> weights;
-    auto station = dynamic_cast<Station *>(graph->findVertex(code));
+std::unordered_map<City*, unsigned int> Manager::checkStationFailure(std::string code) {
+    std::unordered_map<Pipe*, double> weights;
+    auto station = dynamic_cast<Station*>(graph->findVertex(code));
 
-    for (Pipe *pipe: station->getAdj()) {
+    std::unordered_map<City*, unsigned int> res;
+    maxFlowAllCities();
+
+    for (Vertex* vertex : graph->getVertexSet()) {
+        if (auto city = dynamic_cast<City*>(vertex)) {
+            res.insert({city, city->getIncome()});
+        }
+    }
+
+    for (Pipe* pipe : station->getAdj()) {
         weights.insert({pipe, pipe->getWeight()});
         pipe->setWeight(0);
     }
@@ -283,12 +302,12 @@ std::vector<City*> Manager::checkStationFailure(std::string code) {
 
     maxFlowAllCities();
 
-    std::vector<City *> res;
-    for (Vertex *vertex: graph->getVertexSet()) {
-        if (auto city = dynamic_cast<City *>(vertex)) {
-            if (city->getDemand() > city->getIncome())
-                res.push_back(city);
-        }
+    auto it = res.begin();
+    while (it != res.end()) {
+        if (it->second == it->first->getIncome())
+            it = res.erase(it);
+        else
+            it++;
     }
 
     for (auto pair: weights) {
@@ -298,6 +317,8 @@ std::vector<City*> Manager::checkStationFailure(std::string code) {
     return res;
 }
 
+std::unordered_map<City*, unsigned int> Manager::checkPipeFailure(std::pair<std::string, std::string> vertices) {
+}
 
 Manager::Manager() : logger("../data/out/log.txt") {}
 

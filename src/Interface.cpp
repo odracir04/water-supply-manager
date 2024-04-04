@@ -2,6 +2,7 @@
 #include "Reservoir.h"
 #include <iostream>
 #include <iomanip>
+#include <unordered_map>
 
 using namespace std;
 
@@ -86,7 +87,7 @@ pair<string, string> Interface::readPipeline() {
     do {
         clear();
         header();
-        cout <<"\n\tInsert a " << BLUE << "pipe source" << RESET <<  " (e.g. R_1 / PS_1): " << RESET;
+        cout <<"\n\tInsert a " << BLUE << "pipe source" << RESET <<  " (e.g. R_1 / PS_1)" << RESET;
         cin.clear();
         cin >> option1;
         cin.ignore();
@@ -195,11 +196,16 @@ void Interface::pipeFailureMenu() {
             reliabilityMenu();
             break;
         case 1:
-            manager.checkPipeFailure(readPipeline());
+            if (!confirmationMenu()) {
+                pipeFailureMenu();
+            }
+            printAffectedCities(manager.checkPipeFailure(readPipeline()));
             break;
         case 2:
-            manager.checkVitalPipes(readCity());
-
+            if (!confirmationMenu()) {
+                pipeFailureMenu();
+            }
+            printVitalPipes(manager.checkVitalPipes(readCity()));
     }
 }
 
@@ -222,10 +228,16 @@ void Interface::reliabilityMenu() {
             mainMenu();
             break;
         case 1:
-            printCitiesInDeficit(manager.checkReservoirFailure(readReservoir()));
+            if (!confirmationMenu()) {
+                reliabilityMenu();
+            }
+            printAffectedCities(manager.checkReservoirFailure(readReservoir()));
             break;
         case 2:
-            printCitiesInDeficit(manager.checkStationFailure(readStation()));
+            if (!confirmationMenu()) {
+                reliabilityMenu();
+            }
+            printAffectedCities(manager.checkStationFailure(readStation()));
             break;
         case 3:
             pipeFailureMenu();
@@ -262,7 +274,20 @@ void Interface::mainMenu() {
             reliabilityMenu();
             break;
     }
+}
 
+bool Interface::confirmationMenu() {
+    string option;
+    do {
+        clear();
+        header();
+        cout << BLUE << "\n\tAre you " << BOLD "sure" << RESET << "? [yes/no]: ";
+        cin.clear();
+        cin >> option;
+        cin.ignore();
+    } while (option != "yes" && option != "no");
+
+    return option == "yes";
 }
 
 void Interface::printWaterSupplyCity(string option) {
@@ -270,6 +295,7 @@ void Interface::printWaterSupplyCity(string option) {
     std::stringstream ss;
 
     if (city != nullptr) {
+        cout << "\n\n";
         printSupplyHeader(manager);
 
         cout << left << "| " << setw(15) << city->getCode()
@@ -295,6 +321,7 @@ void Interface::printWaterSupplyCity(string option) {
 }
 
 void Interface::printWaterSupplyAllCities() {
+    clear();
     printSupplyHeader(manager);
     std::vector<City*> cities = manager.getCities();
 
@@ -326,22 +353,35 @@ void Interface::printWaterSupplyAllCities() {
     servicesMenu();
 }
 
-
-void Interface::printCitiesInDeficit(std::vector<City*> cities) {
+void Interface::printAffectedCities(std::unordered_map<City*, unsigned int> cities) {
     clear();
     cout << left << BOLD << "| " << BLUE << setw(15) << "Code" << RESET
-    << BOLD << "| " << BLUE << setw(15) << "Deficit" << RESET
+    << BOLD << "| " << BLUE << setw(15) << "Old Flow" << RESET
+    << BOLD << "| " << BLUE << setw(15) << "New Flow" << RESET
     << BOLD << "| " << BLUE << setw(30) << "Name" << RESET << endl;
 
-    for (const City* city : cities) {
-        if (city->getDemand() > city->getIncome()) {
-            cout << left << "| " << setw(15) << city->getCode()
-                 << "| " << setw(15) << city->getDemand() - city->getIncome()
-                 << "| " << setw(30) << city->getName() << RESET << endl;
-        }
+    for (const auto pair : cities) {
+        cout << left << "| " << setw(15) << pair.first->getCode()
+        << "| " << setw(15) << pair.second
+        << "| " << setw(15) << pair.first->getIncome()
+        << "| " << setw(30) << pair.first->getName() << endl;
     }
     inputWait();
     reliabilityMenu();
+}
+
+void Interface::printVitalPipes(std::pair<City*, std::vector<Pipe*>> city) {
+    clear();
+    header();
+    cout << BOLD << BLUE << "\tCity: " << RESET << city.first->getName() << ", " << city.first->getCode() << "\n\n";
+
+    cout << left << BOLD << "\t| " << YELLOW << setw(15) << "Origin" << RESET
+    << BOLD << "| " << YELLOW << setw(15) << "Capacity" << RESET << endl;
+
+    for (Pipe* pipe : city.second) {
+        cout << left << "\t| " << setw(15) << pipe->getDest()
+        << "| " << setw(15) << pipe->getWeight() << "\n";
+    }
 }
 
 void Interface::printSupplyHeader(Manager &man) {
