@@ -42,6 +42,8 @@ public:
 
     Logger* getLogger();
     void resetGraph();
+
+    void networkMetrics();
 };
 
 

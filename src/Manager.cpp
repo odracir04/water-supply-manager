@@ -367,33 +367,65 @@ void Manager::checkPipeFailure(std::pair<std::string, std::string> vertices) {
 }
 
 void Manager::checkVitalPipes(std::string code) {
-    std::vector<std::pair<Pipe*, int>> res = {};
-    std::queue<Pipe*> pipeQ = {};
+    std::vector<std::pair<Pipe *, int>> res = {};
+    std::queue<Pipe *> pipeQ = {};
 
     maxFlowAllCities();
-    int defaultFlow = dynamic_cast<City*>(graph->findVertex(code))->getIncome();
+    int defaultFlow = dynamic_cast<City *>(graph->findVertex(code))->getIncome();
 
-    for (auto v : graph->getVertexSet()) {
-        for (auto e : v->getAdj()) {
+    for (auto v: graph->getVertexSet()) {
+        for (auto e: v->getAdj()) {
             pipeQ.push(e);
         }
     }
 
     while (!pipeQ.empty()) {
-        Pipe* p = pipeQ.front();
+        Pipe *p = pipeQ.front();
         pipeQ.pop();
         int w = p->getWeight();
         p->setWeight(0);
         maxFlowAllCities();
-        if (dynamic_cast<City*>(graph->findVertex(code))->getIncome() != defaultFlow) {
-            res.push_back(std::pair<Pipe*, int>(p, dynamic_cast<City*>(graph->findVertex(code))->getIncome()));
+        if (dynamic_cast<City *>(graph->findVertex(code))->getIncome() != defaultFlow) {
+            res.push_back(std::pair<Pipe *, int>(p, dynamic_cast<City *>(graph->findVertex(code))->getIncome()));
         }
         p->setWeight(w);
     }
 
-    for (auto p : res) {
+    for (auto p: res) {
         std::cout << p.first->getOrig() << " -> " << p.first->getDest() << " New Flow: " << p.second << std::endl;
     }
+
+}
+
+void Manager::networkMetrics(){
+
+    maxFlowAllCities();
+
+    int countPipes = 0;
+    double totalDifference = 0.0;
+    double squaredDifferenceSum = 0.0;
+    int maxDifference = INT_MIN;
+
+    for (auto* v : graph->getVertexSet()) {
+        for (auto* p : v->getAdj()) {
+            int difference = abs(p->getWeight() - p->getFlow());
+            totalDifference += difference;
+            squaredDifferenceSum += difference * difference;
+            if (difference > maxDifference) {
+                maxDifference = difference;
+            }
+            countPipes++;
+        }
+    }
+
+    double averageDifference = totalDifference / countPipes;
+
+    double variance = ((squaredDifferenceSum - countPipes * (averageDifference*averageDifference))/( countPipes - 1));
+
+    std::cout << "Average Difference: " << averageDifference << std::endl;
+    std::cout << "Variance of Differences: " << variance << std::endl;
+    std::cout << "Maximum Difference: " << maxDifference << std::endl;
+
 }
 
 void Manager::resetGraph() {

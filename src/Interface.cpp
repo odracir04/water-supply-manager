@@ -165,11 +165,11 @@ void Interface::servicesMenu() {
             manager.maxFlowAllCities();
             printWaterSupplyAllCities();
             break;
-        case 3:
+        case 4:
             clear();
-            // printNetworkMetrics();
+            printNetworkMetrics();
             manager.balanceWaterFlow();
-            // printNetworkMetrics();
+            printNetworkMetrics();
             break;
     }
 
@@ -288,6 +288,12 @@ bool Interface::confirmationMenu() {
     } while (option != "yes" && option != "no");
 
     return option == "yes";
+}
+
+void Interface::printNetworkMetrics(){
+
+    manager.networkMetrics();
+
 }
 
 void Interface::printWaterSupplyCity(string option) {

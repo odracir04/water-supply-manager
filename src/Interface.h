@@ -176,6 +176,8 @@ public:
      * @return Code of the City.
      */
     std::string readCity();
+
+    void printNetworkMetrics();
 };
 
 
