@@ -323,8 +323,8 @@ Logger* Manager::getLogger() {
     return &logger;
 }
 
-void Manager::checkPipeFailure(std::pair<std::string, std::string> vertices) {
-    std::vector<City*> res = {};
+std::unordered_map<City*, unsigned int> Manager::checkPipeFailure(std::pair<std::string, std::string> vertices) {
+    std::unordered_map<City*, unsigned int>  res = {};
     std::vector<std::pair<std::string, int>> start = {};
 
     maxFlowAllCities();
@@ -347,7 +347,7 @@ void Manager::checkPipeFailure(std::pair<std::string, std::string> vertices) {
 
     if (pipe == nullptr) {
         std::cout << "ERROR: Pipe not found.\n";
-        return;
+        return {};
     }
 
     int w = pipe->getWeight();
@@ -359,16 +359,17 @@ void Manager::checkPipeFailure(std::pair<std::string, std::string> vertices) {
         auto u = graph->findVertex(pair.first);
         auto c = dynamic_cast<City *>(u);
         if (pair.second > c->getIncome()) {
-            res.push_back(c);
+            res.insert({c, pair.second});
         }
     }
 
     pipe->setWeight(w);
+    return res;
 }
 
-void Manager::checkVitalPipes(std::string code) {
-    std::vector<std::pair<Pipe *, int>> res = {};
-    std::queue<Pipe *> pipeQ = {};
+std::pair<City*, std::vector<Pipe*>> Manager::checkVitalPipes(std::string code) {
+    std::vector<Pipe*> res = {};
+    std::queue<Pipe*> pipeQ = {};
 
     maxFlowAllCities();
     int defaultFlow = dynamic_cast<City *>(graph->findVertex(code))->getIncome();
@@ -385,19 +386,17 @@ void Manager::checkVitalPipes(std::string code) {
         int w = p->getWeight();
         p->setWeight(0);
         maxFlowAllCities();
-        if (dynamic_cast<City *>(graph->findVertex(code))->getIncome() != defaultFlow) {
-            res.push_back(std::pair<Pipe *, int>(p, dynamic_cast<City *>(graph->findVertex(code))->getIncome()));
+        if (dynamic_cast<City*>(graph->findVertex(code))->getIncome() != defaultFlow) {
+            res.push_back(p);
+
         }
         p->setWeight(w);
     }
 
-    for (auto p: res) {
-        std::cout << p.first->getOrig() << " -> " << p.first->getDest() << " New Flow: " << p.second << std::endl;
-    }
-
+    return {dynamic_cast<City *>(graph->findVertex(code)), res};
 }
 
-void Manager::networkMetrics(){
+void Manager::networkMetrics() {
 
     maxFlowAllCities();
 
@@ -425,7 +424,6 @@ void Manager::networkMetrics(){
     std::cout << "Average Difference: " << averageDifference << std::endl;
     std::cout << "Variance of Differences: " << variance << std::endl;
     std::cout << "Maximum Difference: " << maxDifference << std::endl;
-
 }
 
 void Manager::resetGraph() {

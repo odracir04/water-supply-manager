@@ -45,11 +45,11 @@ string Interface::readReservoir() {
     do {
         clear();
         header();
-        cout <<"\n\tInsert a " << BLUE << "reservoir code" << RESET <<  " (e.g. R_1): " << RESET;
+        cout <<"\n\tInsert a " << BLUE << "reservoir code" << RESET <<  " (e.g. R_1): ";
         cin.clear();
         cin >> option;
         cin.ignore();
-    } while (!manager.validateReservoir(option));
+    } while (!manager.validateReservoir(option) && !option.empty());
 
     return option;
 }
@@ -87,7 +87,7 @@ pair<string, string> Interface::readPipeline() {
     do {
         clear();
         header();
-        cout <<"\n\tInsert a " << BLUE << "pipe source" << RESET <<  " (e.g. R_1 / PS_1)" << RESET;
+        cout <<"\n\tInsert a " << BLUE << "pipe source" << RESET <<  " (e.g. R_1 / PS_1): " << RESET;
         cin.clear();
         cin >> option1;
         cin.ignore();
@@ -199,13 +199,13 @@ void Interface::pipeFailureMenu() {
             if (!confirmationMenu()) {
                 pipeFailureMenu();
             }
-            //printAffectedCities(manager.checkPipeFailure(readPipeline()));
+            printAffectedCities(manager.checkPipeFailure(readPipeline()));
             break;
         case 2:
             if (!confirmationMenu()) {
                 pipeFailureMenu();
             }
-            //printVitalPipes(manager.checkVitalPipes(readCity()));
+            printVitalPipes(manager.checkVitalPipes(readCity()));
     }
 }
 
@@ -382,10 +382,12 @@ void Interface::printVitalPipes(std::pair<City*, std::vector<Pipe*>> city) {
     cout << BOLD << BLUE << "\tCity: " << RESET << city.first->getName() << ", " << city.first->getCode() << "\n\n";
 
     cout << left << BOLD << "\t| " << YELLOW << setw(15) << "Origin" << RESET
+    << BOLD << "| " << YELLOW << setw(15) << "Destination" << RESET
     << BOLD << "| " << YELLOW << setw(15) << "Capacity" << RESET << endl;
 
     for (Pipe* pipe : city.second) {
-        cout << left << "\t| " << setw(15) << pipe->getDest()
+        cout << left << "\t| " << setw(15) << pipe->getOrig()
+        << "| " << setw(15) << pipe->getDest()
         << "| " << setw(15) << pipe->getWeight() << "\n";
     }
 }
