@@ -12,6 +12,7 @@ class Pipe {
         int capacity;
         double flow;
         Pipe* reverse;
+        bool direction;
 
     public:
 
@@ -21,7 +22,7 @@ class Pipe {
          * @param d Destination vertex.
          * @param w Weight of the vertex.
          */
-        Pipe(const std::string &s, const std::string &d, double &w);
+        Pipe(const std::string &s, const std::string &d, double &w, bool direction);
 
         /**
          * Getter for the flow of the pipe.
@@ -63,6 +64,12 @@ class Pipe {
          */
         void setWeight(double weight);
         void setReverse(Pipe* pipe);
+
+        /**
+         * Getter for the direction of the pipe.
+         * @return 0 for bidirectional and  1 for unidirectional.
+         */
+        bool getDirection();
 
 
 };

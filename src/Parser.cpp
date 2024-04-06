@@ -88,10 +88,10 @@ void Parser::readData(Graph* graph) {
         getline(iss, capacity, ',');
         getline(iss, direction, '\r');
 
-        graph->addEdge(SA, SB, stoi(capacity));
+        graph->addEdge(SA, SB, stoi(capacity), stoi(direction));
 
         if (stoi(direction) == 0)
-            graph->addEdge(SB, SA, stoi(capacity));
+            graph->addEdge(SB, SA, stoi(capacity), stoi(direction));
     }
 
     inputFile.close();

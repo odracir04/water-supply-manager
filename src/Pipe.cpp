@@ -1,10 +1,11 @@
 
 #include "Pipe.h"
 
-Pipe::Pipe(const std::string &s, const std::string &d, double &w) {
+Pipe::Pipe(const std::string &s, const std::string &d, double &w, bool direction) {
     this->servicePointA = s;
     this->servicePointB = d;
     this->capacity = w;
+    this->direction = direction;
 }
 
 double Pipe::getFlow() const {
@@ -41,4 +42,8 @@ Pipe *Pipe::getReverse() const {
 
 void Pipe::setReverse(Pipe *pipe) {
     this->reverse = pipe;
+}
+
+bool Pipe::getDirection() {
+    return direction;
 }
