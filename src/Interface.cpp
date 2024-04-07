@@ -194,15 +194,9 @@ void Interface::pipeFailureMenu() {
             reliabilityMenu();
             break;
         case 1:
-            if (!confirmationMenu()) {
-                pipeFailureMenu();
-            }
             printAffectedCities(manager.checkPipeFailure(readPipeline()));
             break;
         case 2:
-            if (!confirmationMenu()) {
-                pipeFailureMenu();
-            }
             printVitalPipes(manager.checkVitalPipes(readCity()));
     }
 }
@@ -226,15 +220,9 @@ void Interface::reliabilityMenu() {
             mainMenu();
             break;
         case 1:
-            if (!confirmationMenu()) {
-                reliabilityMenu();
-            }
             printAffectedCities(manager.checkReservoirFailure(readReservoir()));
             break;
         case 2:
-            if (!confirmationMenu()) {
-                reliabilityMenu();
-            }
             printAffectedCities(manager.checkStationFailure(readStation()));
             break;
         case 3:
@@ -272,20 +260,6 @@ void Interface::mainMenu() {
             reliabilityMenu();
             break;
     }
-}
-
-bool Interface::confirmationMenu() {
-    string option;
-    do {
-        clear();
-        header();
-        cout << "\n\tAre you " << BLUE << BOLD << "sure" << RESET << "? [yes/no]: ";
-        cin.clear();
-        cin >> option;
-        cin.ignore();
-    } while (option != "yes" && option != "no");
-
-    return option == "yes";
 }
 
 void Interface::printNetworkMetrics() {
