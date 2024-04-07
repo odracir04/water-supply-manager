@@ -147,7 +147,7 @@ void Interface::servicesMenu() {
 
     footer();
 
-    int option = readOption(4);
+    int option = readOption(3);
     string city;
 
     switch(option) {
@@ -161,14 +161,11 @@ void Interface::servicesMenu() {
             printWaterSupplyCity(city);
             break;
         case 2:
-            //clear();
             manager.maxFlowAllCities();
             printWaterSupplyAllCities();
             break;
         case 3:
             clear();
-            printNetworkMetrics();
-            manager.balanceWaterFlow();
             printNetworkMetrics();
             break;
     }
@@ -281,7 +278,7 @@ bool Interface::confirmationMenu() {
     do {
         clear();
         header();
-        cout << BLUE << "\n\tAre you " << BOLD "sure" << RESET << "? [yes/no]: ";
+        cout << "\n\tAre you " << BLUE << BOLD << "sure" << RESET << "? [yes/no]: ";
         cin.clear();
         cin >> option;
         cin.ignore();
@@ -290,10 +287,27 @@ bool Interface::confirmationMenu() {
     return option == "yes";
 }
 
-void Interface::printNetworkMetrics(){
+void Interface::printNetworkMetrics() {
+    clear();
+    header();
 
-    manager.networkMetrics();
+    metrics metrics = manager.networkMetrics();
 
+    cout << BLUE << BOLD << "\n\tNetwork Metrics: Capacity - Flow" << RESET << endl
+    << YELLOW << BOLD << "\tAverage: " << RESET << metrics.average << endl
+    << YELLOW << BOLD << "\tVariance: " << RESET << metrics.variance << endl
+    << YELLOW << BOLD << "\tMax Difference: " << RESET << metrics.max_difference << "\n" << endl;
+
+    cout << GREEN << "\tRunning Balancing Algorithm..." << RESET << endl;
+    manager.balanceWaterFlow();
+    metrics = manager.networkMetrics();
+
+    cout << BLUE << BOLD << "\n\tNetwork Metrics: Capacity - Flow" << RESET << endl
+    << YELLOW << BOLD << "\tAverage: " << RESET << metrics.average << endl
+    << YELLOW << BOLD << "\tVariance: " << RESET << metrics.variance << endl
+    << YELLOW << BOLD << "\tMax Difference: " << RESET << metrics.max_difference << "\n\n" << endl;
+
+    footer();
 }
 
 void Interface::printWaterSupplyCity(string option) {

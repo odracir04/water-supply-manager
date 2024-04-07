@@ -27,10 +27,6 @@ std::vector<Pipe *> Vertex::getIncoming() const {
     return incoming;
 }
 
-bool Vertex::isProcessing() const {
-    return processing;
-}
-
 void Vertex::setVisited(bool v) {
     this->visited = v;
 }
@@ -38,5 +34,3 @@ void Vertex::setVisited(bool v) {
 bool Vertex::isVisited() const {
     return visited;
 }
-
-

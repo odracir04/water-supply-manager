@@ -7,6 +7,12 @@
 #include "City.h"
 #include "Logger.h"
 
+struct metrics {
+    double average;
+    double variance;
+    int max_difference;
+};
+
 class Manager {
 
 private:
@@ -19,7 +25,6 @@ private:
 
 public:
     Manager();
-    Graph* getGraph() {return graph;}
     void extractFiles(bool option);
     void maxFlowCities(std::string dest);
 
@@ -39,11 +44,10 @@ public:
     bool validateReservoir(std::string code);
     bool validatePipe(std::string src, std::string dest);
 
-
     Logger* getLogger();
     void resetGraph();
 
-    void networkMetrics();
+    metrics networkMetrics();
 };
 
 

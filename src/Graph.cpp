@@ -43,12 +43,6 @@ bool Graph::addVertex(const std::string &code) {
     return true;
 }
 
-void Graph::printVertexSet() {
-    for(auto v : vertexSet ){
-        std::cout << v->getCode() << "\n";
-    }
-}
-
 std::vector<Vertex *> Graph::getVertexSet() const {
     return vertexSet;
 }
@@ -72,7 +66,6 @@ void Graph::setVertexSet(std::vector<Vertex *> &v) {
 
 void Graph::deleteEdge(const std::string &s, Pipe *pipe) const{
     Vertex *dest = findVertex(pipe->getDest());
-    // Remove the corresponding edge from the incoming list
     auto it = dest->incoming.begin();
     while (it != dest->incoming.end()) {
         auto* temp = findVertex((*it)->getOrig());
@@ -111,13 +104,6 @@ bool Graph::removeEdge(const std::string &sourc, const std::string &dest) {
         }
     }
     return removedEdge;
-}
-
-void Graph::removeAllAdjEdges(Vertex* vertex) {
-    for (auto & it : vertex->adj) {
-        delete it;
-    }
-    vertex->adj.clear();
 }
 
 bool Graph::removeVertex(const std::string &in) {

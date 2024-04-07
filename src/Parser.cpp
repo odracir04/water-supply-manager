@@ -1,7 +1,5 @@
-#include <iostream>
 #include "Parser.h"
 #include "Reservoir.h"
-#include "City.h"
 
 Parser::Parser(bool dataSetter) {
     this->dataSetter = dataSetter;

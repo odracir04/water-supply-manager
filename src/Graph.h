@@ -13,7 +13,7 @@ class Graph {
 
 protected:
     std::vector<Vertex*> vertexSet;
-    void dfsVisit(Vertex *v,  std::vector<Vertex> & res) const;
+
 public:
     /**
      * Searches for the vertex code in vertex set.
@@ -22,7 +22,6 @@ public:
      * Complexity: O(v), where v in the number of vertexes in vertex set.
      */
     Vertex* findVertex(const std::string &code) const;
-    int getNumVertex() const;
 
     /**
      * Adds the city to the vertex set after verifying that it already exists.
@@ -90,10 +89,6 @@ public:
      * @param v The new vector of vertexes to be set as the VertexSet
      */
     void setVertexSet(std::vector<Vertex*> &v);
-    std::vector<Vertex> dfs() const;
-    std::vector<Vertex> dfs(const std::string & source) const;
-    std::vector<Vertex> bfs(const std::string &source) const;
-    void printVertexSet();
 
     /**
      * Adds a new Vertex to the Vertex Set verifying if it already exists.
@@ -108,9 +103,6 @@ public:
      * @param pipe
      */
     void deleteEdge(const std::string &s, Pipe *pipe) const;
-
-    void removeAllAdjEdges(Vertex *vertex);
 };
-
 
 #endif //DA_PROJ1_GRAPH_H

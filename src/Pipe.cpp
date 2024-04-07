@@ -1,4 +1,3 @@
-
 #include "Pipe.h"
 
 Pipe::Pipe(const std::string &s, const std::string &d, double &w) {
