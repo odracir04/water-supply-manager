@@ -60,7 +60,10 @@ bool Manager::validatePipe(std::string src, std::string dest) {
     if (!validateReservoir(src) && !validateStation(src)) return false;
     if (!validateStation(dest) && !validateCity(dest)) return false;
 
-    return true;
+    for (Pipe* pipe : graph->findVertex(src)->getAdj()) {
+        if (pipe->getDest() == dest) return true;
+    }
+    return false;
 }
 
 /*
@@ -351,7 +354,6 @@ void Manager::maxFlowCities(std::string dest) {
         return;
     }
 
-    newGraph.removeEdge()
     Vertex *superSource = new Vertex("SS");
 
     std::vector<Vertex*> vec = newGraph.getVertexSet();

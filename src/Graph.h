@@ -74,7 +74,7 @@ public:
     /**
      * Removes an pipe connecting two vertexes.
      * @param sourc Source vertex.
-     * @param dest Destinnation vertex.
+     * @param dest Destination vertex.
      * @return True if successfully remover, False otherwise.
      */
     bool removeEdge(const std::string &sourc, const std::string &dest);

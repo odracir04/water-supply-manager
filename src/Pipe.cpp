@@ -19,10 +19,6 @@ std::string Pipe::getDest() const {
     return servicePointB;
 }
 
-void Pipe::setDest(std::string *dest) {
-    this->servicePointB = *dest;
-}
-
 std::string Pipe::getOrig() const {
     return servicePointA;
 }
@@ -33,14 +29,6 @@ double Pipe::getWeight() const {
 
 void Pipe::setWeight(double weight) {
     this->capacity = weight;
-}
-
-Pipe *Pipe::getReverse() const {
-    return reverse;
-}
-
-void Pipe::setReverse(Pipe *pipe) {
-    this->reverse = pipe;
 }
 
 bool Pipe::getDirection() {

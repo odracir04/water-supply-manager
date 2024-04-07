@@ -58,9 +58,14 @@ public:
      */
     void maxFlowCities(std::string dest);
 
+    /**
+    * Attempts to balance the water network by running max-flow with capacity scaling for pathfinding.
+    * Complexity: O(V * P^2), where V is the number of vertexes and P the number of pipes in the graph.
+    */
     void balanceWaterFlow();
 
     /*
+    // Alternative to balance network without altering Edmonds-Karp implementation
     void DFSPipeToCities(Vertex* v, std::unordered_set<City*>* visitedCities);
 
     void DFSPipeToCitiesVisit(Vertex* v, std::unordered_set<City*>* visitedCities);
@@ -109,7 +114,7 @@ public:
      * @param vertices A pair of vertexes representing the endpoints of the pipe to be simulated.
      * @return The cities affected by Pipe failure.
      */
-    std::unordered_map<City*, unsigned int>  checkPipeFailure(std::pair<std::string, std::string> vertices);
+    std::unordered_map<City*, unsigned int> checkPipeFailure(std::pair<std::string, std::string> vertices);
 
     /**
      * Identifies vital pipes connected to a single city by simulating the failure of each pipe individually
@@ -132,7 +137,6 @@ public:
      * * O(V * P^2), where V is the number of vertices and P is the number of pipes in the graph.
      */
     void maxFlowAllCities();
-
 
     /**
      * Getter for a specific city based on the code.
@@ -193,8 +197,7 @@ public:
      * @return A struct containing the network metrics.
      * Complexity: O(V + P) where V is the number of vertexes and P the number of pipes.
      */
-
-    metrics networkMetrics();
+     metrics networkMetrics();
 };
 
 
