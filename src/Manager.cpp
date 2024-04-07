@@ -64,7 +64,6 @@ bool Manager::validatePipe(std::string src, std::string dest) {
 }
 
 /*
->>>>>>> refs/remotes/origin/master
 void Manager::DFSPipeToCities(Vertex* v, std::unordered_set<City*>* visitedCities) {
     for (auto u : graph->getVertexSet()) {
         u->setVisited(false);
