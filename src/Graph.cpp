@@ -47,14 +47,14 @@ std::vector<Vertex *> Graph::getVertexSet() const {
     return vertexSet;
 }
 
-Pipe* Graph::addEdge(const std::string &sourc, const std::string &dest, double w) {
+Pipe* Graph::addEdge(const std::string &sourc, const std::string &dest, double w, bool direction) {
     Vertex* source = findVertex(sourc);
     Vertex* destination = findVertex(dest);
 
     if (source == nullptr || destination == nullptr)
         return nullptr;
 
-    auto newPipe = new Pipe(sourc, dest, w);
+    auto newPipe = new Pipe(sourc, dest, w, direction );
     source->adj.push_back(newPipe);
     destination->incoming.push_back(newPipe);
     return newPipe;

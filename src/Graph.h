@@ -66,9 +66,10 @@ public:
      * @param sourc Source vertex.
      * @param dest Destination vertex.
      * @param w Weight of the pipe.
+     * @param direction Direction of the edge
      * @return The new pipe created or nullptr if one of the vertexes not found.
      */
-    Pipe* addEdge(const std::string &sourc, const std::string &dest, double w);
+    Pipe* addEdge(const std::string &sourc, const std::string &dest, double w, bool direction);
 
     /**
      * Removes an pipe connecting two vertexes.

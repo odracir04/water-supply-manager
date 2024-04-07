@@ -7,9 +7,6 @@ std::string Vertex::getCode() const {
     return code;
 }
 
-void Vertex::addPipe(const std::string &dest, double &w) {
-    adj.push_back(new Pipe(this->getCode(), dest, w));
-}
 
 const std::vector<Pipe *> &Vertex::getAdj() const {
     return this->adj;

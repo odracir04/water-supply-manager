@@ -145,7 +145,7 @@ void Manager::maxFlowCities(std::string dest) {
 
     for (auto *v: newGraph.getVertexSet()) {
         if (v->getCode()[0] == 'R') {
-            newGraph.addEdge("SS", v->getCode(), 999999999);
+            newGraph.addEdge("SS", v->getCode(), 999999999, 1);
         }
     }
 
@@ -185,10 +185,10 @@ void Manager::addSuperVertexes() {
 
     for (Vertex* v : graph->getVertexSet()) {
         if (auto reservoir = dynamic_cast<Reservoir*>(v)) {
-            graph->addEdge("SS", v->getCode(), reservoir->getMaxDelivery());
+            graph->addEdge("SS", v->getCode(), reservoir->getMaxDelivery(), 1);
         }
         if (auto city = dynamic_cast<City*>(v)) {
-            graph->addEdge(v->getCode(), "ST", city->getDemand());
+            graph->addEdge(v->getCode(), "ST", city->getDemand(), 1);
             city->setIncome(0);
         }
     }
@@ -391,11 +391,13 @@ metrics Manager::networkMetrics() {
 
     for (auto* v : graph->getVertexSet()) {
         for (auto* p : v->getAdj()) {
-            int difference = abs(p->getWeight() - p->getFlow());
-            totalDifference += difference;
-            squaredDifferenceSum += difference * difference;
-            if (difference > maxDifference) {
-                maxDifference = difference;
+
+                int difference = abs(p->getWeight() - p->getFlow());
+                totalDifference += difference;
+                squaredDifferenceSum += difference * difference;
+                if (difference > maxDifference  && p->getDirection() == 1) {
+                    maxDifference = difference;
+
             }
             countPipes++;
         }
