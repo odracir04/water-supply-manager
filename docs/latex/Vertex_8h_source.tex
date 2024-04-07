@@ -1,0 +1,41 @@
+\doxysection{Vertex.\+h}
+\hypertarget{Vertex_8h_source}{}\label{Vertex_8h_source}\index{/home/oxi-\/moron/LEIC/DA/DA2324\_PRJ1\_G155/src/Vertex.h@{/home/oxi-\/moron/LEIC/DA/DA2324\_PRJ1\_G155/src/Vertex.h}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#ifndef\ DA\_PROJ1\_VERTEX\_H}}
+\DoxyCodeLine{00002\ \textcolor{preprocessor}{\#define\ DA\_PROJ1\_VERTEX\_H}}
+\DoxyCodeLine{00003\ \textcolor{preprocessor}{\#include\ <vector>}}
+\DoxyCodeLine{00004\ \textcolor{preprocessor}{\#include\ "{}Pipe.h"{}}}
+\DoxyCodeLine{00005\ }
+\DoxyCodeLine{00006\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classVertex}{Vertex}}\ \{}
+\DoxyCodeLine{00007\ \ \ \ \ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00008\ \ \ \ \ \ \ \ \ std::string\ code;}
+\DoxyCodeLine{00009\ \ \ \ \ \ \ \ \ std::vector<Pipe*>\ adj;}
+\DoxyCodeLine{00010\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{bool}\ visited;}
+\DoxyCodeLine{00011\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classPipe}{Pipe}}\ *path\ =\ \textcolor{keyword}{nullptr};}
+\DoxyCodeLine{00012\ }
+\DoxyCodeLine{00013\ \ \ \ \ \ \ \ \ std::vector<Pipe\ *>\ incoming;}
+\DoxyCodeLine{00014\ \ \ \ \ \ \ \ \ \textcolor{keyword}{friend}\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classGraph}{Graph}};}
+\DoxyCodeLine{00015\ }
+\DoxyCodeLine{00016\ \ \ \ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00021\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classVertex_a6a0aede4a40c7b49ca487066463b1e75}{Vertex}}(std::string\ code);}
+\DoxyCodeLine{00022\ }
+\DoxyCodeLine{00027\ \ \ \ \ \ \ \ \ \textcolor{keyword}{virtual}\ std::string\ \mbox{\hyperlink{classVertex_a89a00554f777a1dfdd8797b822d308bc}{getCode}}()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00028\ }
+\DoxyCodeLine{00033\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classVertex_aa4bd82105b85ee53a917391f4811cd8a}{isVisited}}()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00034\ }
+\DoxyCodeLine{00039\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classVertex_a3c6d6c2254850a647d3a27007ef940f6}{setVisited}}(\textcolor{keywordtype}{bool}\ v);}
+\DoxyCodeLine{00040\ }
+\DoxyCodeLine{00045\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classPipe}{Pipe}}*\ \mbox{\hyperlink{classVertex_afdc6a4154139fedb4c34bba13c3c5f43}{getPath}}()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00046\ }
+\DoxyCodeLine{00051\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classVertex_a8302b03d0b2500ce0ddd9d47677becdf}{setPath}}(\mbox{\hyperlink{classPipe}{Pipe}}*\ path);}
+\DoxyCodeLine{00052\ }
+\DoxyCodeLine{00057\ \ \ \ \ \ \ \ \ std::vector<Pipe\ *>\ \mbox{\hyperlink{classVertex_ab113b6d8783a099354a40e15ee5f0901}{getIncoming}}()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00058\ }
+\DoxyCodeLine{00063\ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ std::vector<Pipe*>\ \&\mbox{\hyperlink{classVertex_a4c4f9024bfe12a1a14e0ccf28bda1883}{getAdj}}()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00064\ \ \ \ \ \ \ \ \ \textcolor{keyword}{friend}\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classGraph}{Graph}};}
+\DoxyCodeLine{00065\ \};}
+\DoxyCodeLine{00066\ }
+\DoxyCodeLine{00067\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{//DA\_PROJ1\_VERTEX\_H}}
+
+\end{DoxyCode}

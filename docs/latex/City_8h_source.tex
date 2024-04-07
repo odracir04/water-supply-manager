@@ -1,0 +1,41 @@
+\doxysection{City.\+h}
+\hypertarget{City_8h_source}{}\label{City_8h_source}\index{/home/oxi-\/moron/LEIC/DA/DA2324\_PRJ1\_G155/src/City.h@{/home/oxi-\/moron/LEIC/DA/DA2324\_PRJ1\_G155/src/City.h}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#ifndef\ DA\_PROJ1\_CITY\_H}}
+\DoxyCodeLine{00002\ \textcolor{preprocessor}{\#define\ DA\_PROJ1\_CITY\_H}}
+\DoxyCodeLine{00003\ }
+\DoxyCodeLine{00004\ \textcolor{preprocessor}{\#include\ <string>}}
+\DoxyCodeLine{00005\ }
+\DoxyCodeLine{00006\ \textcolor{preprocessor}{\#include\ "{}Vertex.h"{}}}
+\DoxyCodeLine{00007\ }
+\DoxyCodeLine{00008\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classCity}{City}}\ :\ \textcolor{keyword}{public}\ \mbox{\hyperlink{classVertex}{Vertex}}\ \{}
+\DoxyCodeLine{00009\ \ \ \ \ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00010\ \ \ \ \ \ \ \ \ std::string\ name;}
+\DoxyCodeLine{00011\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{int}\ id;}
+\DoxyCodeLine{00012\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{int}\ demand;}
+\DoxyCodeLine{00013\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{int}\ population;}
+\DoxyCodeLine{00014\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{double}\ income;}
+\DoxyCodeLine{00015\ }
+\DoxyCodeLine{00016\ \ \ \ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00017\ }
+\DoxyCodeLine{00026\ \ \ \ \ \mbox{\hyperlink{classCity_ac5424bff9915eba26fc804537407cb4a}{City}}(std::string\ n,\ \textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{int}\ i,\ std::string\ c,\ \textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{int}\ d,\ \textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{int}\ p)}
+\DoxyCodeLine{00027\ \ \ \ \ :\ \mbox{\hyperlink{classVertex}{Vertex}}(c),\ name(n),\ id(i),\ demand(d),\ population(p)\ \{\}}
+\DoxyCodeLine{00028\ }
+\DoxyCodeLine{00033\ \ \ \ \ std::string\ \mbox{\hyperlink{classCity_a79ba022573d8174291b5dac268ee5ec0}{getName}}()\textcolor{keyword}{\ const\ }\{\textcolor{keywordflow}{return}\ this-\/>name;\}}
+\DoxyCodeLine{00034\ }
+\DoxyCodeLine{00039\ \ \ \ \ \textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{classCity_afd25c1cdb1d327bd29f09858457f5394}{getId}}()\textcolor{keyword}{\ const\ }\{\textcolor{keywordflow}{return}\ this-\/>id;\}}
+\DoxyCodeLine{00040\ }
+\DoxyCodeLine{00045\ \ \ \ \ \textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{classCity_a1f02e27d744a32bb1e3b6ae448b05c9c}{getDemand}}()\textcolor{keyword}{\ const\ }\{\textcolor{keywordflow}{return}\ this-\/>demand;\}}
+\DoxyCodeLine{00046\ }
+\DoxyCodeLine{00051\ \ \ \ \ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{classCity_ab70468f8ab66805741433edf1306aae8}{getIncome}}()\textcolor{keyword}{\ const}\{\ \textcolor{keywordflow}{return}\ income;\}}
+\DoxyCodeLine{00052\ }
+\DoxyCodeLine{00057\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classCity_a053e0e25c3541caca48514e0518f1a9f}{setIncome}}(\textcolor{keywordtype}{double}\ inc)\{this-\/>income=inc;\}}
+\DoxyCodeLine{00058\ }
+\DoxyCodeLine{00063\ \ \ \ \ \textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{classCity_a504facb83d364a46d8f3181c3fb954ba}{getPopulation}}()\textcolor{keyword}{\ const\ }\{\textcolor{keywordflow}{return}\ this-\/>population;\}}
+\DoxyCodeLine{00064\ \};}
+\DoxyCodeLine{00065\ }
+\DoxyCodeLine{00066\ }
+\DoxyCodeLine{00067\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{//DA\_PROJ1\_CITY\_H}}
+
+\end{DoxyCode}

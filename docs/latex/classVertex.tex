@@ -1,0 +1,127 @@
+\doxysection{Vertex Class Reference}
+\hypertarget{classVertex}{}\label{classVertex}\index{Vertex@{Vertex}}
+Inheritance diagram for Vertex\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{classVertex}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classVertex_a6a0aede4a40c7b49ca487066463b1e75}{Vertex}} (std\+::string code)
+\begin{DoxyCompactList}\small\item\em \doxylink{classVertex}{Vertex} constructor. \end{DoxyCompactList}\item 
+virtual std\+::string \mbox{\hyperlink{classVertex_a89a00554f777a1dfdd8797b822d308bc}{get\+Code}} () const
+\item 
+bool \mbox{\hyperlink{classVertex_aa4bd82105b85ee53a917391f4811cd8a}{is\+Visited}} () const
+\item 
+void \mbox{\hyperlink{classVertex_a3c6d6c2254850a647d3a27007ef940f6}{set\+Visited}} (bool v)
+\item 
+\mbox{\hyperlink{classPipe}{Pipe}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classVertex_afdc6a4154139fedb4c34bba13c3c5f43}{get\+Path}} () const
+\item 
+void \mbox{\hyperlink{classVertex_a8302b03d0b2500ce0ddd9d47677becdf}{set\+Path}} (\mbox{\hyperlink{classPipe}{Pipe}} \texorpdfstring{$\ast$}{*}path)
+\item 
+std\+::vector$<$ \mbox{\hyperlink{classPipe}{Pipe}} \texorpdfstring{$\ast$}{*} $>$ \mbox{\hyperlink{classVertex_ab113b6d8783a099354a40e15ee5f0901}{get\+Incoming}} () const
+\item 
+const std\+::vector$<$ \mbox{\hyperlink{classPipe}{Pipe}} \texorpdfstring{$\ast$}{*} $>$ \& \mbox{\hyperlink{classVertex_a4c4f9024bfe12a1a14e0ccf28bda1883}{get\+Adj}} () const
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Friends}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{classVertex_a271836f2eb9fe5e1f97ce4209b36c66a}\label{classVertex_a271836f2eb9fe5e1f97ce4209b36c66a} 
+class {\bfseries Graph}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classVertex_a6a0aede4a40c7b49ca487066463b1e75}\label{classVertex_a6a0aede4a40c7b49ca487066463b1e75} 
+\index{Vertex@{Vertex}!Vertex@{Vertex}}
+\index{Vertex@{Vertex}!Vertex@{Vertex}}
+\doxysubsubsection{\texorpdfstring{Vertex()}{Vertex()}}
+{\footnotesize\ttfamily Vertex\+::\+Vertex (\begin{DoxyParamCaption}\item[{std\+::string}]{code }\end{DoxyParamCaption})}
+
+
+
+\doxylink{classVertex}{Vertex} constructor. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em code} & Code of the vertex. \\
+\hline
+\end{DoxyParams}
+
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classVertex_a4c4f9024bfe12a1a14e0ccf28bda1883}\label{classVertex_a4c4f9024bfe12a1a14e0ccf28bda1883} 
+\index{Vertex@{Vertex}!getAdj@{getAdj}}
+\index{getAdj@{getAdj}!Vertex@{Vertex}}
+\doxysubsubsection{\texorpdfstring{getAdj()}{getAdj()}}
+{\footnotesize\ttfamily const std\+::vector$<$ \mbox{\hyperlink{classPipe}{Pipe}} \texorpdfstring{$\ast$}{*} $>$ \& Vertex\+::get\+Adj (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+Getter for a vector of pipes that correspond to the pipes leaving the vertex. \begin{DoxyReturn}{Returns}
+Vector containing pipes that have the source vertex equal to the caller. 
+\end{DoxyReturn}
+\Hypertarget{classVertex_a89a00554f777a1dfdd8797b822d308bc}\label{classVertex_a89a00554f777a1dfdd8797b822d308bc} 
+\index{Vertex@{Vertex}!getCode@{getCode}}
+\index{getCode@{getCode}!Vertex@{Vertex}}
+\doxysubsubsection{\texorpdfstring{getCode()}{getCode()}}
+{\footnotesize\ttfamily std\+::string Vertex\+::get\+Code (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [virtual]}}
+
+Getter for \doxylink{classVertex}{Vertex} code. \begin{DoxyReturn}{Returns}
+vertex code. 
+\end{DoxyReturn}
+\Hypertarget{classVertex_ab113b6d8783a099354a40e15ee5f0901}\label{classVertex_ab113b6d8783a099354a40e15ee5f0901} 
+\index{Vertex@{Vertex}!getIncoming@{getIncoming}}
+\index{getIncoming@{getIncoming}!Vertex@{Vertex}}
+\doxysubsubsection{\texorpdfstring{getIncoming()}{getIncoming()}}
+{\footnotesize\ttfamily std\+::vector$<$ \mbox{\hyperlink{classPipe}{Pipe}} \texorpdfstring{$\ast$}{*} $>$ Vertex\+::get\+Incoming (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+Getter for a vector of pipes that correspond to the pipes incoming to the vertex. \begin{DoxyReturn}{Returns}
+Vector containing pipes that have the source vertex equal to the caller. 
+\end{DoxyReturn}
+\Hypertarget{classVertex_afdc6a4154139fedb4c34bba13c3c5f43}\label{classVertex_afdc6a4154139fedb4c34bba13c3c5f43} 
+\index{Vertex@{Vertex}!getPath@{getPath}}
+\index{getPath@{getPath}!Vertex@{Vertex}}
+\doxysubsubsection{\texorpdfstring{getPath()}{getPath()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classPipe}{Pipe}} \texorpdfstring{$\ast$}{*} Vertex\+::get\+Path (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+Getter for the vertex path. \begin{DoxyReturn}{Returns}
+\doxylink{classPipe}{Pipe} corresponding to the path of the vertex. 
+\end{DoxyReturn}
+\Hypertarget{classVertex_aa4bd82105b85ee53a917391f4811cd8a}\label{classVertex_aa4bd82105b85ee53a917391f4811cd8a} 
+\index{Vertex@{Vertex}!isVisited@{isVisited}}
+\index{isVisited@{isVisited}!Vertex@{Vertex}}
+\doxysubsubsection{\texorpdfstring{isVisited()}{isVisited()}}
+{\footnotesize\ttfamily bool Vertex\+::is\+Visited (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+Checks visited attribute. \begin{DoxyReturn}{Returns}
+True if vertex is visited or false otherwise. 
+\end{DoxyReturn}
+\Hypertarget{classVertex_a8302b03d0b2500ce0ddd9d47677becdf}\label{classVertex_a8302b03d0b2500ce0ddd9d47677becdf} 
+\index{Vertex@{Vertex}!setPath@{setPath}}
+\index{setPath@{setPath}!Vertex@{Vertex}}
+\doxysubsubsection{\texorpdfstring{setPath()}{setPath()}}
+{\footnotesize\ttfamily void Vertex\+::set\+Path (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classPipe}{Pipe}} \texorpdfstring{$\ast$}{*}}]{path }\end{DoxyParamCaption})}
+
+Setter for the vertex path. 
+\begin{DoxyParams}{Parameters}
+{\em path} & \doxylink{classPipe}{Pipe} to be set as path of the vertex. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{classVertex_a3c6d6c2254850a647d3a27007ef940f6}\label{classVertex_a3c6d6c2254850a647d3a27007ef940f6} 
+\index{Vertex@{Vertex}!setVisited@{setVisited}}
+\index{setVisited@{setVisited}!Vertex@{Vertex}}
+\doxysubsubsection{\texorpdfstring{setVisited()}{setVisited()}}
+{\footnotesize\ttfamily void Vertex\+::set\+Visited (\begin{DoxyParamCaption}\item[{bool}]{v }\end{DoxyParamCaption})}
+
+Setter for visited attribute. 
+\begin{DoxyParams}{Parameters}
+{\em v} & Value to be assigned to visited attribute. \\
+\hline
+\end{DoxyParams}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+/home/oxi-\/moron/\+LEIC/\+DA/\+DA2324\+\_\+\+PRJ1\+\_\+\+G155/src/Vertex.\+h\item 
+/home/oxi-\/moron/\+LEIC/\+DA/\+DA2324\+\_\+\+PRJ1\+\_\+\+G155/src/Vertex.\+cpp\end{DoxyCompactItemize}

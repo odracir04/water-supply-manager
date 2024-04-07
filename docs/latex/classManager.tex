@@ -1,0 +1,257 @@
+\doxysection{Manager Class Reference}
+\hypertarget{classManager}{}\label{classManager}\index{Manager@{Manager}}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classManager_a1658ff9f18e38ccd9cb8b0b371b9c20b}{Manager}} ()
+\item 
+void \mbox{\hyperlink{classManager_aa715ec6529f126a55750749187ea69fd}{extract\+Files}} (bool option)
+\item 
+void \mbox{\hyperlink{classManager_a9beb94544f7607578831e5cda84fc65e}{max\+Flow\+Cities}} (std\+::string dest)
+\item 
+void \mbox{\hyperlink{classManager_ad203a4b49ce1314dd1679489fcd192fb}{balance\+Water\+Flow}} ()
+\item 
+std\+::unordered\+\_\+map$<$ \mbox{\hyperlink{classCity}{City}} \texorpdfstring{$\ast$}{*}, unsigned int $>$ \mbox{\hyperlink{classManager_a91a926b30c1d12bb3540ff4a94d6aa53}{check\+Reservoir\+Failure}} (std\+::string code)
+\item 
+std\+::unordered\+\_\+map$<$ \mbox{\hyperlink{classCity}{City}} \texorpdfstring{$\ast$}{*}, unsigned int $>$ \mbox{\hyperlink{classManager_ab4e183a0328c0d5209b8871f4e87abe5}{check\+Station\+Failure}} (std\+::string code)
+\item 
+std\+::unordered\+\_\+map$<$ \mbox{\hyperlink{classCity}{City}} \texorpdfstring{$\ast$}{*}, unsigned int $>$ \mbox{\hyperlink{classManager_a04cb4ce50e0d0e75b688f6d765013da8}{check\+Pipe\+Failure}} (std\+::pair$<$ std\+::string, std\+::string $>$ vertices)
+\item 
+std\+::pair$<$ \mbox{\hyperlink{classCity}{City}} \texorpdfstring{$\ast$}{*}, std\+::vector$<$ \mbox{\hyperlink{classPipe}{Pipe}} \texorpdfstring{$\ast$}{*} $>$ $>$ \mbox{\hyperlink{classManager_a7586c19f37afa74d5c44db8b3342c478}{check\+Vital\+Pipes}} (std\+::string code)
+\item 
+std\+::vector$<$ \mbox{\hyperlink{classCity}{City}} \texorpdfstring{$\ast$}{*} $>$ \mbox{\hyperlink{classManager_af09cc1157b1fdb3fafb757c8521e73d9}{get\+Cities}} ()
+\item 
+void \mbox{\hyperlink{classManager_a287fe42d047eb23e50e1607a9533db6c}{max\+Flow\+All\+Cities}} ()
+\item 
+\mbox{\hyperlink{classCity}{City}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classManager_abb6c3834a992a5debcef9175692cb7d6}{get\+City}} (std\+::string code)
+\item 
+bool \mbox{\hyperlink{classManager_abbbf8692ccdcd4f4ef7fc34224d29802}{validate\+Station}} (std\+::string code)
+\item 
+bool \mbox{\hyperlink{classManager_ab6cf28631919f2ed45ad7ef9a1b06ab8}{validate\+City}} (std\+::string code)
+\item 
+bool \mbox{\hyperlink{classManager_a05c597bd688d2eb9774f46e67b07f328}{validate\+Reservoir}} (std\+::string code)
+\item 
+bool \mbox{\hyperlink{classManager_a1457871dea1b97db8b3dc1863ffce436}{validate\+Pipe}} (std\+::string src, std\+::string dest)
+\item 
+\mbox{\hyperlink{classLogger}{Logger}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classManager_a605cb2510ac4da6278b4639866c943d5}{get\+Logger}} ()
+\item 
+void \mbox{\hyperlink{classManager_a6b28e6723d6c47a59bae1a714fc21f05}{reset\+Graph}} ()
+\item 
+\mbox{\hyperlink{structmetrics}{metrics}} \mbox{\hyperlink{classManager_ab052df2b5de668b10e44dc3274096c08}{network\+Metrics}} ()
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classManager_a1658ff9f18e38ccd9cb8b0b371b9c20b}\label{classManager_a1658ff9f18e38ccd9cb8b0b371b9c20b} 
+\index{Manager@{Manager}!Manager@{Manager}}
+\index{Manager@{Manager}!Manager@{Manager}}
+\doxysubsubsection{\texorpdfstring{Manager()}{Manager()}}
+{\footnotesize\ttfamily Manager\+::\+Manager (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\doxylink{classManager}{Manager} constructor. Builds a logger instance indicating output file location. 
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classManager_ad203a4b49ce1314dd1679489fcd192fb}\label{classManager_ad203a4b49ce1314dd1679489fcd192fb} 
+\index{Manager@{Manager}!balanceWaterFlow@{balanceWaterFlow}}
+\index{balanceWaterFlow@{balanceWaterFlow}!Manager@{Manager}}
+\doxysubsubsection{\texorpdfstring{balanceWaterFlow()}{balanceWaterFlow()}}
+{\footnotesize\ttfamily void Manager\+::balance\+Water\+Flow (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+Attempts to balance the water network by running max-\/flow with capacity scaling for pathfinding. Complexity\+: O(\+V \texorpdfstring{$\ast$}{*} P\texorpdfstring{$^\wedge$}{\string^}2), where V is the number of vertexes and P the number of pipes in the graph. \Hypertarget{classManager_a04cb4ce50e0d0e75b688f6d765013da8}\label{classManager_a04cb4ce50e0d0e75b688f6d765013da8} 
+\index{Manager@{Manager}!checkPipeFailure@{checkPipeFailure}}
+\index{checkPipeFailure@{checkPipeFailure}!Manager@{Manager}}
+\doxysubsubsection{\texorpdfstring{checkPipeFailure()}{checkPipeFailure()}}
+{\footnotesize\ttfamily std\+::unordered\+\_\+map$<$ \mbox{\hyperlink{classCity}{City}} \texorpdfstring{$\ast$}{*}, unsigned int $>$ Manager\+::check\+Pipe\+Failure (\begin{DoxyParamCaption}\item[{std\+::pair$<$ std\+::string, std\+::string $>$}]{vertices }\end{DoxyParamCaption})}
+
+Simulates specific \doxylink{classPipe}{Pipe} failure by setting the weight of that to 0 and then recalculates the maximum flow to all cities identifying the cities affected by that change. Complexity\+: O(\+V \texorpdfstring{$\ast$}{*} P\texorpdfstring{$^\wedge$}{\string^}2) where V is the number of vertexes and P the number of pipes. 
+\begin{DoxyParams}{Parameters}
+{\em vertices} & A pair of vertexes representing the endpoints of the pipe to be simulated. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The cities affected by \doxylink{classPipe}{Pipe} failure. 
+\end{DoxyReturn}
+\Hypertarget{classManager_a91a926b30c1d12bb3540ff4a94d6aa53}\label{classManager_a91a926b30c1d12bb3540ff4a94d6aa53} 
+\index{Manager@{Manager}!checkReservoirFailure@{checkReservoirFailure}}
+\index{checkReservoirFailure@{checkReservoirFailure}!Manager@{Manager}}
+\doxysubsubsection{\texorpdfstring{checkReservoirFailure()}{checkReservoirFailure()}}
+{\footnotesize\ttfamily std\+::unordered\+\_\+map$<$ \mbox{\hyperlink{classCity}{City}} \texorpdfstring{$\ast$}{*}, unsigned int $>$ Manager\+::check\+Reservoir\+Failure (\begin{DoxyParamCaption}\item[{std\+::string}]{code }\end{DoxyParamCaption})}
+
+Simulates \doxylink{classReservoir}{Reservoir} failure by setting the weights of the adjacent pipes to 0 and then recalculates the maximum flow to all cities identifying the cities affected by that change. Complexity\+: O(\+V \texorpdfstring{$\ast$}{*} P\texorpdfstring{$^\wedge$}{\string^}2) where V is the number of vertexes and P the number of pipes. 
+\begin{DoxyParams}{Parameters}
+{\em code} & Code of the \doxylink{classReservoir}{Reservoir} to simulate. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The cities affected by the \doxylink{classReservoir}{Reservoir} failure. 
+\end{DoxyReturn}
+\Hypertarget{classManager_ab4e183a0328c0d5209b8871f4e87abe5}\label{classManager_ab4e183a0328c0d5209b8871f4e87abe5} 
+\index{Manager@{Manager}!checkStationFailure@{checkStationFailure}}
+\index{checkStationFailure@{checkStationFailure}!Manager@{Manager}}
+\doxysubsubsection{\texorpdfstring{checkStationFailure()}{checkStationFailure()}}
+{\footnotesize\ttfamily std\+::unordered\+\_\+map$<$ \mbox{\hyperlink{classCity}{City}} \texorpdfstring{$\ast$}{*}, unsigned int $>$ Manager\+::check\+Station\+Failure (\begin{DoxyParamCaption}\item[{std\+::string}]{code }\end{DoxyParamCaption})}
+
+Simulates \doxylink{classStation}{Station} failure by setting the weights of the adjacent pipes to 0 and then recalculates the maximum flow to all cities identifying the cities affected by that change. Complexity\+: O(\+V \texorpdfstring{$\ast$}{*} P\texorpdfstring{$^\wedge$}{\string^}2) where V is the number of vertexes and P the number of pipes. 
+\begin{DoxyParams}{Parameters}
+{\em code} & Code of the \doxylink{classStation}{Station} to simulate. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The cities affected by the \doxylink{classStation}{Station} failure. 
+\end{DoxyReturn}
+\Hypertarget{classManager_a7586c19f37afa74d5c44db8b3342c478}\label{classManager_a7586c19f37afa74d5c44db8b3342c478} 
+\index{Manager@{Manager}!checkVitalPipes@{checkVitalPipes}}
+\index{checkVitalPipes@{checkVitalPipes}!Manager@{Manager}}
+\doxysubsubsection{\texorpdfstring{checkVitalPipes()}{checkVitalPipes()}}
+{\footnotesize\ttfamily std\+::pair$<$ \mbox{\hyperlink{classCity}{City}} \texorpdfstring{$\ast$}{*}, std\+::vector$<$ \mbox{\hyperlink{classPipe}{Pipe}} \texorpdfstring{$\ast$}{*} $>$ $>$ Manager\+::check\+Vital\+Pipes (\begin{DoxyParamCaption}\item[{std\+::string}]{code }\end{DoxyParamCaption})}
+
+Identifies vital pipes connected to a single city by simulating the failure of each pipe individually recalculating the maximum flow to all cities and checking changes in the income. Complexity\+: O(\+V \texorpdfstring{$\ast$}{*} P\texorpdfstring{$^\wedge$}{\string^}3) where V is the number of vertexes and P the number of pipes. 
+\begin{DoxyParams}{Parameters}
+{\em code} & Code of the city to be simulated \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Pair containing the city tested and a vector of the vital pipes calculated. 
+\end{DoxyReturn}
+\Hypertarget{classManager_aa715ec6529f126a55750749187ea69fd}\label{classManager_aa715ec6529f126a55750749187ea69fd} 
+\index{Manager@{Manager}!extractFiles@{extractFiles}}
+\index{extractFiles@{extractFiles}!Manager@{Manager}}
+\doxysubsubsection{\texorpdfstring{extractFiles()}{extractFiles()}}
+{\footnotesize\ttfamily void Manager\+::extract\+Files (\begin{DoxyParamCaption}\item[{bool}]{option }\end{DoxyParamCaption})}
+
+Calls parser functions that reads the data files according to the dataset chosen and builds the graph. 
+\begin{DoxyParams}{Parameters}
+{\em option} & Dataset choice. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{classManager_af09cc1157b1fdb3fafb757c8521e73d9}\label{classManager_af09cc1157b1fdb3fafb757c8521e73d9} 
+\index{Manager@{Manager}!getCities@{getCities}}
+\index{getCities@{getCities}!Manager@{Manager}}
+\doxysubsubsection{\texorpdfstring{getCities()}{getCities()}}
+{\footnotesize\ttfamily std\+::vector$<$ \mbox{\hyperlink{classCity}{City}} \texorpdfstring{$\ast$}{*} $>$ Manager\+::get\+Cities (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+Getter for all cities in the \doxylink{classVertex}{Vertex} Set of the \doxylink{classGraph}{Graph}. Complexity\+: O(\+V) where V is the number of vertexes. \begin{DoxyReturn}{Returns}
+Vector of all cities in the graph. 
+\end{DoxyReturn}
+\Hypertarget{classManager_abb6c3834a992a5debcef9175692cb7d6}\label{classManager_abb6c3834a992a5debcef9175692cb7d6} 
+\index{Manager@{Manager}!getCity@{getCity}}
+\index{getCity@{getCity}!Manager@{Manager}}
+\doxysubsubsection{\texorpdfstring{getCity()}{getCity()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classCity}{City}} \texorpdfstring{$\ast$}{*} Manager\+::get\+City (\begin{DoxyParamCaption}\item[{std\+::string}]{code }\end{DoxyParamCaption})}
+
+Getter for a specific city based on the code. Searches in the \doxylink{classVertex}{Vertex} set for a specific city. Complexity\+: O(\+V) where V is the number of vertexes. 
+\begin{DoxyParams}{Parameters}
+{\em code} & Code of the city. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Corresponding \doxylink{classCity}{City} object. 
+\end{DoxyReturn}
+\Hypertarget{classManager_a605cb2510ac4da6278b4639866c943d5}\label{classManager_a605cb2510ac4da6278b4639866c943d5} 
+\index{Manager@{Manager}!getLogger@{getLogger}}
+\index{getLogger@{getLogger}!Manager@{Manager}}
+\doxysubsubsection{\texorpdfstring{getLogger()}{getLogger()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classLogger}{Logger}} \texorpdfstring{$\ast$}{*} Manager\+::get\+Logger (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\doxylink{classLogger}{Logger} Getter. \begin{DoxyReturn}{Returns}
+The instance of the \doxylink{classLogger}{Logger} object. 
+\end{DoxyReturn}
+\Hypertarget{classManager_a287fe42d047eb23e50e1607a9533db6c}\label{classManager_a287fe42d047eb23e50e1607a9533db6c} 
+\index{Manager@{Manager}!maxFlowAllCities@{maxFlowAllCities}}
+\index{maxFlowAllCities@{maxFlowAllCities}!Manager@{Manager}}
+\doxysubsubsection{\texorpdfstring{maxFlowAllCities()}{maxFlowAllCities()}}
+{\footnotesize\ttfamily void Manager\+::max\+Flow\+All\+Cities (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+Computes the maximum flow to all cities in the graph using the Edmonds-\/\+Karp Algorithm.
+\begin{DoxyItemize}
+\item O(\+V \texorpdfstring{$\ast$}{*} P\texorpdfstring{$^\wedge$}{\string^}2), where V is the number of vertices and P is the number of pipes in the graph. 
+\end{DoxyItemize}\Hypertarget{classManager_a9beb94544f7607578831e5cda84fc65e}\label{classManager_a9beb94544f7607578831e5cda84fc65e} 
+\index{Manager@{Manager}!maxFlowCities@{maxFlowCities}}
+\index{maxFlowCities@{maxFlowCities}!Manager@{Manager}}
+\doxysubsubsection{\texorpdfstring{maxFlowCities()}{maxFlowCities()}}
+{\footnotesize\ttfamily void Manager\+::max\+Flow\+Cities (\begin{DoxyParamCaption}\item[{std\+::string}]{dest }\end{DoxyParamCaption})}
+
+Calculates the maximum flow from a super source \textquotesingle{}SS\textquotesingle{} to the destination(dest) city. Complexity\+: O(\+V \texorpdfstring{$\ast$}{*} P\texorpdfstring{$^\wedge$}{\string^}2) where V is the number of vertexes and P the number of pipes in the graph. 
+\begin{DoxyParams}{Parameters}
+{\em dest} & Destination \doxylink{classCity}{City}. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{classManager_ab052df2b5de668b10e44dc3274096c08}\label{classManager_ab052df2b5de668b10e44dc3274096c08} 
+\index{Manager@{Manager}!networkMetrics@{networkMetrics}}
+\index{networkMetrics@{networkMetrics}!Manager@{Manager}}
+\doxysubsubsection{\texorpdfstring{networkMetrics()}{networkMetrics()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{structmetrics}{metrics}} Manager\+::network\+Metrics (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+Computes some metrics, such as the average and variance of the differences between capacity and flow for each pipe, as well as the maximum difference. \begin{DoxyReturn}{Returns}
+A struct containing the network metrics. Complexity\+: O(V + P) where V is the number of vertexes and P the number of pipes. 
+\end{DoxyReturn}
+\Hypertarget{classManager_a6b28e6723d6c47a59bae1a714fc21f05}\label{classManager_a6b28e6723d6c47a59bae1a714fc21f05} 
+\index{Manager@{Manager}!resetGraph@{resetGraph}}
+\index{resetGraph@{resetGraph}!Manager@{Manager}}
+\doxysubsubsection{\texorpdfstring{resetGraph()}{resetGraph()}}
+{\footnotesize\ttfamily void Manager\+::reset\+Graph (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+Resets the graph by deleting the existing graph object and creating a new empty graph. \Hypertarget{classManager_ab6cf28631919f2ed45ad7ef9a1b06ab8}\label{classManager_ab6cf28631919f2ed45ad7ef9a1b06ab8} 
+\index{Manager@{Manager}!validateCity@{validateCity}}
+\index{validateCity@{validateCity}!Manager@{Manager}}
+\doxysubsubsection{\texorpdfstring{validateCity()}{validateCity()}}
+{\footnotesize\ttfamily bool Manager\+::validate\+City (\begin{DoxyParamCaption}\item[{std\+::string}]{code }\end{DoxyParamCaption})}
+
+Validates whether a \doxylink{classCity}{City} with a given code exists in the graph. Complexity\+: O(\+V) where V is the number of vertexes. 
+\begin{DoxyParams}{Parameters}
+{\em code} & Code of the city to be tested. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+True if the city exits, False otherwise. 
+\end{DoxyReturn}
+\Hypertarget{classManager_a1457871dea1b97db8b3dc1863ffce436}\label{classManager_a1457871dea1b97db8b3dc1863ffce436} 
+\index{Manager@{Manager}!validatePipe@{validatePipe}}
+\index{validatePipe@{validatePipe}!Manager@{Manager}}
+\doxysubsubsection{\texorpdfstring{validatePipe()}{validatePipe()}}
+{\footnotesize\ttfamily bool Manager\+::validate\+Pipe (\begin{DoxyParamCaption}\item[{std\+::string}]{src,  }\item[{std\+::string}]{dest }\end{DoxyParamCaption})}
+
+Validates whether a \doxylink{classPipe}{Pipe} with a given source and destination exists. Complexity\+: O(\+V) where V is the number of vertexes. 
+\begin{DoxyParams}{Parameters}
+{\em src} & \doxylink{classPipe}{Pipe} source code. \\
+\hline
+{\em dest} & \doxylink{classPipe}{Pipe} destination code. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+True if the \doxylink{classPipe}{Pipe} exits, False otherwise. 
+\end{DoxyReturn}
+\Hypertarget{classManager_a05c597bd688d2eb9774f46e67b07f328}\label{classManager_a05c597bd688d2eb9774f46e67b07f328} 
+\index{Manager@{Manager}!validateReservoir@{validateReservoir}}
+\index{validateReservoir@{validateReservoir}!Manager@{Manager}}
+\doxysubsubsection{\texorpdfstring{validateReservoir()}{validateReservoir()}}
+{\footnotesize\ttfamily bool Manager\+::validate\+Reservoir (\begin{DoxyParamCaption}\item[{std\+::string}]{code }\end{DoxyParamCaption})}
+
+Validates whether a \doxylink{classReservoir}{Reservoir} with a given code exists in the graph. Complexity\+: O(\+V) where V is the number of vertexes. 
+\begin{DoxyParams}{Parameters}
+{\em code} & Code of the reservoir to be tested. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+True if the reservoir exits, False otherwise. 
+\end{DoxyReturn}
+\Hypertarget{classManager_abbbf8692ccdcd4f4ef7fc34224d29802}\label{classManager_abbbf8692ccdcd4f4ef7fc34224d29802} 
+\index{Manager@{Manager}!validateStation@{validateStation}}
+\index{validateStation@{validateStation}!Manager@{Manager}}
+\doxysubsubsection{\texorpdfstring{validateStation()}{validateStation()}}
+{\footnotesize\ttfamily bool Manager\+::validate\+Station (\begin{DoxyParamCaption}\item[{std\+::string}]{code }\end{DoxyParamCaption})}
+
+Validates whether a \doxylink{classStation}{Station} with a given code exists in the graph. Complexity\+: O(\+V) where V is the number of vertexes. 
+\begin{DoxyParams}{Parameters}
+{\em code} & Code of the station to be tested. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+True if the station exits, False otherwise. 
+\end{DoxyReturn}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+/home/oxi-\/moron/\+LEIC/\+DA/\+DA2324\+\_\+\+PRJ1\+\_\+\+G155/src/Manager.\+h\item 
+/home/oxi-\/moron/\+LEIC/\+DA/\+DA2324\+\_\+\+PRJ1\+\_\+\+G155/src/Manager.\+cpp\end{DoxyCompactItemize}

@@ -1,0 +1,78 @@
+\doxysection{Interface.\+h}
+\hypertarget{Interface_8h_source}{}\label{Interface_8h_source}\index{/home/oxi-\/moron/LEIC/DA/DA2324\_PRJ1\_G155/src/Interface.h@{/home/oxi-\/moron/LEIC/DA/DA2324\_PRJ1\_G155/src/Interface.h}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#ifndef\ DA\_PROJ1\_INTERFACE\_H}}
+\DoxyCodeLine{00002\ \textcolor{preprocessor}{\#define\ DA\_PROJ1\_INTERFACE\_H}}
+\DoxyCodeLine{00003\ }
+\DoxyCodeLine{00004\ \textcolor{comment}{//\ Text\ Formatting}}
+\DoxyCodeLine{00005\ \textcolor{preprocessor}{\#include\ <string>}}
+\DoxyCodeLine{00006\ \textcolor{preprocessor}{\#include\ <unordered\_map>}}
+\DoxyCodeLine{00007\ \textcolor{preprocessor}{\#include\ "{}Parser.h"{}}}
+\DoxyCodeLine{00008\ \textcolor{preprocessor}{\#include\ "{}Manager.h"{}}}
+\DoxyCodeLine{00009\ \textcolor{preprocessor}{\#include\ "{}Logger.h"{}}}
+\DoxyCodeLine{00010\ }
+\DoxyCodeLine{00011\ \textcolor{preprocessor}{\#define\ RESET\ \ \ \ \ \ \ "{}\(\backslash\)033[0m"{}}}
+\DoxyCodeLine{00012\ \textcolor{preprocessor}{\#define\ BOLD\ \ \ \ \ \ \ \ "{}\(\backslash\)033[1m"{}}}
+\DoxyCodeLine{00013\ \textcolor{preprocessor}{\#define\ FAINT\ \ \ \ \ \ \ "{}\(\backslash\)033[2m"{}}}
+\DoxyCodeLine{00014\ }
+\DoxyCodeLine{00015\ \textcolor{comment}{//\ Text\ Colors\ (Foreground)}}
+\DoxyCodeLine{00016\ \textcolor{preprocessor}{\#define\ RED\ \ \ \ \ \ \ \ \ "{}\(\backslash\)033[31m"{}}}
+\DoxyCodeLine{00017\ \textcolor{preprocessor}{\#define\ GREEN\ \ \ \ \ \ \ "{}\(\backslash\)033[32m"{}}}
+\DoxyCodeLine{00018\ \textcolor{preprocessor}{\#define\ YELLOW\ \ \ \ \ \ "{}\(\backslash\)033[33m"{}}}
+\DoxyCodeLine{00019\ \textcolor{preprocessor}{\#define\ BLUE\ \ \ \ \ \ \ \ "{}\(\backslash\)033[34m"{}}}
+\DoxyCodeLine{00020\ }
+\DoxyCodeLine{00021\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classInterface}{Interface}}\ \{}
+\DoxyCodeLine{00022\ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00023\ \ \ \ \ \mbox{\hyperlink{classManager}{Manager}}\ manager;}
+\DoxyCodeLine{00027\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{void}\ header();}
+\DoxyCodeLine{00028\ }
+\DoxyCodeLine{00032\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{void}\ footer();}
+\DoxyCodeLine{00033\ }
+\DoxyCodeLine{00037\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{void}\ clear();}
+\DoxyCodeLine{00038\ }
+\DoxyCodeLine{00043\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{void}\ printSupplyHeader(\mbox{\hyperlink{classManager}{Manager}}\ \&man);}
+\DoxyCodeLine{00044\ }
+\DoxyCodeLine{00048\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{void}\ inputWait();}
+\DoxyCodeLine{00049\ }
+\DoxyCodeLine{00050\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00054\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classInterface_a4cae6ec8b7fd4a857f80cea5adb4ff35}{init}}();}
+\DoxyCodeLine{00055\ }
+\DoxyCodeLine{00056\ }
+\DoxyCodeLine{00060\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classInterface_a234c585c1d0c308c58bac384ffdb74bd}{startMenu}}();}
+\DoxyCodeLine{00061\ }
+\DoxyCodeLine{00065\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classInterface_ae3c5680ac1fe3077ae7caffa54c737d3}{mainMenu}}();}
+\DoxyCodeLine{00066\ }
+\DoxyCodeLine{00070\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classInterface_a1796714b9aff059595df108bb0d952f0}{exitMenu}}();}
+\DoxyCodeLine{00071\ }
+\DoxyCodeLine{00077\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classInterface_a3ee0ad4f9e8ec99d5536fa1d88f98e7d}{servicesMenu}}();}
+\DoxyCodeLine{00078\ }
+\DoxyCodeLine{00084\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classInterface_a0307fcbf578c2adf0389c0e9dd6f9628}{reliabilityMenu}}();}
+\DoxyCodeLine{00085\ }
+\DoxyCodeLine{00091\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classInterface_a5f5365b78347394add56db093601cbc4}{pipeFailureMenu}}();}
+\DoxyCodeLine{00092\ }
+\DoxyCodeLine{00098\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classInterface_ab60970c75f49ac42ea1e6c3bb3ef72db}{printWaterSupplyCity}}(std::string\ option);}
+\DoxyCodeLine{00099\ }
+\DoxyCodeLine{00104\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classInterface_ac342689c1538713a74ab809bda6d3364}{printAffectedCities}}(std::unordered\_map<City*,\ unsigned\ int>\ \ cities);}
+\DoxyCodeLine{00105\ \ \ }
+\DoxyCodeLine{00110\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classInterface_abad6c8d13c3f6d1028ee74dde22eedf9}{printWaterSupplyAllCities}}();}
+\DoxyCodeLine{00111\ \ \ }
+\DoxyCodeLine{00117\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classInterface_aca969f06a5f6fecf247b03c4ecdd57d4}{printVitalPipes}}(std::pair<\mbox{\hyperlink{classCity}{City}}*,\ std::vector<Pipe*>>\ city);}
+\DoxyCodeLine{00118\ }
+\DoxyCodeLine{00124\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{classInterface_ae428fd1ef77badaedb72d813a37fa648}{readOption}}(\textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{int}\ options);}
+\DoxyCodeLine{00125\ }
+\DoxyCodeLine{00131\ \ \ \ \ std::string\ \mbox{\hyperlink{classInterface_abf43ac896d304922bf6bbba621e02ba5}{readReservoir}}();}
+\DoxyCodeLine{00132\ }
+\DoxyCodeLine{00138\ \ \ \ \ std::string\ \mbox{\hyperlink{classInterface_a662acfe243f97f0e5269d27cc498e2b1}{readStation}}();}
+\DoxyCodeLine{00139\ }
+\DoxyCodeLine{00145\ \ \ \ \ std::pair<std::string,\ std::string>\ \mbox{\hyperlink{classInterface_a8c89656fe858745a130e8156325e8a89}{readPipeline}}();}
+\DoxyCodeLine{00146\ }
+\DoxyCodeLine{00152\ \ \ \ \ std::string\ \mbox{\hyperlink{classInterface_a5d5af82366c46314565ab6915f79e453}{readCity}}();}
+\DoxyCodeLine{00153\ }
+\DoxyCodeLine{00158\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classInterface_a5df8d02170feb5badc0e50efcd1ef5f0}{printNetworkMetrics}}();}
+\DoxyCodeLine{00159\ \};}
+\DoxyCodeLine{00160\ }
+\DoxyCodeLine{00161\ }
+\DoxyCodeLine{00162\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{//DA\_PROJ1\_INTERFACE\_H}}
+
+\end{DoxyCode}

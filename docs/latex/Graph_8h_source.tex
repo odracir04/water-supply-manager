@@ -1,0 +1,48 @@
+\doxysection{Graph.\+h}
+\hypertarget{Graph_8h_source}{}\label{Graph_8h_source}\index{/home/oxi-\/moron/LEIC/DA/DA2324\_PRJ1\_G155/src/Graph.h@{/home/oxi-\/moron/LEIC/DA/DA2324\_PRJ1\_G155/src/Graph.h}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#ifndef\ DA\_PROJ1\_GRAPH\_H}}
+\DoxyCodeLine{00002\ \textcolor{preprocessor}{\#define\ DA\_PROJ1\_GRAPH\_H}}
+\DoxyCodeLine{00003\ }
+\DoxyCodeLine{00004\ \textcolor{preprocessor}{\#include\ "{}Vertex.h"{}}}
+\DoxyCodeLine{00005\ \textcolor{preprocessor}{\#include\ "{}Pipe.h"{}}}
+\DoxyCodeLine{00006\ \textcolor{preprocessor}{\#include\ <vector>}}
+\DoxyCodeLine{00007\ \textcolor{preprocessor}{\#include\ <limits>}}
+\DoxyCodeLine{00008\ \textcolor{preprocessor}{\#include\ <algorithm>}}
+\DoxyCodeLine{00009\ }
+\DoxyCodeLine{00010\ \textcolor{preprocessor}{\#define\ INF\ std::numeric\_limits<double>::max();}}
+\DoxyCodeLine{00011\ }
+\DoxyCodeLine{00012\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classGraph}{Graph}}\ \{}
+\DoxyCodeLine{00013\ }
+\DoxyCodeLine{00014\ \textcolor{keyword}{protected}:}
+\DoxyCodeLine{00015\ \ \ \ \ std::vector<Vertex*>\ vertexSet;}
+\DoxyCodeLine{00016\ }
+\DoxyCodeLine{00017\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00024\ \ \ \ \ \mbox{\hyperlink{classVertex}{Vertex}}*\ \mbox{\hyperlink{classGraph_a04b6f7bf51526a60b0c071375a244774}{findVertex}}(\textcolor{keyword}{const}\ std::string\ \&code)\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00025\ }
+\DoxyCodeLine{00035\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classGraph_a43821dea773d25050d18dc09c1551a59}{addCity}}(\textcolor{keyword}{const}\ std::string\ \&name,\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{int}\ \&\textcolor{keywordtype}{id},}
+\DoxyCodeLine{00036\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ std::string\ \&code,\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{int}\ \&demand,\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{int}\ \&population);}
+\DoxyCodeLine{00046\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classGraph_a3925de4b56634cf040fd2d52f905efa2}{addReservoir}}(\textcolor{keyword}{const}\ std::string\ \&name,\ \textcolor{keyword}{const}\ std::string\ \&municipality,}
+\DoxyCodeLine{00047\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{int}\ \&\textcolor{keywordtype}{id},\ \textcolor{keyword}{const}\ std::string\ \&code,\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{int}\ \&max);}
+\DoxyCodeLine{00048\ }
+\DoxyCodeLine{00055\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classGraph_a75fe53da4c057f6b41d69435fcd58dab}{addStation}}(\textcolor{keyword}{const}\ std::string\ \&code,\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{int}\ \&\textcolor{keywordtype}{id});}
+\DoxyCodeLine{00056\ }
+\DoxyCodeLine{00062\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classGraph_ad5b9140e6a07d71e6e057dd4fb6d841e}{removeVertex}}(\textcolor{keyword}{const}\ std::string\ \&in);}
+\DoxyCodeLine{00063\ }
+\DoxyCodeLine{00072\ \ \ \ \ \mbox{\hyperlink{classPipe}{Pipe}}*\ \mbox{\hyperlink{classGraph_a023fc478d0b9eaa849cbe29402b04846}{addEdge}}(\textcolor{keyword}{const}\ std::string\ \&sourc,\ \textcolor{keyword}{const}\ std::string\ \&dest,\ \textcolor{keywordtype}{double}\ w,\ \textcolor{keywordtype}{bool}\ direction);}
+\DoxyCodeLine{00073\ }
+\DoxyCodeLine{00080\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classGraph_a5952737480a3d7f51362989373043c4a}{removeEdge}}(\textcolor{keyword}{const}\ std::string\ \&sourc,\ \textcolor{keyword}{const}\ std::string\ \&dest);}
+\DoxyCodeLine{00081\ }
+\DoxyCodeLine{00086\ \ \ \ \ std::vector<Vertex*>\ \mbox{\hyperlink{classGraph_a619ac583094079134074658e29463c0e}{getVertexSet}}()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00087\ }
+\DoxyCodeLine{00092\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classGraph_a0018b7a69553714b00b710757298e998}{setVertexSet}}(std::vector<Vertex*>\ \&v);}
+\DoxyCodeLine{00093\ }
+\DoxyCodeLine{00099\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classGraph_acb1271e04ce4e4fcf567773024dffa4c}{addVertex}}(\textcolor{keyword}{const}\ std::string\ \&code);}
+\DoxyCodeLine{00100\ }
+\DoxyCodeLine{00106\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classGraph_ae4ccb385466d321a201d92fea84c0aba}{deleteEdge}}(\textcolor{keyword}{const}\ std::string\ \&s,\ \mbox{\hyperlink{classPipe}{Pipe}}\ *pipe)\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00107\ \};}
+\DoxyCodeLine{00108\ }
+\DoxyCodeLine{00109\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{//DA\_PROJ1\_GRAPH\_H}}
+
+\end{DoxyCode}

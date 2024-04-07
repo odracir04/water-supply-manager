@@ -1,0 +1,42 @@
+\doxysection{Pipe.\+h}
+\hypertarget{Pipe_8h_source}{}\label{Pipe_8h_source}\index{/home/oxi-\/moron/LEIC/DA/DA2324\_PRJ1\_G155/src/Pipe.h@{/home/oxi-\/moron/LEIC/DA/DA2324\_PRJ1\_G155/src/Pipe.h}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ }
+\DoxyCodeLine{00002\ \textcolor{preprocessor}{\#ifndef\ DA\_PROJ1\_PIPE\_H}}
+\DoxyCodeLine{00003\ \textcolor{preprocessor}{\#define\ DA\_PROJ1\_PIPE\_H}}
+\DoxyCodeLine{00004\ }
+\DoxyCodeLine{00005\ \textcolor{preprocessor}{\#include\ <string>}}
+\DoxyCodeLine{00006\ }
+\DoxyCodeLine{00007\ }
+\DoxyCodeLine{00008\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classPipe}{Pipe}}\ \{}
+\DoxyCodeLine{00009\ \ \ \ \ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00010\ \ \ \ \ \ \ \ \ std::string\ servicePointA;}
+\DoxyCodeLine{00011\ \ \ \ \ \ \ \ \ std::string\ servicePointB;}
+\DoxyCodeLine{00012\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ capacity;}
+\DoxyCodeLine{00013\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{double}\ flow;}
+\DoxyCodeLine{00014\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{bool}\ direction;}
+\DoxyCodeLine{00015\ }
+\DoxyCodeLine{00016\ \ \ \ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00017\ }
+\DoxyCodeLine{00024\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classPipe_a02ccbb476a28f295e299cc1adfaf9827}{Pipe}}(\textcolor{keyword}{const}\ std::string\ \&s,\ \textcolor{keyword}{const}\ std::string\ \&d,\ \textcolor{keywordtype}{double}\ \&w,\ \textcolor{keywordtype}{bool}\ direction);}
+\DoxyCodeLine{00025\ }
+\DoxyCodeLine{00030\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{classPipe_afda9933102df2e11477f5e25d3bd176d}{getFlow}}()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00031\ }
+\DoxyCodeLine{00036\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classPipe_ad1a431f886645a10e26581661f98531d}{setFlow}}(\textcolor{keywordtype}{double}\ f);}
+\DoxyCodeLine{00037\ }
+\DoxyCodeLine{00042\ \ \ \ \ \ \ \ \ std::string\ \mbox{\hyperlink{classPipe_ac6c408e19d668ba1a43f6ab97416c7ba}{getDest}}()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00043\ }
+\DoxyCodeLine{00048\ \ \ \ \ \ \ \ \ std::string\ \mbox{\hyperlink{classPipe_a31fef9c5d8a7752c7fa2a229ad628352}{getOrig}}()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00049\ }
+\DoxyCodeLine{00054\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{classPipe_a7f39033f0e9440b3036e73beb95b48ff}{getWeight}}()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00055\ }
+\DoxyCodeLine{00060\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classPipe_aa37a4378469882e9a1c81355e38c4cd3}{setWeight}}(\textcolor{keywordtype}{double}\ weight);}
+\DoxyCodeLine{00061\ }
+\DoxyCodeLine{00066\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classPipe_aa0ab4ac02c4bf80b6e2248bab6ef7908}{getDirection}}();}
+\DoxyCodeLine{00067\ \};}
+\DoxyCodeLine{00068\ }
+\DoxyCodeLine{00069\ }
+\DoxyCodeLine{00070\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{//DA\_PROJ1\_PIPE\_H}}
+
+\end{DoxyCode}

@@ -1,0 +1,134 @@
+\doxysection{City Class Reference}
+\hypertarget{classCity}{}\label{classCity}\index{City@{City}}
+Inheritance diagram for City\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{classCity}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classCity_ac5424bff9915eba26fc804537407cb4a}{City}} (std\+::string n, unsigned int i, std\+::string c, unsigned int d, unsigned int p)
+\begin{DoxyCompactList}\small\item\em \doxylink{classCity}{City} constructor. \end{DoxyCompactList}\item 
+std\+::string \mbox{\hyperlink{classCity_a79ba022573d8174291b5dac268ee5ec0}{get\+Name}} () const
+\item 
+unsigned int \mbox{\hyperlink{classCity_afd25c1cdb1d327bd29f09858457f5394}{get\+Id}} () const
+\item 
+unsigned int \mbox{\hyperlink{classCity_a1f02e27d744a32bb1e3b6ae448b05c9c}{get\+Demand}} () const
+\item 
+double \mbox{\hyperlink{classCity_ab70468f8ab66805741433edf1306aae8}{get\+Income}} () const
+\item 
+void \mbox{\hyperlink{classCity_a053e0e25c3541caca48514e0518f1a9f}{set\+Income}} (double inc)
+\item 
+unsigned int \mbox{\hyperlink{classCity_a504facb83d364a46d8f3181c3fb954ba}{get\+Population}} () const
+\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions inherited from \mbox{\hyperlink{classVertex}{Vertex}}}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classVertex_a6a0aede4a40c7b49ca487066463b1e75}{Vertex}} (std\+::string code)
+\begin{DoxyCompactList}\small\item\em \doxylink{classVertex}{Vertex} constructor. \end{DoxyCompactList}\item 
+virtual std\+::string \mbox{\hyperlink{classVertex_a89a00554f777a1dfdd8797b822d308bc}{get\+Code}} () const
+\item 
+bool \mbox{\hyperlink{classVertex_aa4bd82105b85ee53a917391f4811cd8a}{is\+Visited}} () const
+\item 
+void \mbox{\hyperlink{classVertex_a3c6d6c2254850a647d3a27007ef940f6}{set\+Visited}} (bool v)
+\item 
+\mbox{\hyperlink{classPipe}{Pipe}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classVertex_afdc6a4154139fedb4c34bba13c3c5f43}{get\+Path}} () const
+\item 
+void \mbox{\hyperlink{classVertex_a8302b03d0b2500ce0ddd9d47677becdf}{set\+Path}} (\mbox{\hyperlink{classPipe}{Pipe}} \texorpdfstring{$\ast$}{*}path)
+\item 
+std\+::vector$<$ \mbox{\hyperlink{classPipe}{Pipe}} \texorpdfstring{$\ast$}{*} $>$ \mbox{\hyperlink{classVertex_ab113b6d8783a099354a40e15ee5f0901}{get\+Incoming}} () const
+\item 
+const std\+::vector$<$ \mbox{\hyperlink{classPipe}{Pipe}} \texorpdfstring{$\ast$}{*} $>$ \& \mbox{\hyperlink{classVertex_a4c4f9024bfe12a1a14e0ccf28bda1883}{get\+Adj}} () const
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classCity_ac5424bff9915eba26fc804537407cb4a}\label{classCity_ac5424bff9915eba26fc804537407cb4a} 
+\index{City@{City}!City@{City}}
+\index{City@{City}!City@{City}}
+\doxysubsubsection{\texorpdfstring{City()}{City()}}
+{\footnotesize\ttfamily City\+::\+City (\begin{DoxyParamCaption}\item[{std\+::string}]{n,  }\item[{unsigned int}]{i,  }\item[{std\+::string}]{c,  }\item[{unsigned int}]{d,  }\item[{unsigned int}]{p }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+\doxylink{classCity}{City} constructor. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em n} & Name of the city. \\
+\hline
+{\em i} & Id of the city. \\
+\hline
+{\em c} & Code of the city. \\
+\hline
+{\em d} & Demand of the city \\
+\hline
+{\em p} & Population of the city. \\
+\hline
+\end{DoxyParams}
+
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classCity_a1f02e27d744a32bb1e3b6ae448b05c9c}\label{classCity_a1f02e27d744a32bb1e3b6ae448b05c9c} 
+\index{City@{City}!getDemand@{getDemand}}
+\index{getDemand@{getDemand}!City@{City}}
+\doxysubsubsection{\texorpdfstring{getDemand()}{getDemand()}}
+{\footnotesize\ttfamily unsigned int City\+::get\+Demand (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+\doxylink{classCity}{City} demand getter. \begin{DoxyReturn}{Returns}
+demand of the city. 
+\end{DoxyReturn}
+\Hypertarget{classCity_afd25c1cdb1d327bd29f09858457f5394}\label{classCity_afd25c1cdb1d327bd29f09858457f5394} 
+\index{City@{City}!getId@{getId}}
+\index{getId@{getId}!City@{City}}
+\doxysubsubsection{\texorpdfstring{getId()}{getId()}}
+{\footnotesize\ttfamily unsigned int City\+::get\+Id (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+\doxylink{classCity}{City} id getter. \begin{DoxyReturn}{Returns}
+if of the city. 
+\end{DoxyReturn}
+\Hypertarget{classCity_ab70468f8ab66805741433edf1306aae8}\label{classCity_ab70468f8ab66805741433edf1306aae8} 
+\index{City@{City}!getIncome@{getIncome}}
+\index{getIncome@{getIncome}!City@{City}}
+\doxysubsubsection{\texorpdfstring{getIncome()}{getIncome()}}
+{\footnotesize\ttfamily double City\+::get\+Income (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+\doxylink{classCity}{City} Income getter. \begin{DoxyReturn}{Returns}
+income of the city. 
+\end{DoxyReturn}
+\Hypertarget{classCity_a79ba022573d8174291b5dac268ee5ec0}\label{classCity_a79ba022573d8174291b5dac268ee5ec0} 
+\index{City@{City}!getName@{getName}}
+\index{getName@{getName}!City@{City}}
+\doxysubsubsection{\texorpdfstring{getName()}{getName()}}
+{\footnotesize\ttfamily std\+::string City\+::get\+Name (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+\doxylink{classCity}{City} name getter. \begin{DoxyReturn}{Returns}
+name of the city. 
+\end{DoxyReturn}
+\Hypertarget{classCity_a504facb83d364a46d8f3181c3fb954ba}\label{classCity_a504facb83d364a46d8f3181c3fb954ba} 
+\index{City@{City}!getPopulation@{getPopulation}}
+\index{getPopulation@{getPopulation}!City@{City}}
+\doxysubsubsection{\texorpdfstring{getPopulation()}{getPopulation()}}
+{\footnotesize\ttfamily unsigned int City\+::get\+Population (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+\doxylink{classCity}{City} Population getter. \begin{DoxyReturn}{Returns}
+population of the city. 
+\end{DoxyReturn}
+\Hypertarget{classCity_a053e0e25c3541caca48514e0518f1a9f}\label{classCity_a053e0e25c3541caca48514e0518f1a9f} 
+\index{City@{City}!setIncome@{setIncome}}
+\index{setIncome@{setIncome}!City@{City}}
+\doxysubsubsection{\texorpdfstring{setIncome()}{setIncome()}}
+{\footnotesize\ttfamily void City\+::set\+Income (\begin{DoxyParamCaption}\item[{double}]{inc }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Setter for \doxylink{classCity}{City} Income 
+\begin{DoxyParams}{Parameters}
+{\em income} & of the city. \\
+\hline
+\end{DoxyParams}
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+/home/oxi-\/moron/\+LEIC/\+DA/\+DA2324\+\_\+\+PRJ1\+\_\+\+G155/src/City.\+h\end{DoxyCompactItemize}

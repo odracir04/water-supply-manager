@@ -1,0 +1,101 @@
+\doxysection{Manager.\+h}
+\hypertarget{Manager_8h_source}{}\label{Manager_8h_source}\index{/home/oxi-\/moron/LEIC/DA/DA2324\_PRJ1\_G155/src/Manager.h@{/home/oxi-\/moron/LEIC/DA/DA2324\_PRJ1\_G155/src/Manager.h}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#ifndef\ DA\_PROJ1\_MANAGER\_H}}
+\DoxyCodeLine{00002\ \textcolor{preprocessor}{\#define\ DA\_PROJ1\_MANAGER\_H}}
+\DoxyCodeLine{00003\ }
+\DoxyCodeLine{00004\ }
+\DoxyCodeLine{00005\ \textcolor{preprocessor}{\#include\ "{}Graph.h"{}}}
+\DoxyCodeLine{00006\ \textcolor{preprocessor}{\#include\ "{}Parser.h"{}}}
+\DoxyCodeLine{00007\ \textcolor{preprocessor}{\#include\ "{}City.h"{}}}
+\DoxyCodeLine{00008\ \textcolor{preprocessor}{\#include\ "{}Logger.h"{}}}
+\DoxyCodeLine{00009\ \textcolor{preprocessor}{\#include\ "{}Reservoir.h"{}}}
+\DoxyCodeLine{00010\ \textcolor{preprocessor}{\#include\ <stack>}}
+\DoxyCodeLine{00011\ \textcolor{preprocessor}{\#include\ <unordered\_set>}}
+\DoxyCodeLine{00012\ }
+\DoxyCodeLine{00013\ \textcolor{keyword}{struct\ }\mbox{\hyperlink{structmetrics}{metrics}}\ \{}
+\DoxyCodeLine{00014\ \ \ \ \ \textcolor{keywordtype}{double}\ average;}
+\DoxyCodeLine{00015\ \ \ \ \ \textcolor{keywordtype}{double}\ variance;}
+\DoxyCodeLine{00016\ \ \ \ \ \textcolor{keywordtype}{int}\ max\_difference;}
+\DoxyCodeLine{00017\ \};}
+\DoxyCodeLine{00018\ }
+\DoxyCodeLine{00019\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classManager}{Manager}}\ \{}
+\DoxyCodeLine{00020\ }
+\DoxyCodeLine{00021\ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00022\ \ \ \ \ \mbox{\hyperlink{classLogger}{Logger}}\ logger;}
+\DoxyCodeLine{00023\ \ \ \ \ \mbox{\hyperlink{classGraph}{Graph}}\ *graph\ =\ \textcolor{keyword}{new}\ \mbox{\hyperlink{classGraph}{Graph}};}
+\DoxyCodeLine{00024\ \ \ \ \ \mbox{\hyperlink{classParser}{Parser}}\ parser\ =\ \mbox{\hyperlink{classParser}{Parser}}(\textcolor{keyword}{false});}
+\DoxyCodeLine{00025\ }
+\DoxyCodeLine{00026\ }
+\DoxyCodeLine{00032\ \ \ \ \ \textcolor{keywordtype}{void}\ computeCityFlow();}
+\DoxyCodeLine{00033\ }
+\DoxyCodeLine{00039\ \ \ \ \ \textcolor{keywordtype}{void}\ addSuperVertexes();}
+\DoxyCodeLine{00040\ }
+\DoxyCodeLine{00041\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00046\ \ \ \ \ \mbox{\hyperlink{classManager_a1658ff9f18e38ccd9cb8b0b371b9c20b}{Manager}}();}
+\DoxyCodeLine{00047\ }
+\DoxyCodeLine{00052\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classManager_aa715ec6529f126a55750749187ea69fd}{extractFiles}}(\textcolor{keywordtype}{bool}\ option);}
+\DoxyCodeLine{00053\ }
+\DoxyCodeLine{00059\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classManager_a9beb94544f7607578831e5cda84fc65e}{maxFlowCities}}(std::string\ dest);}
+\DoxyCodeLine{00060\ }
+\DoxyCodeLine{00065\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classManager_ad203a4b49ce1314dd1679489fcd192fb}{balanceWaterFlow}}();}
+\DoxyCodeLine{00066\ }
+\DoxyCodeLine{00067\ \ \ \ \ \textcolor{comment}{/*}}
+\DoxyCodeLine{00068\ \textcolor{comment}{\ \ \ \ //\ Alternative\ to\ balance\ network\ without\ altering\ Edmonds-\/Karp\ implementation}}
+\DoxyCodeLine{00069\ \textcolor{comment}{\ \ \ \ void\ DFSPipeToCities(Vertex*\ v,\ std::unordered\_set<City*>*\ visitedCities);}}
+\DoxyCodeLine{00070\ \textcolor{comment}{}}
+\DoxyCodeLine{00071\ \textcolor{comment}{\ \ \ \ void\ DFSPipeToCitiesVisit(Vertex*\ v,\ std::unordered\_set<City*>*\ visitedCities);}}
+\DoxyCodeLine{00072\ \textcolor{comment}{}}
+\DoxyCodeLine{00073\ \textcolor{comment}{\ \ \ \ void\ DFSPipeToReservoirs(Vertex*\ v,\ std::unordered\_set<Reservoir*>*\ incomingReservoirs);}}
+\DoxyCodeLine{00074\ \textcolor{comment}{}}
+\DoxyCodeLine{00075\ \textcolor{comment}{\ \ \ \ void\ DFSPipeToReservoirsVisit(Vertex*\ v,\ std::unordered\_set<Reservoir*>*\ incomingReservoirs);}}
+\DoxyCodeLine{00076\ \textcolor{comment}{}}
+\DoxyCodeLine{00077\ \textcolor{comment}{\ \ \ \ void\ DFSReservoirToCities(Vertex*\ v,\ std::unordered\_set<City*>*\ foundCities);}}
+\DoxyCodeLine{00078\ \textcolor{comment}{}}
+\DoxyCodeLine{00079\ \textcolor{comment}{\ \ \ \ void\ DFSReservoirToCitiesVisit(Vertex*\ v,\ std::unordered\_set<City*>*\ foundCities);}}
+\DoxyCodeLine{00080\ \textcolor{comment}{}}
+\DoxyCodeLine{00081\ \textcolor{comment}{\ \ \ \ void\ findPathRC(Reservoir*\ r,\ City*\ c,\ std::stack<Pipe*>*\ path);}}
+\DoxyCodeLine{00082\ \textcolor{comment}{}}
+\DoxyCodeLine{00083\ \textcolor{comment}{\ \ \ \ void\ findPathRCVisit(Vertex*\ v,\ City*\ c,\ std::stack<Pipe*>*\ path);}}
+\DoxyCodeLine{00084\ \textcolor{comment}{}}
+\DoxyCodeLine{00085\ \textcolor{comment}{\ \ \ \ void\ findPathREC(Reservoir*\ r,\ Pipe*\ pipe,\ City*\ c,\ std::stack<Pipe*>*\ path);}}
+\DoxyCodeLine{00086\ \textcolor{comment}{}}
+\DoxyCodeLine{00087\ \textcolor{comment}{\ \ \ \ void\ findPathREVisit(Vertex*\ v,\ Pipe*\ pipe,\ std::stack<Pipe*>*\ path);}}
+\DoxyCodeLine{00088\ \textcolor{comment}{}}
+\DoxyCodeLine{00089\ \textcolor{comment}{\ \ \ \ void\ findPathECVisit(Vertex*\ v,\ City*\ c,\ std::stack<Pipe*>*\ path);}}
+\DoxyCodeLine{00090\ \textcolor{comment}{\ \ \ \ */}}
+\DoxyCodeLine{00091\ }
+\DoxyCodeLine{00099\ \ \ \ \ std::unordered\_map<City*,\ unsigned\ int>\ \ \mbox{\hyperlink{classManager_a91a926b30c1d12bb3540ff4a94d6aa53}{checkReservoirFailure}}(std::string\ code);}
+\DoxyCodeLine{00100\ }
+\DoxyCodeLine{00108\ \ \ \ \ std::unordered\_map<City*,\ unsigned\ int>\ \mbox{\hyperlink{classManager_ab4e183a0328c0d5209b8871f4e87abe5}{checkStationFailure}}(std::string\ code);}
+\DoxyCodeLine{00109\ }
+\DoxyCodeLine{00117\ \ \ \ \ std::unordered\_map<City*,\ unsigned\ int>\ \mbox{\hyperlink{classManager_a04cb4ce50e0d0e75b688f6d765013da8}{checkPipeFailure}}(std::pair<std::string,\ std::string>\ vertices);}
+\DoxyCodeLine{00118\ }
+\DoxyCodeLine{00126\ \ \ \ \ std::pair<City*,\ std::vector<Pipe*>>\ \mbox{\hyperlink{classManager_a7586c19f37afa74d5c44db8b3342c478}{checkVitalPipes}}(std::string\ code);}
+\DoxyCodeLine{00127\ }
+\DoxyCodeLine{00133\ \ \ \ \ std::vector<City*>\ \mbox{\hyperlink{classManager_af09cc1157b1fdb3fafb757c8521e73d9}{getCities}}();}
+\DoxyCodeLine{00134\ }
+\DoxyCodeLine{00139\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classManager_a287fe42d047eb23e50e1607a9533db6c}{maxFlowAllCities}}();}
+\DoxyCodeLine{00140\ }
+\DoxyCodeLine{00148\ \ \ \ \ \mbox{\hyperlink{classCity}{City}}*\ \mbox{\hyperlink{classManager_abb6c3834a992a5debcef9175692cb7d6}{getCity}}(std::string\ code);}
+\DoxyCodeLine{00149\ }
+\DoxyCodeLine{00156\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classManager_abbbf8692ccdcd4f4ef7fc34224d29802}{validateStation}}(std::string\ code);}
+\DoxyCodeLine{00157\ }
+\DoxyCodeLine{00164\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classManager_ab6cf28631919f2ed45ad7ef9a1b06ab8}{validateCity}}(std::string\ code);}
+\DoxyCodeLine{00165\ }
+\DoxyCodeLine{00172\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classManager_a05c597bd688d2eb9774f46e67b07f328}{validateReservoir}}(std::string\ code);}
+\DoxyCodeLine{00173\ }
+\DoxyCodeLine{00181\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classManager_a1457871dea1b97db8b3dc1863ffce436}{validatePipe}}(std::string\ src,\ std::string\ dest);}
+\DoxyCodeLine{00182\ }
+\DoxyCodeLine{00187\ \ \ \ \ \mbox{\hyperlink{classLogger}{Logger}}*\ \mbox{\hyperlink{classManager_a605cb2510ac4da6278b4639866c943d5}{getLogger}}();}
+\DoxyCodeLine{00188\ }
+\DoxyCodeLine{00192\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classManager_a6b28e6723d6c47a59bae1a714fc21f05}{resetGraph}}();}
+\DoxyCodeLine{00193\ }
+\DoxyCodeLine{00200\ \ \ \ \ \ \mbox{\hyperlink{structmetrics}{metrics}}\ \mbox{\hyperlink{classManager_ab052df2b5de668b10e44dc3274096c08}{networkMetrics}}();}
+\DoxyCodeLine{00201\ \};}
+\DoxyCodeLine{00202\ }
+\DoxyCodeLine{00203\ }
+\DoxyCodeLine{00204\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{//DA\_PROJ1\_MANAGER\_H}}
+
+\end{DoxyCode}

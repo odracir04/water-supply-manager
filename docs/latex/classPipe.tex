@@ -1,0 +1,119 @@
+\doxysection{Pipe Class Reference}
+\hypertarget{classPipe}{}\label{classPipe}\index{Pipe@{Pipe}}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classPipe_a02ccbb476a28f295e299cc1adfaf9827}{Pipe}} (const std\+::string \&s, const std\+::string \&d, double \&w, bool direction)
+\begin{DoxyCompactList}\small\item\em \doxylink{classPipe}{Pipe} constructor. \end{DoxyCompactList}\item 
+double \mbox{\hyperlink{classPipe_afda9933102df2e11477f5e25d3bd176d}{get\+Flow}} () const
+\item 
+void \mbox{\hyperlink{classPipe_ad1a431f886645a10e26581661f98531d}{set\+Flow}} (double f)
+\item 
+std\+::string \mbox{\hyperlink{classPipe_ac6c408e19d668ba1a43f6ab97416c7ba}{get\+Dest}} () const
+\item 
+std\+::string \mbox{\hyperlink{classPipe_a31fef9c5d8a7752c7fa2a229ad628352}{get\+Orig}} () const
+\item 
+double \mbox{\hyperlink{classPipe_a7f39033f0e9440b3036e73beb95b48ff}{get\+Weight}} () const
+\item 
+void \mbox{\hyperlink{classPipe_aa37a4378469882e9a1c81355e38c4cd3}{set\+Weight}} (double weight)
+\item 
+bool \mbox{\hyperlink{classPipe_aa0ab4ac02c4bf80b6e2248bab6ef7908}{get\+Direction}} ()
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classPipe_a02ccbb476a28f295e299cc1adfaf9827}\label{classPipe_a02ccbb476a28f295e299cc1adfaf9827} 
+\index{Pipe@{Pipe}!Pipe@{Pipe}}
+\index{Pipe@{Pipe}!Pipe@{Pipe}}
+\doxysubsubsection{\texorpdfstring{Pipe()}{Pipe()}}
+{\footnotesize\ttfamily Pipe\+::\+Pipe (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{s,  }\item[{const std\+::string \&}]{d,  }\item[{double \&}]{w,  }\item[{bool}]{direction }\end{DoxyParamCaption})}
+
+
+
+\doxylink{classPipe}{Pipe} constructor. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em s} & Source vertex. \\
+\hline
+{\em d} & Destination vertex. \\
+\hline
+{\em w} & Weight of the vertex. \\
+\hline
+\end{DoxyParams}
+
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classPipe_ac6c408e19d668ba1a43f6ab97416c7ba}\label{classPipe_ac6c408e19d668ba1a43f6ab97416c7ba} 
+\index{Pipe@{Pipe}!getDest@{getDest}}
+\index{getDest@{getDest}!Pipe@{Pipe}}
+\doxysubsubsection{\texorpdfstring{getDest()}{getDest()}}
+{\footnotesize\ttfamily std\+::string Pipe\+::get\+Dest (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+Getter for the destination vertex. \begin{DoxyReturn}{Returns}
+destination vertex code. 
+\end{DoxyReturn}
+\Hypertarget{classPipe_aa0ab4ac02c4bf80b6e2248bab6ef7908}\label{classPipe_aa0ab4ac02c4bf80b6e2248bab6ef7908} 
+\index{Pipe@{Pipe}!getDirection@{getDirection}}
+\index{getDirection@{getDirection}!Pipe@{Pipe}}
+\doxysubsubsection{\texorpdfstring{getDirection()}{getDirection()}}
+{\footnotesize\ttfamily bool Pipe\+::get\+Direction (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+Getter for the direction of the pipe. \begin{DoxyReturn}{Returns}
+0 for bidirectional and 1 for unidirectional. 
+\end{DoxyReturn}
+\Hypertarget{classPipe_afda9933102df2e11477f5e25d3bd176d}\label{classPipe_afda9933102df2e11477f5e25d3bd176d} 
+\index{Pipe@{Pipe}!getFlow@{getFlow}}
+\index{getFlow@{getFlow}!Pipe@{Pipe}}
+\doxysubsubsection{\texorpdfstring{getFlow()}{getFlow()}}
+{\footnotesize\ttfamily double Pipe\+::get\+Flow (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+Getter for the flow of the pipe. \begin{DoxyReturn}{Returns}
+Flow of the pipe. 
+\end{DoxyReturn}
+\Hypertarget{classPipe_a31fef9c5d8a7752c7fa2a229ad628352}\label{classPipe_a31fef9c5d8a7752c7fa2a229ad628352} 
+\index{Pipe@{Pipe}!getOrig@{getOrig}}
+\index{getOrig@{getOrig}!Pipe@{Pipe}}
+\doxysubsubsection{\texorpdfstring{getOrig()}{getOrig()}}
+{\footnotesize\ttfamily std\+::string Pipe\+::get\+Orig (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+Getter for the source vertex. \begin{DoxyReturn}{Returns}
+source vertex code. 
+\end{DoxyReturn}
+\Hypertarget{classPipe_a7f39033f0e9440b3036e73beb95b48ff}\label{classPipe_a7f39033f0e9440b3036e73beb95b48ff} 
+\index{Pipe@{Pipe}!getWeight@{getWeight}}
+\index{getWeight@{getWeight}!Pipe@{Pipe}}
+\doxysubsubsection{\texorpdfstring{getWeight()}{getWeight()}}
+{\footnotesize\ttfamily double Pipe\+::get\+Weight (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+Getter for the weight of the pipe. \begin{DoxyReturn}{Returns}
+weight of the pipe. 
+\end{DoxyReturn}
+\Hypertarget{classPipe_ad1a431f886645a10e26581661f98531d}\label{classPipe_ad1a431f886645a10e26581661f98531d} 
+\index{Pipe@{Pipe}!setFlow@{setFlow}}
+\index{setFlow@{setFlow}!Pipe@{Pipe}}
+\doxysubsubsection{\texorpdfstring{setFlow()}{setFlow()}}
+{\footnotesize\ttfamily void Pipe\+::set\+Flow (\begin{DoxyParamCaption}\item[{double}]{f }\end{DoxyParamCaption})}
+
+Setter for the flow of the pipe. 
+\begin{DoxyParams}{Parameters}
+{\em f} & Flow of the city. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{classPipe_aa37a4378469882e9a1c81355e38c4cd3}\label{classPipe_aa37a4378469882e9a1c81355e38c4cd3} 
+\index{Pipe@{Pipe}!setWeight@{setWeight}}
+\index{setWeight@{setWeight}!Pipe@{Pipe}}
+\doxysubsubsection{\texorpdfstring{setWeight()}{setWeight()}}
+{\footnotesize\ttfamily void Pipe\+::set\+Weight (\begin{DoxyParamCaption}\item[{double}]{weight }\end{DoxyParamCaption})}
+
+Setter for the weight of the pipe. 
+\begin{DoxyParams}{Parameters}
+{\em weight} & weight to be set. \\
+\hline
+\end{DoxyParams}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+/home/oxi-\/moron/\+LEIC/\+DA/\+DA2324\+\_\+\+PRJ1\+\_\+\+G155/src/Pipe.\+h\item 
+/home/oxi-\/moron/\+LEIC/\+DA/\+DA2324\+\_\+\+PRJ1\+\_\+\+G155/src/Pipe.\+cpp\end{DoxyCompactItemize}

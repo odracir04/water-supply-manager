@@ -1,0 +1,111 @@
+\doxysection{Reservoir Class Reference}
+\hypertarget{classReservoir}{}\label{classReservoir}\index{Reservoir@{Reservoir}}
+Inheritance diagram for Reservoir\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{classReservoir}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classReservoir_a2e897b5bb93d56aa0fad3a46bf5819e8}{Reservoir}} (std\+::string n, std\+::string m, unsigned int i, std\+::string c, unsigned int max)
+\begin{DoxyCompactList}\small\item\em \doxylink{classReservoir}{Reservoir} constructor. \end{DoxyCompactList}\item 
+std\+::string \mbox{\hyperlink{classReservoir_aa73308e734ce198e2217ce00205763ba}{get\+Name}} () const
+\item 
+std\+::string \mbox{\hyperlink{classReservoir_a05b3ae3fe93212c1e5608cd5aeee1231}{get\+Municipality}} () const
+\item 
+unsigned int \mbox{\hyperlink{classReservoir_a3115fc953d3096238f6fd977284a6a94}{get\+Id}} () const
+\item 
+unsigned int \mbox{\hyperlink{classReservoir_a8ed06f750dd6dd06f846941720c89825}{get\+Max\+Delivery}} () const
+\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions inherited from \mbox{\hyperlink{classVertex}{Vertex}}}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classVertex_a6a0aede4a40c7b49ca487066463b1e75}{Vertex}} (std\+::string code)
+\begin{DoxyCompactList}\small\item\em \doxylink{classVertex}{Vertex} constructor. \end{DoxyCompactList}\item 
+virtual std\+::string \mbox{\hyperlink{classVertex_a89a00554f777a1dfdd8797b822d308bc}{get\+Code}} () const
+\item 
+bool \mbox{\hyperlink{classVertex_aa4bd82105b85ee53a917391f4811cd8a}{is\+Visited}} () const
+\item 
+void \mbox{\hyperlink{classVertex_a3c6d6c2254850a647d3a27007ef940f6}{set\+Visited}} (bool v)
+\item 
+\mbox{\hyperlink{classPipe}{Pipe}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classVertex_afdc6a4154139fedb4c34bba13c3c5f43}{get\+Path}} () const
+\item 
+void \mbox{\hyperlink{classVertex_a8302b03d0b2500ce0ddd9d47677becdf}{set\+Path}} (\mbox{\hyperlink{classPipe}{Pipe}} \texorpdfstring{$\ast$}{*}path)
+\item 
+std\+::vector$<$ \mbox{\hyperlink{classPipe}{Pipe}} \texorpdfstring{$\ast$}{*} $>$ \mbox{\hyperlink{classVertex_ab113b6d8783a099354a40e15ee5f0901}{get\+Incoming}} () const
+\item 
+const std\+::vector$<$ \mbox{\hyperlink{classPipe}{Pipe}} \texorpdfstring{$\ast$}{*} $>$ \& \mbox{\hyperlink{classVertex_a4c4f9024bfe12a1a14e0ccf28bda1883}{get\+Adj}} () const
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classReservoir_a2e897b5bb93d56aa0fad3a46bf5819e8}\label{classReservoir_a2e897b5bb93d56aa0fad3a46bf5819e8} 
+\index{Reservoir@{Reservoir}!Reservoir@{Reservoir}}
+\index{Reservoir@{Reservoir}!Reservoir@{Reservoir}}
+\doxysubsubsection{\texorpdfstring{Reservoir()}{Reservoir()}}
+{\footnotesize\ttfamily Reservoir\+::\+Reservoir (\begin{DoxyParamCaption}\item[{std\+::string}]{n,  }\item[{std\+::string}]{m,  }\item[{unsigned int}]{i,  }\item[{std\+::string}]{c,  }\item[{unsigned int}]{max }\end{DoxyParamCaption})}
+
+
+
+\doxylink{classReservoir}{Reservoir} constructor. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em n} & Name of the reservoir. \\
+\hline
+{\em m} & Municipality of the reservoir. \\
+\hline
+{\em i} & Id of the reservoir. \\
+\hline
+{\em c} & Code of the reservoir. \\
+\hline
+{\em max} & Max Delivery of the reservoir \\
+\hline
+\end{DoxyParams}
+
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classReservoir_a3115fc953d3096238f6fd977284a6a94}\label{classReservoir_a3115fc953d3096238f6fd977284a6a94} 
+\index{Reservoir@{Reservoir}!getId@{getId}}
+\index{getId@{getId}!Reservoir@{Reservoir}}
+\doxysubsubsection{\texorpdfstring{getId()}{getId()}}
+{\footnotesize\ttfamily unsigned int Reservoir\+::get\+Id (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+\doxylink{classReservoir}{Reservoir} id getter. \begin{DoxyReturn}{Returns}
+id of the city. 
+\end{DoxyReturn}
+\Hypertarget{classReservoir_a8ed06f750dd6dd06f846941720c89825}\label{classReservoir_a8ed06f750dd6dd06f846941720c89825} 
+\index{Reservoir@{Reservoir}!getMaxDelivery@{getMaxDelivery}}
+\index{getMaxDelivery@{getMaxDelivery}!Reservoir@{Reservoir}}
+\doxysubsubsection{\texorpdfstring{getMaxDelivery()}{getMaxDelivery()}}
+{\footnotesize\ttfamily unsigned int Reservoir\+::get\+Max\+Delivery (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+\doxylink{classReservoir}{Reservoir} Max Delivery getter. \begin{DoxyReturn}{Returns}
+max\+Delivery of the city. 
+\end{DoxyReturn}
+\Hypertarget{classReservoir_a05b3ae3fe93212c1e5608cd5aeee1231}\label{classReservoir_a05b3ae3fe93212c1e5608cd5aeee1231} 
+\index{Reservoir@{Reservoir}!getMunicipality@{getMunicipality}}
+\index{getMunicipality@{getMunicipality}!Reservoir@{Reservoir}}
+\doxysubsubsection{\texorpdfstring{getMunicipality()}{getMunicipality()}}
+{\footnotesize\ttfamily std\+::string Reservoir\+::get\+Municipality (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+\doxylink{classReservoir}{Reservoir} municipality getter. \begin{DoxyReturn}{Returns}
+municipality of the city. 
+\end{DoxyReturn}
+\Hypertarget{classReservoir_aa73308e734ce198e2217ce00205763ba}\label{classReservoir_aa73308e734ce198e2217ce00205763ba} 
+\index{Reservoir@{Reservoir}!getName@{getName}}
+\index{getName@{getName}!Reservoir@{Reservoir}}
+\doxysubsubsection{\texorpdfstring{getName()}{getName()}}
+{\footnotesize\ttfamily std\+::string Reservoir\+::get\+Name (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+\doxylink{classReservoir}{Reservoir} name getter. \begin{DoxyReturn}{Returns}
+name of the city. 
+\end{DoxyReturn}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+/home/oxi-\/moron/\+LEIC/\+DA/\+DA2324\+\_\+\+PRJ1\+\_\+\+G155/src/Reservoir.\+h\item 
+/home/oxi-\/moron/\+LEIC/\+DA/\+DA2324\+\_\+\+PRJ1\+\_\+\+G155/src/Reservoir.\+cpp\end{DoxyCompactItemize}

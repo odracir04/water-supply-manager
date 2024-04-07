@@ -1,0 +1,54 @@
+\doxysection{Logger Class Reference}
+\hypertarget{classLogger}{}\label{classLogger}\index{Logger@{Logger}}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classLogger_a785b9fbb3c9ad8d6fe0c11aa156d68fb}{Logger}} (std\+::string filename)
+\item 
+\mbox{\hyperlink{classLogger_acb668a9e186a25fbaad2e4af6d1ed00a}{\texorpdfstring{$\sim$}{\string~}\+Logger}} ()
+\item 
+void \mbox{\hyperlink{classLogger_a1a004f2b499088c460ce76787c086c45}{log}} (std\+::string str)
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classLogger_a785b9fbb3c9ad8d6fe0c11aa156d68fb}\label{classLogger_a785b9fbb3c9ad8d6fe0c11aa156d68fb} 
+\index{Logger@{Logger}!Logger@{Logger}}
+\index{Logger@{Logger}!Logger@{Logger}}
+\doxysubsubsection{\texorpdfstring{Logger()}{Logger()}}
+{\footnotesize\ttfamily Logger\+::\+Logger (\begin{DoxyParamCaption}\item[{std\+::string}]{filename }\end{DoxyParamCaption})}
+
+\doxylink{classLogger}{Logger} constructor. Receives the name of file where it is going to write. ~\newline
+ Complexity\+: O(1) 
+\begin{DoxyParams}{Parameters}
+{\em filename} & string related to the name of the file.. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{classLogger_acb668a9e186a25fbaad2e4af6d1ed00a}\label{classLogger_acb668a9e186a25fbaad2e4af6d1ed00a} 
+\index{Logger@{Logger}!````~Logger@{\texorpdfstring{$\sim$}{\string~}Logger}}
+\index{````~Logger@{\texorpdfstring{$\sim$}{\string~}Logger}!Logger@{Logger}}
+\doxysubsubsection{\texorpdfstring{\texorpdfstring{$\sim$}{\string~}Logger()}{\string~Logger()}}
+{\footnotesize\ttfamily Logger\+::\texorpdfstring{$\sim$}{\string~}\+Logger (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\doxylink{classLogger}{Logger} destructor. Verifies if the ifstream is open and closes it. ~\newline
+ Complexity\+: O(1) 
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classLogger_a1a004f2b499088c460ce76787c086c45}\label{classLogger_a1a004f2b499088c460ce76787c086c45} 
+\index{Logger@{Logger}!log@{log}}
+\index{log@{log}!Logger@{Logger}}
+\doxysubsubsection{\texorpdfstring{log()}{log()}}
+{\footnotesize\ttfamily void Logger\+::log (\begin{DoxyParamCaption}\item[{std\+::string}]{str }\end{DoxyParamCaption})}
+
+\doxylink{classLogger}{Logger} writer. Verifies if ifstream is open, and writes the content to the file. ~\newline
+ Complexity\+: O(1) 
+\begin{DoxyParams}{Parameters}
+{\em str} & String that is written to the file. \\
+\hline
+\end{DoxyParams}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+/home/oxi-\/moron/\+LEIC/\+DA/\+DA2324\+\_\+\+PRJ1\+\_\+\+G155/src/Logger.\+h\item 
+/home/oxi-\/moron/\+LEIC/\+DA/\+DA2324\+\_\+\+PRJ1\+\_\+\+G155/src/Logger.\+cpp\end{DoxyCompactItemize}

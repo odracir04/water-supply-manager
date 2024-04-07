@@ -1,0 +1,33 @@
+\doxysection{Reservoir.\+h}
+\hypertarget{Reservoir_8h_source}{}\label{Reservoir_8h_source}\index{/home/oxi-\/moron/LEIC/DA/DA2324\_PRJ1\_G155/src/Reservoir.h@{/home/oxi-\/moron/LEIC/DA/DA2324\_PRJ1\_G155/src/Reservoir.h}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#ifndef\ DA\_PROJ1\_RESERVOIR\_H}}
+\DoxyCodeLine{00002\ \textcolor{preprocessor}{\#define\ DA\_PROJ1\_RESERVOIR\_H}}
+\DoxyCodeLine{00003\ }
+\DoxyCodeLine{00004\ \textcolor{preprocessor}{\#include\ <string>}}
+\DoxyCodeLine{00005\ \textcolor{preprocessor}{\#include\ "{}Vertex.h"{}}}
+\DoxyCodeLine{00006\ }
+\DoxyCodeLine{00007\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classReservoir}{Reservoir}}\ :\ \textcolor{keyword}{public}\ \mbox{\hyperlink{classVertex}{Vertex}}\ \{}
+\DoxyCodeLine{00008\ \ \ \ \ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00009\ \ \ \ \ \ \ \ \ std::string\ name;}
+\DoxyCodeLine{00010\ \ \ \ \ \ \ \ \ std::string\ municipality;}
+\DoxyCodeLine{00011\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{int}\ id;}
+\DoxyCodeLine{00012\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{int}\ maxDelivery;}
+\DoxyCodeLine{00013\ \ \ \ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00014\ }
+\DoxyCodeLine{00023\ \ \ \ \ \mbox{\hyperlink{classReservoir_a2e897b5bb93d56aa0fad3a46bf5819e8}{Reservoir}}(std::string\ n,\ std::string\ m,\ \textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{int}\ i,\ std::string\ c,\ \textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{int}\ max);}
+\DoxyCodeLine{00024\ }
+\DoxyCodeLine{00029\ \ \ \ \ std::string\ \mbox{\hyperlink{classReservoir_aa73308e734ce198e2217ce00205763ba}{getName}}()\textcolor{keyword}{\ const\ }\{\textcolor{keywordflow}{return}\ this-\/>name;\}}
+\DoxyCodeLine{00030\ }
+\DoxyCodeLine{00035\ \ \ \ \ std::string\ \mbox{\hyperlink{classReservoir_a05b3ae3fe93212c1e5608cd5aeee1231}{getMunicipality}}()\textcolor{keyword}{\ const\ }\{\textcolor{keywordflow}{return}\ this-\/>municipality;\}}
+\DoxyCodeLine{00036\ }
+\DoxyCodeLine{00041\ \ \ \ \ \textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{classReservoir_a3115fc953d3096238f6fd977284a6a94}{getId}}()\textcolor{keyword}{\ const\ }\{\textcolor{keywordflow}{return}\ this-\/>id;\}}
+\DoxyCodeLine{00042\ }
+\DoxyCodeLine{00047\ \ \ \ \ \textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{classReservoir_a8ed06f750dd6dd06f846941720c89825}{getMaxDelivery}}()\textcolor{keyword}{\ const\ }\{\textcolor{keywordflow}{return}\ this-\/>maxDelivery;\}}
+\DoxyCodeLine{00048\ \};}
+\DoxyCodeLine{00049\ }
+\DoxyCodeLine{00050\ }
+\DoxyCodeLine{00051\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{//DA\_PROJ1\_RESERVOIR\_H}}
+
+\end{DoxyCode}

@@ -1,0 +1,213 @@
+\doxysection{Graph Class Reference}
+\hypertarget{classGraph}{}\label{classGraph}\index{Graph@{Graph}}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classVertex}{Vertex}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classGraph_a04b6f7bf51526a60b0c071375a244774}{find\+Vertex}} (const std\+::string \&code) const
+\item 
+bool \mbox{\hyperlink{classGraph_a43821dea773d25050d18dc09c1551a59}{add\+City}} (const std\+::string \&name, const unsigned int \&id, const std\+::string \&code, const unsigned int \&demand, const unsigned int \&population)
+\item 
+bool \mbox{\hyperlink{classGraph_a3925de4b56634cf040fd2d52f905efa2}{add\+Reservoir}} (const std\+::string \&name, const std\+::string \&municipality, const unsigned int \&id, const std\+::string \&code, const unsigned int \&max)
+\item 
+bool \mbox{\hyperlink{classGraph_a75fe53da4c057f6b41d69435fcd58dab}{add\+Station}} (const std\+::string \&code, const unsigned int \&id)
+\item 
+bool \mbox{\hyperlink{classGraph_ad5b9140e6a07d71e6e057dd4fb6d841e}{remove\+Vertex}} (const std\+::string \&in)
+\item 
+\mbox{\hyperlink{classPipe}{Pipe}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classGraph_a023fc478d0b9eaa849cbe29402b04846}{add\+Edge}} (const std\+::string \&sourc, const std\+::string \&dest, double w, bool direction)
+\item 
+bool \mbox{\hyperlink{classGraph_a5952737480a3d7f51362989373043c4a}{remove\+Edge}} (const std\+::string \&sourc, const std\+::string \&dest)
+\item 
+std\+::vector$<$ \mbox{\hyperlink{classVertex}{Vertex}} \texorpdfstring{$\ast$}{*} $>$ \mbox{\hyperlink{classGraph_a619ac583094079134074658e29463c0e}{get\+Vertex\+Set}} () const
+\item 
+void \mbox{\hyperlink{classGraph_a0018b7a69553714b00b710757298e998}{set\+Vertex\+Set}} (std\+::vector$<$ \mbox{\hyperlink{classVertex}{Vertex}} \texorpdfstring{$\ast$}{*} $>$ \&v)
+\item 
+bool \mbox{\hyperlink{classGraph_acb1271e04ce4e4fcf567773024dffa4c}{add\+Vertex}} (const std\+::string \&code)
+\item 
+void \mbox{\hyperlink{classGraph_ae4ccb385466d321a201d92fea84c0aba}{delete\+Edge}} (const std\+::string \&s, \mbox{\hyperlink{classPipe}{Pipe}} \texorpdfstring{$\ast$}{*}pipe) const
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{classGraph_a6eec9bd738a8909119e5b2470ff5f264}\label{classGraph_a6eec9bd738a8909119e5b2470ff5f264} 
+std\+::vector$<$ \mbox{\hyperlink{classVertex}{Vertex}} \texorpdfstring{$\ast$}{*} $>$ {\bfseries vertex\+Set}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classGraph_a43821dea773d25050d18dc09c1551a59}\label{classGraph_a43821dea773d25050d18dc09c1551a59} 
+\index{Graph@{Graph}!addCity@{addCity}}
+\index{addCity@{addCity}!Graph@{Graph}}
+\doxysubsubsection{\texorpdfstring{addCity()}{addCity()}}
+{\footnotesize\ttfamily bool Graph\+::add\+City (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{name,  }\item[{const unsigned int \&}]{id,  }\item[{const std\+::string \&}]{code,  }\item[{const unsigned int \&}]{demand,  }\item[{const unsigned int \&}]{population }\end{DoxyParamCaption})}
+
+Adds the city to the vertex set after verifying that it already exists. 
+\begin{DoxyParams}{Parameters}
+{\em name} & Name of the city. \\
+\hline
+{\em id} & Id of the city. \\
+\hline
+{\em code} & Code of the city. \\
+\hline
+{\em demand} & Demand of the city. \\
+\hline
+{\em population} & Population of the city. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+True if added successfully, False otherwise. 
+\end{DoxyReturn}
+\Hypertarget{classGraph_a023fc478d0b9eaa849cbe29402b04846}\label{classGraph_a023fc478d0b9eaa849cbe29402b04846} 
+\index{Graph@{Graph}!addEdge@{addEdge}}
+\index{addEdge@{addEdge}!Graph@{Graph}}
+\doxysubsubsection{\texorpdfstring{addEdge()}{addEdge()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classPipe}{Pipe}} \texorpdfstring{$\ast$}{*} Graph\+::add\+Edge (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{sourc,  }\item[{const std\+::string \&}]{dest,  }\item[{double}]{w,  }\item[{bool}]{direction }\end{DoxyParamCaption})}
+
+Adds a pipe connecting tow vertexes, checks if the vertexes exists first. 
+\begin{DoxyParams}{Parameters}
+{\em sourc} & Source vertex. \\
+\hline
+{\em dest} & Destination vertex. \\
+\hline
+{\em w} & Weight of the pipe. \\
+\hline
+{\em direction} & Direction of the edge \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The new pipe created or nullptr if one of the vertexes not found. 
+\end{DoxyReturn}
+\Hypertarget{classGraph_a3925de4b56634cf040fd2d52f905efa2}\label{classGraph_a3925de4b56634cf040fd2d52f905efa2} 
+\index{Graph@{Graph}!addReservoir@{addReservoir}}
+\index{addReservoir@{addReservoir}!Graph@{Graph}}
+\doxysubsubsection{\texorpdfstring{addReservoir()}{addReservoir()}}
+{\footnotesize\ttfamily bool Graph\+::add\+Reservoir (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{name,  }\item[{const std\+::string \&}]{municipality,  }\item[{const unsigned int \&}]{id,  }\item[{const std\+::string \&}]{code,  }\item[{const unsigned int \&}]{max }\end{DoxyParamCaption})}
+
+Adds the reservoir to the vertex set after verifying that it already exists. 
+\begin{DoxyParams}{Parameters}
+{\em name} & Name of the reservoir. \\
+\hline
+{\em municipality} & Municipality of the reservoir. \\
+\hline
+{\em id} & Id of the reservoir. \\
+\hline
+{\em code} & Code of the reservoir. \\
+\hline
+{\em max} & Max\+Delivery of the reservoir. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+True if added successfully, False otherwise. 
+\end{DoxyReturn}
+\Hypertarget{classGraph_a75fe53da4c057f6b41d69435fcd58dab}\label{classGraph_a75fe53da4c057f6b41d69435fcd58dab} 
+\index{Graph@{Graph}!addStation@{addStation}}
+\index{addStation@{addStation}!Graph@{Graph}}
+\doxysubsubsection{\texorpdfstring{addStation()}{addStation()}}
+{\footnotesize\ttfamily bool Graph\+::add\+Station (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{code,  }\item[{const unsigned int \&}]{id }\end{DoxyParamCaption})}
+
+Adds the station to the vertex set after verifying that it already exists. 
+\begin{DoxyParams}{Parameters}
+{\em code} & Code of the station. \\
+\hline
+{\em id} & Id of the station. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+True if added successfully, False otherwise. 
+\end{DoxyReturn}
+\Hypertarget{classGraph_acb1271e04ce4e4fcf567773024dffa4c}\label{classGraph_acb1271e04ce4e4fcf567773024dffa4c} 
+\index{Graph@{Graph}!addVertex@{addVertex}}
+\index{addVertex@{addVertex}!Graph@{Graph}}
+\doxysubsubsection{\texorpdfstring{addVertex()}{addVertex()}}
+{\footnotesize\ttfamily bool Graph\+::add\+Vertex (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{code }\end{DoxyParamCaption})}
+
+Adds a new \doxylink{classVertex}{Vertex} to the \doxylink{classVertex}{Vertex} Set verifying if it already exists. 
+\begin{DoxyParams}{Parameters}
+{\em code} & Code of the \doxylink{classVertex}{Vertex} to be removed. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+True if it successfully removes, False otherwise. 
+\end{DoxyReturn}
+\Hypertarget{classGraph_ae4ccb385466d321a201d92fea84c0aba}\label{classGraph_ae4ccb385466d321a201d92fea84c0aba} 
+\index{Graph@{Graph}!deleteEdge@{deleteEdge}}
+\index{deleteEdge@{deleteEdge}!Graph@{Graph}}
+\doxysubsubsection{\texorpdfstring{deleteEdge()}{deleteEdge()}}
+{\footnotesize\ttfamily void Graph\+::delete\+Edge (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{s,  }\item[{\mbox{\hyperlink{classPipe}{Pipe}} \texorpdfstring{$\ast$}{*}}]{pipe }\end{DoxyParamCaption}) const}
+
+Removes all incoming pipes. 
+\begin{DoxyParams}{Parameters}
+{\em s} & \doxylink{classVertex}{Vertex} code. \\
+\hline
+{\em pipe} & \\
+\hline
+\end{DoxyParams}
+\Hypertarget{classGraph_a04b6f7bf51526a60b0c071375a244774}\label{classGraph_a04b6f7bf51526a60b0c071375a244774} 
+\index{Graph@{Graph}!findVertex@{findVertex}}
+\index{findVertex@{findVertex}!Graph@{Graph}}
+\doxysubsubsection{\texorpdfstring{findVertex()}{findVertex()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classVertex}{Vertex}} \texorpdfstring{$\ast$}{*} Graph\+::find\+Vertex (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{code }\end{DoxyParamCaption}) const}
+
+Searches for the vertex code in vertex set. 
+\begin{DoxyParams}{Parameters}
+{\em code} & Code of the vertex. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Corresponding \doxylink{classVertex}{Vertex} if it finds the code in the vertex set, nullptr otherwise. Complexity\+: O(v), where v in the number of vertexes in vertex set. 
+\end{DoxyReturn}
+\Hypertarget{classGraph_a619ac583094079134074658e29463c0e}\label{classGraph_a619ac583094079134074658e29463c0e} 
+\index{Graph@{Graph}!getVertexSet@{getVertexSet}}
+\index{getVertexSet@{getVertexSet}!Graph@{Graph}}
+\doxysubsubsection{\texorpdfstring{getVertexSet()}{getVertexSet()}}
+{\footnotesize\ttfamily std\+::vector$<$ \mbox{\hyperlink{classVertex}{Vertex}} \texorpdfstring{$\ast$}{*} $>$ Graph\+::get\+Vertex\+Set (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+Getter for the Vertex\+Set. \begin{DoxyReturn}{Returns}
+Vector of Vertexes corresponding to the Vertex\+Set. 
+\end{DoxyReturn}
+\Hypertarget{classGraph_a5952737480a3d7f51362989373043c4a}\label{classGraph_a5952737480a3d7f51362989373043c4a} 
+\index{Graph@{Graph}!removeEdge@{removeEdge}}
+\index{removeEdge@{removeEdge}!Graph@{Graph}}
+\doxysubsubsection{\texorpdfstring{removeEdge()}{removeEdge()}}
+{\footnotesize\ttfamily bool Graph\+::remove\+Edge (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{sourc,  }\item[{const std\+::string \&}]{dest }\end{DoxyParamCaption})}
+
+Removes an pipe connecting two vertexes. 
+\begin{DoxyParams}{Parameters}
+{\em sourc} & Source vertex. \\
+\hline
+{\em dest} & Destination vertex. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+True if successfully remover, False otherwise. 
+\end{DoxyReturn}
+\Hypertarget{classGraph_ad5b9140e6a07d71e6e057dd4fb6d841e}\label{classGraph_ad5b9140e6a07d71e6e057dd4fb6d841e} 
+\index{Graph@{Graph}!removeVertex@{removeVertex}}
+\index{removeVertex@{removeVertex}!Graph@{Graph}}
+\doxysubsubsection{\texorpdfstring{removeVertex()}{removeVertex()}}
+{\footnotesize\ttfamily bool Graph\+::remove\+Vertex (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{in }\end{DoxyParamCaption})}
+
+Removes the vertex from the vertex set, his adjacent pipes and his incoming pipes. 
+\begin{DoxyParams}{Parameters}
+{\em in} & Code of the vertex to be removed. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+True if successfully removed, False otherwise. 
+\end{DoxyReturn}
+\Hypertarget{classGraph_a0018b7a69553714b00b710757298e998}\label{classGraph_a0018b7a69553714b00b710757298e998} 
+\index{Graph@{Graph}!setVertexSet@{setVertexSet}}
+\index{setVertexSet@{setVertexSet}!Graph@{Graph}}
+\doxysubsubsection{\texorpdfstring{setVertexSet()}{setVertexSet()}}
+{\footnotesize\ttfamily void Graph\+::set\+Vertex\+Set (\begin{DoxyParamCaption}\item[{std\+::vector$<$ \mbox{\hyperlink{classVertex}{Vertex}} \texorpdfstring{$\ast$}{*} $>$ \&}]{v }\end{DoxyParamCaption})}
+
+Setter for the Vertex\+Set 
+\begin{DoxyParams}{Parameters}
+{\em v} & The new vector of vertexes to be set as the Vertex\+Set \\
+\hline
+\end{DoxyParams}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+/home/oxi-\/moron/\+LEIC/\+DA/\+DA2324\+\_\+\+PRJ1\+\_\+\+G155/src/Graph.\+h\item 
+/home/oxi-\/moron/\+LEIC/\+DA/\+DA2324\+\_\+\+PRJ1\+\_\+\+G155/src/Graph.\+cpp\end{DoxyCompactItemize}
