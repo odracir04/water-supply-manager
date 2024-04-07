@@ -167,6 +167,7 @@ void Interface::servicesMenu() {
             break;
         case 3:
             clear();
+            manager.maxFlowAllCities();
             printNetworkMetrics();
             manager.balanceWaterFlow();
             printNetworkMetrics();
@@ -291,7 +292,6 @@ bool Interface::confirmationMenu() {
 }
 
 void Interface::printNetworkMetrics(){
-
     manager.networkMetrics();
 
 }

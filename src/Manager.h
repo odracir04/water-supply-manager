@@ -6,6 +6,9 @@
 #include "Parser.h"
 #include "City.h"
 #include "Logger.h"
+#include "Reservoir.h"
+#include <stack>
+#include <unordered_set>
 
 class Manager {
 
@@ -52,6 +55,29 @@ public:
     void maxFlowCities(std::string dest);
 
     void balanceWaterFlow();
+
+    void DFSPipeToCities(Vertex* v, std::unordered_set<City*>* visitedCities);
+
+    void DFSPipeToCitiesVisit(Vertex* v, std::unordered_set<City*>* visitedCities);
+
+    void DFSPipeToReservoirs(Vertex* v, std::unordered_set<Reservoir*>* incomingReservoirs);
+
+    void DFSPipeToReservoirsVisit(Vertex* v, std::unordered_set<Reservoir*>* incomingReservoirs);
+
+    void DFSReservoirToCities(Vertex* v, std::unordered_set<City*>* foundCities);
+
+    void DFSReservoirToCitiesVisit(Vertex* v, std::unordered_set<City*>* foundCities);
+
+    void findPathRC(Reservoir* r, City* c, std::stack<Pipe*>* path);
+
+    void findPathRCVisit(Vertex* v, City* c, std::stack<Pipe*>* path);
+
+    void findPathREC(Reservoir* r, Pipe* pipe, City* c, std::stack<Pipe*>* path);
+
+    void findPathREVisit(Vertex* v, Pipe* pipe, std::stack<Pipe*>* path);
+
+    void findPathECVisit(Vertex* v, City* c, std::stack<Pipe*>* path);
+
 
     /**
      * Simulates Reservoir failure by setting the weights of the adjacent pipes to 0
@@ -162,6 +188,11 @@ public:
      * Complexity: O(V * P) where V is the number of vertexes and P the number of pipes.
      */
     void networkMetrics();
+
+    void exploreGraphForPaths(std::pair<std::stack<Pipe *>, int> path, Vertex *v,
+                              std::vector<std::pair<std::stack<Pipe *>, int>> *res);
+
+    std::vector<std::pair<std::stack<Pipe *>, int>> findAllPaths(Vertex *start);
 };
 
 
