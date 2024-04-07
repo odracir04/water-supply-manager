@@ -10,6 +10,12 @@
 #include <stack>
 #include <unordered_set>
 
+struct metrics {
+    double average;
+    double variance;
+    int max_difference;
+};
+
 class Manager {
 
 private:
@@ -20,7 +26,7 @@ private:
 
     /**
     * Calculates the total flow of each city based on incoming pipes and sets the income accordingly.
-    * Complexity: O(C * P), where V is the number of cities and E is the number of pipes in the graph.
+    * Complexity: O(C + P), where C is the number of cities and P is the number of pipes leading to cities.
     * Note: If the number of incoming pipes for each city is a constant, the complexity becomes O(C).
     */
     void computeCityFlow();
@@ -39,8 +45,6 @@ public:
      */
     Manager();
 
-    Graph* getGraph() {return graph;}
-
     /**
      * Calls parser functions that reads the data files according to the dataset chosen and builds the graph.
      * @param option Dataset choice.
@@ -49,7 +53,7 @@ public:
 
     /**
      * Calculates the maximum flow from a super source 'SS' to the destination(dest) city.
-     * Complexity: O(V*P) where V is the number of vertexes and P the number of pipes in the graph.
+     * Complexity: O(V * P^2) where V is the number of vertexes and P the number of pipes in the graph.
      * @param dest Destination City.
      */
     void maxFlowCities(std::string dest);
@@ -82,7 +86,7 @@ public:
     /**
      * Simulates Reservoir failure by setting the weights of the adjacent pipes to 0
      * and then recalculates the maximum flow to all cities identifying the cities affected by that change.
-     * Complexity: O(V * P) where V is the number of vertexes and P the number of pipes.
+     * Complexity: O(V * P^2) where V is the number of vertexes and P the number of pipes.
      * @param code Code of the Reservoir to simulate.
      * @return The cities affected by the Reservoir failure.
      */
@@ -91,7 +95,7 @@ public:
     /**
      * Simulates Station failure by setting the weights of the adjacent pipes to 0
      * and then recalculates the maximum flow to all cities identifying the cities affected by that change.
-     * Complexity: O(V * P) where V is the number of vertexes and P the number of pipes.
+     * Complexity: O(V * P^2) where V is the number of vertexes and P the number of pipes.
      * @param code Code of the Station to simulate.
      * @return The cities affected by the Station failure.
      */
@@ -100,7 +104,7 @@ public:
     /**
      * Simulates specific Pipe failure by setting the weight of that to 0
      * and then recalculates the maximum flow to all cities identifying the cities affected by that change.
-     * Complexity: O(V * P) where V is the number of vertexes and P the number of pipes.
+     * Complexity: O(V * P^2) where V is the number of vertexes and P the number of pipes.
      * @param vertices A pair of vertexes representing the endpoints of the pipe to be simulated.
      * @return The cities affected by Pipe failure.
      */
@@ -109,7 +113,7 @@ public:
     /**
      * Identifies vital pipes connected to a single city by simulating the failure of each pipe individually
      * recalculating the maximum flow to all cities and checking changes in the income.
-     * Complexity: O(V * P) where V is the number of vertexes and P the number of pipes.
+     * Complexity: O(V * P^3) where V is the number of vertexes and P the number of pipes.
      * @param code Code of the city to be simulated
      * @return Pair containing the city tested and a vector of the vital pipes calculated.
      */
@@ -185,14 +189,11 @@ public:
     /**
      * Computes some metrics, such as the average and variance of the differences
      * between capacity and flow for each pipe, as well as the maximum difference.
-     * Complexity: O(V * P) where V is the number of vertexes and P the number of pipes.
+     * @return A struct containing the network metrics.
+     * Complexity: O(V + P) where V is the number of vertexes and P the number of pipes.
      */
-    void networkMetrics();
 
-    void exploreGraphForPaths(std::pair<std::stack<Pipe *>, int> path, Vertex *v,
-                              std::vector<std::pair<std::stack<Pipe *>, int>> *res);
-
-    std::vector<std::pair<std::stack<Pipe *>, int>> findAllPaths(Vertex *start);
+    metrics networkMetrics();
 };
 
 

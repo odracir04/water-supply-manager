@@ -13,7 +13,7 @@ class Graph {
 
 protected:
     std::vector<Vertex*> vertexSet;
-    void dfsVisit(Vertex *v,  std::vector<Vertex> & res) const;
+
 public:
     /**
      * Searches for the vertex code in vertex set.
@@ -22,7 +22,6 @@ public:
      * Complexity: O(v), where v in the number of vertexes in vertex set.
      */
     Vertex* findVertex(const std::string &code) const;
-    int getNumVertex() const;
 
     /**
      * Adds the city to the vertex set after verifying that it already exists.
@@ -67,9 +66,10 @@ public:
      * @param sourc Source vertex.
      * @param dest Destination vertex.
      * @param w Weight of the pipe.
+     * @param direction Direction of the edge
      * @return The new pipe created or nullptr if one of the vertexes not found.
      */
-    Pipe* addEdge(const std::string &sourc, const std::string &dest, double w);
+    Pipe* addEdge(const std::string &sourc, const std::string &dest, double w, bool direction);
 
     /**
      * Removes an pipe connecting two vertexes.
@@ -90,10 +90,6 @@ public:
      * @param v The new vector of vertexes to be set as the VertexSet
      */
     void setVertexSet(std::vector<Vertex*> &v);
-    std::vector<Vertex> dfs() const;
-    std::vector<Vertex> dfs(const std::string & source) const;
-    std::vector<Vertex> bfs(const std::string &source) const;
-    void printVertexSet();
 
     /**
      * Adds a new Vertex to the Vertex Set verifying if it already exists.
@@ -108,9 +104,6 @@ public:
      * @param pipe
      */
     void deleteEdge(const std::string &s, Pipe *pipe) const;
-
-    void removeAllAdjEdges(Vertex *vertex);
 };
-
 
 #endif //DA_PROJ1_GRAPH_H

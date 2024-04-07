@@ -61,11 +61,6 @@ class City : public Vertex {
      * @return population of the city.
      */
     unsigned int getPopulation() const {return this->population;}
-
-
-    void setName(std::string const n) {this->name = n;}
-    void setDemand(unsigned int const d) {this->demand = d;}
-    void setPopulation(unsigned int const p) {this->population = p;}
 };
 
 

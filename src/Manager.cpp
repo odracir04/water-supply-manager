@@ -1,8 +1,6 @@
 #include <iostream>
 #include <queue>
-#include <cfloat>
 #include <unordered_map>
-#include <unordered_set>
 #include <climits>
 #include <stack>
 #include <unordered_set>
@@ -20,7 +18,7 @@ std::vector<City*> Manager::getCities() {
     std::vector<City*> cities;
     for (auto* v : graph->getVertexSet()){
         if (City* city = dynamic_cast<City*>(v)) {
-            cities.push_back(city); // Call city specific method
+            cities.push_back(city);
         }
     }
     return cities;
@@ -29,7 +27,7 @@ std::vector<City*> Manager::getCities() {
 City *Manager::getCity(std::string code) {
     for (auto* v : graph->getVertexSet()){
         if (v->getCode() == code) {
-            return dynamic_cast<City*>(v); // Call city specific method
+            return dynamic_cast<City*>(v);
         }
     }
 
@@ -63,6 +61,7 @@ bool Manager::validatePipe(std::string src, std::string dest) {
 
     return true;
 }
+
 
 void Manager::DFSPipeToCities(Vertex* v, std::unordered_set<City*>* visitedCities) {
     for (auto u : graph->getVertexSet()) {
@@ -278,9 +277,7 @@ void Manager::balanceWaterFlow() {
 }
 
 void testAndVisit(std::queue< Vertex*> &q, Pipe *e, Vertex *w, double residual) {
-// Check if the vertex 'w' is not visited and there is residual capacity
     if (!w->isVisited() && residual > 0) {
-// Mark 'w' as visited, set the path through which it was reached, and enqueue it
         w->setVisited(true);
         w->setPath(e);
         q.push(w);
@@ -295,30 +292,25 @@ bool findAugmentingPath(Graph &g, Vertex* s ,Vertex* t) {
     s->setVisited(true);
     std::queue<Vertex *> q;
     q.push(s);
-// BFS to find an augmenting path
     while (!q.empty() && !t->isVisited()) {
         auto v = q.front();
         q.pop();
-// Process outgoing edges
         for (auto e: v->getAdj()) {
             if (g.findVertex(e->getDest()) != nullptr) {
                 testAndVisit(q, e, g.findVertex(e->getDest()), e->getWeight() - e->getFlow());
             }
         }
-// Process incoming edges
         for (auto e: v->getIncoming()) {
             if (g.findVertex(e->getOrig()) != nullptr) {
                 testAndVisit(q, e, g.findVertex(e->getOrig()), e->getFlow());
             }
         }
-// Return true if a path to the target is found, false otherwise
     }
     return t->isVisited();
 }
 
 double findMinResidualAlongPath(Graph* g, Vertex*s, Vertex *t) {
     double f = INF;
-// Traverse the augmenting path to find the minimum residual capacity
     for (auto v = t; v != s; ) {
         auto e = v->getPath();
         if (g->findVertex(e->getDest()) == v) {
@@ -330,12 +322,10 @@ double findMinResidualAlongPath(Graph* g, Vertex*s, Vertex *t) {
             v = g->findVertex(e->getDest());
         }
     }
-// Return the minimum residual capacity
     return f;
 }
 
 void augmentFlowAlongPath(Graph* g, Vertex *s, Vertex *t, double f) {
-// Traverse the augmenting path and update the flow values accordingly
     for (auto v = t; v != s;) {
         auto e = v->getPath();
         double flow = e->getFlow();
@@ -360,7 +350,6 @@ void Manager::maxFlowCities(std::string dest) {
         return;
     }
 
-    //Create super Source
     Vertex *superSource = new Vertex("SS");
 
     std::vector<Vertex*> vec = newGraph.getVertexSet();
@@ -369,7 +358,7 @@ void Manager::maxFlowCities(std::string dest) {
 
     for (auto *v: newGraph.getVertexSet()) {
         if (v->getCode()[0] == 'R') {
-            newGraph.addEdge("SS", v->getCode(), 999999999);
+            newGraph.addEdge("SS", v->getCode(), 999999999, 1);
         }
     }
 
@@ -386,13 +375,12 @@ void Manager::maxFlowCities(std::string dest) {
             maxFlow += f;
         }
 
-        //newGraph.removeAllAdjEdges(superSource);
-
         for(auto* v : newGraph.getVertexSet()){
             if(v->getCode() == "SS"){
                 delete v;
             }
         }
+
         newGraph.getVertexSet().clear();
         std::vector<Vertex*> temp = graph->getVertexSet();
         newGraph.setVertexSet(temp);
@@ -410,10 +398,10 @@ void Manager::addSuperVertexes() {
 
     for (Vertex* v : graph->getVertexSet()) {
         if (auto reservoir = dynamic_cast<Reservoir*>(v)) {
-            graph->addEdge("SS", v->getCode(), reservoir->getMaxDelivery());
+            graph->addEdge("SS", v->getCode(), reservoir->getMaxDelivery(), 1);
         }
         if (auto city = dynamic_cast<City*>(v)) {
-            graph->addEdge(v->getCode(), "ST", city->getDemand());
+            graph->addEdge(v->getCode(), "ST", city->getDemand(), 1);
             city->setIncome(0);
         }
     }
@@ -607,7 +595,8 @@ std::pair<City*, std::vector<Pipe*>> Manager::checkVitalPipes(std::string code) 
     return {dynamic_cast<City *>(graph->findVertex(code)), res};
 }
 
-void Manager::networkMetrics() {
+metrics Manager::networkMetrics() {
+
     int countPipes = 0;
     double totalDifference = 0.0;
     double squaredDifferenceSum = 0.0;
@@ -615,11 +604,13 @@ void Manager::networkMetrics() {
 
     for (auto* v : graph->getVertexSet()) {
         for (auto* p : v->getAdj()) {
-            int difference = abs(p->getWeight() - p->getFlow());
-            totalDifference += difference;
-            squaredDifferenceSum += difference * difference;
-            if (difference > maxDifference) {
-                maxDifference = difference;
+
+                int difference = abs(p->getWeight() - p->getFlow());
+                totalDifference += difference;
+                squaredDifferenceSum += difference * difference;
+                if (difference > maxDifference  && p->getDirection() == 1) {
+                    maxDifference = difference;
+
             }
             countPipes++;
         }
@@ -629,13 +620,10 @@ void Manager::networkMetrics() {
 
     double variance = ((squaredDifferenceSum - countPipes * (averageDifference*averageDifference))/( countPipes - 1));
 
-    std::cout << "Average Difference: " << averageDifference << std::endl;
-    std::cout << "Variance of Differences: " << variance << std::endl;
-    std::cout << "Maximum Difference: " << maxDifference << std::endl;
+    return {averageDifference, variance, maxDifference};
 }
 
 void Manager::resetGraph() {
     delete graph;
     this->graph = new Graph();
 }
-

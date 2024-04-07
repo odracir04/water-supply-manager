@@ -30,7 +30,6 @@ class Parser {
          * @param option Chooses the dataSet read.
          */
         void setCSV(bool option) { dataSetter = option; }
-        bool getCSV() { return dataSetter; }
 };
 
 
