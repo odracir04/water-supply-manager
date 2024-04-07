@@ -1,0 +1,27 @@
+| Code           | Demand         | Supply         | Status         | Deficit        | Name                          
+| C_22           | 397            | 330            | NOT SUPPLIED   | 67             | Viseu                         
+
+| Code           | Demand         | Supply         | Status         | Deficit        | Name                          
+| C_1            | 52             | 52             | SUPPLIED       | 0              | Alcacer do Sal                
+| C_2            | 515            | 515            | SUPPLIED       | 0              | Aveiro                        
+| C_3            | 160            | 110            | NOT SUPPLIED   | 50             | Beja                          
+| C_4            | 1208           | 1208           | SUPPLIED       | 0              | Braga                         
+| C_5            | 152            | 125            | NOT SUPPLIED   | 27             | Bragança                     
+| C_6            | 230            | 230            | SUPPLIED       | 0              | Castelo Branco                
+| C_7            | 896            | 896            | SUPPLIED       | 0              | Coimbra                       
+| C_8            | 122            | 100            | NOT SUPPLIED   | 22             | Covilhã                      
+| C_9            | 53             | 53             | SUPPLIED       | 0              | Estremoz                      
+| C_10           | 313            | 220            | NOT SUPPLIED   | 93             | Évora                        
+| C_11           | 407            | 407            | SUPPLIED       | 0              | Faro                          
+| C_12           | 177            | 177            | SUPPLIED       | 0              | Guarda                        
+| C_13           | 158            | 123            | NOT SUPPLIED   | 35             | Lagos                         
+| C_14           | 406            | 406            | SUPPLIED       | 0              | Leiria                        
+| C_15           | 12250          | 12250          | SUPPLIED       | 0              | Lisboa                        
+| C_16           | 96             | 96             | SUPPLIED       | 0              | Portalegre                    
+| C_17           | 6324           | 5650           | NOT SUPPLIED   | 674            | Porto                         
+| C_18           | 200            | 200            | SUPPLIED       | 0              | Santarém                     
+| C_19           | 780            | 780            | SUPPLIED       | 0              | Setúbal                      
+| C_20           | 168            | 100            | NOT SUPPLIED   | 68             | Viana do Castelo              
+| C_21           | 161            | 135            | NOT SUPPLIED   | 26             | Vila Real                     
+| C_22           | 397            | 330            | NOT SUPPLIED   | 67             | Viseu                         
+
