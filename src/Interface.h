@@ -91,13 +91,6 @@ public:
     void pipeFailureMenu();
 
     /**
-     * Prints a confirmation message.
-     * @return True if the user wishes to proceed.
-     * Complexity: Depends on user choice.
-     */
-    bool confirmationMenu();
-
-    /**
      * Prints the parameters of single City according to user input, it also outputs to a file.
      * @param option The city code chosen by user input.
      * Complexity: O(v) where v is the number of vertexes.
