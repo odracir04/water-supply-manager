@@ -11,7 +11,6 @@ class Pipe {
         std::string servicePointB;
         int capacity;
         double flow;
-        Pipe* reverse;
         bool direction;
 
     public:
@@ -47,8 +46,6 @@ class Pipe {
          * @return source vertex code.
          */
         std::string getOrig() const;
-        Pipe* getReverse() const;
-
 
         /**
          * Getter for the weight of the pipe.
@@ -56,22 +53,17 @@ class Pipe {
          */
         double getWeight() const;
 
-        void setDest(std::string *dest);
-
         /**
          * Setter for the weight of the pipe.
          * @param weight weight to be set.
          */
         void setWeight(double weight);
-        void setReverse(Pipe* pipe);
 
         /**
          * Getter for the direction of the pipe.
          * @return 0 for bidirectional and  1 for unidirectional.
          */
         bool getDirection();
-
-
 };
 
 

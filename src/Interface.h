@@ -89,6 +89,12 @@ public:
      * Complexity: Depends on user choice.
      */
     void pipeFailureMenu();
+
+    /**
+     * Prints a confirmation message.
+     * @return True if the user wishes to proceed.
+     * Complexity: Depends on user choice.
+     */
     bool confirmationMenu();
 
     /**
@@ -116,7 +122,6 @@ public:
      * @param city The city to be analyzed.
      */
     void printVitalPipes(std::pair<City*, std::vector<Pipe*>> city);
-
 
     /**
      * Asks the user to chose an option in the different menus, based on an integer user input.
