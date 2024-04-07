@@ -6,6 +6,9 @@
 #include "Parser.h"
 #include "City.h"
 #include "Logger.h"
+#include "Reservoir.h"
+#include <stack>
+#include <unordered_set>
 
 struct metrics {
     double average;
@@ -56,6 +59,30 @@ public:
     void maxFlowCities(std::string dest);
 
     void balanceWaterFlow();
+
+    /*
+    void DFSPipeToCities(Vertex* v, std::unordered_set<City*>* visitedCities);
+
+    void DFSPipeToCitiesVisit(Vertex* v, std::unordered_set<City*>* visitedCities);
+
+    void DFSPipeToReservoirs(Vertex* v, std::unordered_set<Reservoir*>* incomingReservoirs);
+
+    void DFSPipeToReservoirsVisit(Vertex* v, std::unordered_set<Reservoir*>* incomingReservoirs);
+
+    void DFSReservoirToCities(Vertex* v, std::unordered_set<City*>* foundCities);
+
+    void DFSReservoirToCitiesVisit(Vertex* v, std::unordered_set<City*>* foundCities);
+
+    void findPathRC(Reservoir* r, City* c, std::stack<Pipe*>* path);
+
+    void findPathRCVisit(Vertex* v, City* c, std::stack<Pipe*>* path);
+
+    void findPathREC(Reservoir* r, Pipe* pipe, City* c, std::stack<Pipe*>* path);
+
+    void findPathREVisit(Vertex* v, Pipe* pipe, std::stack<Pipe*>* path);
+
+    void findPathECVisit(Vertex* v, City* c, std::stack<Pipe*>* path);
+    */
 
     /**
      * Simulates Reservoir failure by setting the weights of the adjacent pipes to 0
@@ -166,6 +193,7 @@ public:
      * @return A struct containing the network metrics.
      * Complexity: O(V + P) where V is the number of vertexes and P the number of pipes.
      */
+
     metrics networkMetrics();
 };
 

@@ -3,6 +3,8 @@
 #include <unordered_map>
 #include <climits>
 #include <valarray>
+#include <stack>
+#include <unordered_set>
 #include "Manager.h"
 #include "City.h"
 #include "Reservoir.h"
@@ -61,6 +63,220 @@ bool Manager::validatePipe(std::string src, std::string dest) {
     return true;
 }
 
+/*
+void Manager::DFSPipeToCities(Vertex* v, std::unordered_set<City*>* visitedCities) {
+    for (auto u : graph->getVertexSet()) {
+        u->setVisited(false);
+    }
+    DFSPipeToCitiesVisit(v, visitedCities);
+}
+
+void Manager::DFSPipeToCitiesVisit(Vertex* v, std::unordered_set<City*>* visitedCities) {
+    if (v->getCode()[0] == 'C') {
+        visitedCities->insert(dynamic_cast<City*>(v));
+        return;
+    }
+    v->setVisited(true);
+    for (auto pipe : v->getAdj()) {
+        if (!graph->findVertex(pipe->getDest())->isVisited()) {
+            DFSPipeToCitiesVisit(graph->findVertex(pipe->getDest()), visitedCities);
+        }
+    }
+}
+
+void Manager::DFSPipeToReservoirs(Vertex* v, std::unordered_set<Reservoir*>* incomingReservoirs) {
+    for (auto u : graph->getVertexSet()) {
+        u->setVisited(false);
+    }
+    DFSPipeToReservoirsVisit(v, incomingReservoirs);
+}
+
+void Manager::DFSPipeToReservoirsVisit(Vertex* v, std::unordered_set<Reservoir*>* incomingReservoirs) {
+    if (v->getCode()[0] == 'R') {
+        incomingReservoirs->insert(dynamic_cast<Reservoir*>(v));
+        return;
+    }
+    v->setVisited(true);
+    for (auto pipe : v->getIncoming()) {
+        if (!graph->findVertex(pipe->getOrig())->isVisited()) {
+            DFSPipeToReservoirsVisit(graph->findVertex(pipe->getOrig()), incomingReservoirs);
+        }
+    }
+}
+
+void Manager::DFSReservoirToCities(Vertex* v, std::unordered_set<City*>* foundCities) {
+    for (auto u : graph->getVertexSet()) {
+        u->setVisited(false);
+    }
+    DFSReservoirToCitiesVisit(v, foundCities);
+}
+
+void Manager::DFSReservoirToCitiesVisit(Vertex* v, std::unordered_set<City*>* foundCities) {
+    if (v->getCode()[0] == 'C') {
+        foundCities->insert(dynamic_cast<City*>(v));
+        return;
+    }
+    v->setVisited(true);
+    for (auto pipe : v->getAdj()) {
+        if (!graph->findVertex(pipe->getDest())->isVisited() && pipe->getFlow() != 0) {
+            DFSPipeToCitiesVisit(graph->findVertex(pipe->getDest()), foundCities);
+        }
+    }
+}
+
+void Manager::findPathRC(Reservoir* r, City* c, std::stack<Pipe*>* path) {
+    for (auto v : graph->getVertexSet()) {
+        v->setVisited(false);
+    }
+    findPathRCVisit(r, c, path);
+}
+
+void Manager::findPathRCVisit(Vertex* v, City* c, std::stack<Pipe*>* path) {
+    if (v->getCode()[0] == 'C') return;
+
+    v->setVisited(true);
+    std::vector<Pipe*> orderedPipes = v->getAdj();
+    std::sort(orderedPipes.begin(), orderedPipes.end(), [](Pipe* a, Pipe* b) {return a->getWeight() - a->getFlow() > b->getWeight() - b->getFlow();});
+
+    for (auto pipe : orderedPipes) {
+        if (!graph->findVertex(pipe->getDest())->isVisited() && pipe->getFlow() != 0) {
+            path->push(pipe);
+            findPathRCVisit(graph->findVertex(pipe->getDest()), c, path);
+            if (path->top()->getDest() == c->getCode()) return;
+            path->pop();
+        }
+    }
+}
+
+void Manager::findPathREC(Reservoir* r, Pipe* pipe, City* c, std::stack<Pipe*>* path) {
+    for (auto v : graph->getVertexSet()) {
+        v->setVisited(false);
+    }
+    findPathREVisit(r, pipe, path);
+    if (path->empty()) return;
+    findPathECVisit(graph->findVertex(pipe->getDest()), c, path);
+    if (path->top()->getDest() != c->getCode()) {
+        while (!path->empty()) {
+            path->pop();
+        }
+        return;
+    }
+}
+
+void Manager::findPathREVisit(Vertex* v, Pipe* pipe, std::stack<Pipe*>* path) {
+    if (v->getCode()[0] == 'C') return;
+
+    v->setVisited(true);
+    std::vector<Pipe*> orderedPipes = v->getAdj();
+    std::sort(orderedPipes.begin(), orderedPipes.end(), [](Pipe* a, Pipe* b) {return a->getWeight() - a->getFlow() > b->getWeight() - b->getFlow();});
+
+    for (auto p : orderedPipes) {
+        if (!graph->findVertex(p->getDest())->isVisited() && pipe->getFlow() != 0) {
+            path->push(pipe);
+            if (path->top()->getDest() == pipe->getDest() && path->top()->getOrig() == pipe->getOrig()) return;
+            findPathREVisit(graph->findVertex(pipe->getDest()), pipe, path);
+            path->pop();
+        }
+    }
+}
+
+void Manager::findPathECVisit(Vertex* v, City* c, std::stack<Pipe*>* path) {
+    if (v->getCode()[0] == 'C') return;
+
+    v->setVisited(true);
+    std::vector<Pipe*> orderedPipes = v->getAdj();
+    std::sort(orderedPipes.begin(), orderedPipes.end(), [](Pipe* a, Pipe* b) {return a->getWeight() - a->getFlow() > b->getWeight() - b->getFlow();});
+
+    for (auto pipe : orderedPipes) {
+        if (!graph->findVertex(pipe->getDest())->isVisited() && pipe->getFlow() != 0) {
+            path->push(pipe);
+            findPathECVisit(graph->findVertex(pipe->getDest()), c, path);
+            if (path->top()->getDest() == c->getCode()) return;
+            path->pop();
+        }
+    }
+}
+
+void Manager::balanceWaterFlow() {
+    std::queue<Pipe*> emptyPipes = {};
+    for (auto v : graph->getVertexSet()) {
+        for (auto p : v->getAdj()) {
+            if (p->getFlow() == 0) {
+                emptyPipes.push(p);
+            }
+        }
+    }
+
+    while (!emptyPipes.empty()) {
+        Pipe* pipe = emptyPipes.front();
+        emptyPipes.pop();
+        if (pipe->getFlow() != 0) continue;
+
+        std::unordered_set<City*> citiesReachedPipe = {};
+        DFSPipeToCities(graph->findVertex(pipe->getDest()), &citiesReachedPipe);
+
+        std::unordered_set<Reservoir*> reservoirsReachedPipe = {};
+        DFSPipeToReservoirs(graph->findVertex(pipe->getDest()), &reservoirsReachedPipe);
+
+        bool done = false;
+        for (auto reservoir : reservoirsReachedPipe) {
+            std::unordered_set<City*> cities = {};
+            DFSReservoirToCities(reservoir, &cities);
+            for (auto city : cities) {
+                if (citiesReachedPipe.find(city) != citiesReachedPipe.end()) {
+                    std::stack<Pipe*> path1 = {};
+                    findPathRC(reservoir, city, &path1);
+                    std::stack<Pipe*> path1Copy = path1;
+                    int minFlow = INT_MAX;
+                    while (!path1Copy.empty()) {
+                        Pipe* pp = path1Copy.top();
+                        if (pp->getFlow() < minFlow) minFlow = pp->getFlow();
+                        path1Copy.pop();
+                    }
+                    path1Copy = path1;
+                    minFlow /= 2;
+                    while (!path1Copy.empty()) {
+                        Pipe* pp = path1Copy.top();
+                        pp->setFlow(pp->getFlow() - minFlow);
+                        path1Copy.pop();
+                    }
+
+                    std::stack<Pipe*> path2 = {};
+                    findPathREC(reservoir, pipe, city, &path2);
+                    std::stack<Pipe*> path2Copy = path2;
+                    int minCap = INT_MAX;
+                    while (!path2Copy.empty()) {
+                        Pipe* pp = path2Copy.top();
+                        if (pp->getWeight() - pp->getFlow() < minCap) minCap = pp->getWeight() - pp->getFlow();
+                        path2Copy.pop();
+                    }
+                    if (minCap >= minFlow) {
+                        while (!path2.empty()) {
+                            Pipe* pp = path2.top();
+                            pp->setFlow(minFlow);
+                            path2.pop();
+                        }
+                    } else {
+                        int def = minFlow - minCap;
+                        while (!path2.empty()) {
+                            Pipe* pp = path2.top();
+                            pp->setFlow(minCap);
+                            path2.pop();
+                        }
+                        while (!path1.empty()) {
+                            Pipe* pp = path1.top();
+                            pp->setFlow(def);
+                            path1.pop();
+                        }
+                    }
+                    done = true;
+                }
+                if (done) break;
+            }
+        }
+    }
+}
+*/
 void testAndVisit(std::queue< Vertex*> &q, Pipe *e, Vertex *w, double residual) {
     if (!w->isVisited() && residual > 0) {
         w->setVisited(true);
@@ -135,6 +351,7 @@ void Manager::maxFlowCities(std::string dest) {
         return;
     }
 
+    newGraph.removeEdge()
     Vertex *superSource = new Vertex("SS");
 
     std::vector<Vertex*> vec = newGraph.getVertexSet();

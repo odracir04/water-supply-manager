@@ -166,6 +166,7 @@ void Interface::servicesMenu() {
             break;
         case 3:
             clear();
+            manager.maxFlowAllCities();
             printNetworkMetrics();
             break;
     }
