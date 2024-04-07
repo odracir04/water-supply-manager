@@ -2,6 +2,7 @@
 #include <queue>
 #include <unordered_map>
 #include <climits>
+#include <valarray>
 #include <stack>
 #include <unordered_set>
 #include "Manager.h"
@@ -62,6 +63,8 @@ bool Manager::validatePipe(std::string src, std::string dest) {
     return true;
 }
 
+/*
+>>>>>>> refs/remotes/origin/master
 void Manager::DFSPipeToCities(Vertex* v, std::unordered_set<City*>* visitedCities) {
     for (auto u : graph->getVertexSet()) {
         u->setVisited(false);
@@ -274,7 +277,7 @@ void Manager::balanceWaterFlow() {
         }
     }
 }
-
+*/
 void testAndVisit(std::queue< Vertex*> &q, Pipe *e, Vertex *w, double residual) {
     if (!w->isVisited() && residual > 0) {
         w->setVisited(true);
@@ -349,6 +352,7 @@ void Manager::maxFlowCities(std::string dest) {
         return;
     }
 
+    newGraph.removeEdge()
     Vertex *superSource = new Vertex("SS");
 
     std::vector<Vertex*> vec = newGraph.getVertexSet();
@@ -625,4 +629,70 @@ metrics Manager::networkMetrics() {
 void Manager::resetGraph() {
     delete graph;
     this->graph = new Graph();
+}
+
+void testAndVisitLargest(std::queue< Vertex*> &q, Pipe *e, Vertex *w, double residual, int delta) {
+    if (!w->isVisited() && residual > delta) {
+        w->setVisited(true);
+        w->setPath(e);
+        q.push(w);
+    }
+}
+
+bool findLargestPath(Graph &g, Vertex* s ,Vertex* t, int delta) {
+    for (auto *v: g.getVertexSet()) {
+        v->setVisited(false);
+    }
+
+    s->setVisited(true);
+    std::queue<Vertex *> q;
+    q.push(s);
+    while (!q.empty() && !t->isVisited()) {
+        auto v = q.front();
+        q.pop();
+        for (auto e: v->getAdj()) {
+            if (g.findVertex(e->getDest()) != nullptr) {
+                testAndVisitLargest(q, e, g.findVertex(e->getDest()), e->getWeight() - e->getFlow(), delta);
+            }
+        }
+        for (auto e: v->getIncoming()) {
+            if (g.findVertex(e->getOrig()) != nullptr) {
+                testAndVisitLargest(q, e, g.findVertex(e->getOrig()), e->getFlow(), delta);
+            }
+        }
+    }
+    return t->isVisited();
+}
+
+void Manager::balanceWaterFlow() {
+    int max_diff = INT_MIN;
+    for (Vertex* vertex : graph->getVertexSet()) {
+        for (Pipe* pipe : vertex->getAdj()) {
+            max_diff = std::max(max_diff, (int)pipe->getWeight());
+        }
+    }
+    int delta = pow(2, (int) log2(max_diff));
+
+    addSuperVertexes();
+
+    for (Vertex* v : graph->getVertexSet()) {
+        for (Pipe* p : v->getAdj()) {
+            p->setFlow(0);
+        }
+    }
+
+    Vertex* superSource = graph->findVertex("SS");
+    Vertex* superTarget = graph->findVertex("ST");
+
+    while(delta > 0) {
+        if (findLargestPath(*graph, superSource, superTarget, delta)) {
+            double f = findMinResidualAlongPath(graph, superSource, superTarget);
+            augmentFlowAlongPath(graph, superSource, superTarget, f);
+        }
+        else delta /= 2;
+    }
+
+    computeCityFlow();
+    graph->removeVertex("SS");
+    graph->removeVertex("ST");
 }

@@ -60,6 +60,7 @@ public:
 
     void balanceWaterFlow();
 
+    /*
     void DFSPipeToCities(Vertex* v, std::unordered_set<City*>* visitedCities);
 
     void DFSPipeToCitiesVisit(Vertex* v, std::unordered_set<City*>* visitedCities);
@@ -81,7 +82,7 @@ public:
     void findPathREVisit(Vertex* v, Pipe* pipe, std::stack<Pipe*>* path);
 
     void findPathECVisit(Vertex* v, City* c, std::stack<Pipe*>* path);
-
+    */
 
     /**
      * Simulates Reservoir failure by setting the weights of the adjacent pipes to 0
