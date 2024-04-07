@@ -291,6 +291,7 @@ void Interface::printNetworkMetrics() {
     clear();
     header();
 
+    manager.maxFlowAllCities();
     metrics metrics = manager.networkMetrics();
 
     cout << BLUE << BOLD << "\n\tNetwork Metrics: Capacity - Flow" << RESET << endl

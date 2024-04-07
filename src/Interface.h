@@ -110,7 +110,11 @@ public:
      */
     void printWaterSupplyAllCities();
   
-  
+    /**
+     * Prints all pipes vital to a cities supply.
+     * Complexity: O(v), where v is the nnumber of vertexes.
+     * @param city The city to be analyzed.
+     */
     void printVitalPipes(std::pair<City*, std::vector<Pipe*>> city);
 
 
@@ -149,6 +153,10 @@ public:
      */
     std::string readCity();
 
+    /**
+     * Prints a series of network metrics before and after running the balance flow algorithm.
+     * Complexity: O(1)
+     */
     void printNetworkMetrics();
 };
 

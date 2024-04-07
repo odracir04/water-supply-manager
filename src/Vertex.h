@@ -8,12 +8,8 @@ class Vertex {
         std::string code;
         std::vector<Pipe*> adj;
         bool visited;
-        bool processing;
-        int excess;
-        int height;
         Pipe *path = nullptr;
 
-        void addPipe(const std::string &dest,double &w);
         std::vector<Pipe *> incoming;
         friend class Graph;
 
@@ -41,8 +37,6 @@ class Vertex {
          * @param v Value to be assigned to visited attribute.
          */
         void setVisited(bool v);
-
-        bool isProcessing() const;
 
         /**
          * Getter for the vertex path.

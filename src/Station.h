@@ -21,10 +21,6 @@ class Station : public Vertex {
          * @return id of the station.
          */
         unsigned int getId() const {return this->id;}
-        /*
-        void setId(unsigned int const i) {this->id = i;}
-        void setCode(std::string const c) {this->code = c;}
-         */
 };
 
 
